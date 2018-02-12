@@ -10,5 +10,9 @@ class Users extends CI_Model {
         }
         return true;
     }
+    public function listar(){
+        $usuarios = $this->db->select('USER_PK, USER_names')->from('users')->get();
+        return $usuarios;
+    }
 
 }

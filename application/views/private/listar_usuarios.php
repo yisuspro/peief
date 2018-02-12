@@ -40,22 +40,16 @@
                         <table id="sample_1" class="display" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Documento</th>
+                                    <th>Nombres</th>
+                                    
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Documento</th>
+                                    <th>Nombres</th>
+                                    
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -83,7 +77,8 @@
 jQuery(document).ready(function (){
     var table, url;
     table = $('#sample_1');
-    url = "{{ route('Listar_Convenios.Listar_Convenios') }}";
+    url = "<?= base_url('index.php/Usuarios/listarTabla')?>";
+    
     table.DataTable({
        lengthMenu: [
            [5, 10, 25, 50, -1],
@@ -119,26 +114,8 @@ jQuery(document).ready(function (){
                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
            }
        },
-       columns:[
-           {data: 'DT_Row_Index'},
-           {data: 'PK_Convenios', "visible": true, name:"documento" },
-           {data: 'Nombre', searchable: true},
-           {data: 'Fecha_Inicio', searchable: true},
-           {data: 'Fecha_Fin',searchable: true},
-           {data: 'convenios__estados.Estado', searchable: true},
-           {data: 'convenios__sedes.Sede',searchable: true},
-           {data:'action',className:'',searchable: false,
-            name:'action',
-            title:'Acciones',
-            orderable: false,
-            exportable: false,
-            printable: false,
-            defaultContent: '<a href="#" id="editar" title="Editar Convenio" class="btn btn-simple btn-warning btn-icon edit"><i class="icon-pencil"></i></a><a href="#" id="ver" title="Documentos e informacion del Convenio" class="btn btn-simple btn-success btn-icon editar2"><i class="icon-notebook"></i></a>'
-
-            
-        }
-           
-       ],
+      
+      
        buttons: [
            { extend: 'print', className: 'btn btn-circle btn-icon-only btn-default tooltips t-print', text: '<i class="fa fa-print"></i>' },
            { extend: 'copy', className: 'btn btn-circle btn-icon-only btn-default tooltips t-copy', text: '<i class="fa fa-files-o"></i>' },
