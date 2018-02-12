@@ -10,8 +10,6 @@ class Usuarios extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('Users');
-        
-      
     }
     public function index(){
         $this->load->view('public/registro');
@@ -37,6 +35,26 @@ class Usuarios extends CI_Controller
         $this->load->view('public/registro');
     }
     public function perfil(){
-        $this->load->view('private/perfil');
+        if($this->session->userdata('logueado')){
+                $data = array();
+                $data['nombre'] = $this->session->userdata('nombre');
+                $data['id'] =$this->session->userdata('id');
+                $data['apellido']= $this ->session->userdata('apellido');
+                $data['email']= $this ->session->userdata('email');
+                $data['password']= $this ->session->userdata('password');
+                $data['address']= $this ->session->userdata('address');
+                $data['telephone']= $this ->session->userdata('telephone');
+                $data['state']= $this ->session->userdata('state');
+                $data['type_identification']= $this ->session->userdata('type_identification');
+                $data['gander']= $this ->session->userdata('gander');
+                $this->load->view('private/perfil', $data);
+            
+            }else{
+                redirect('login');
+            }
+    }
+    public function listarUsuarios(){
+        $this->load->view('private/listar_usuarios');
     }
 }
+ 
