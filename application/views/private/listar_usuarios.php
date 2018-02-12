@@ -1,5 +1,5 @@
 <!--titulo de la pagina-->
-<?php require_once 'heads/head_1.php'; ?> Perfil
+<?php require_once 'heads/head_1.php'; ?> Lista usuarios
 <?php require_once 'heads/head_2.php'; ?>
 <!--titulo de la pagina fin-->
 <!--librerias extras-->
@@ -41,7 +41,7 @@
                     </div>
                     <div class="portlet-body">
                         <!-- espacio de trabajo _______________________________________________________________________________________________________________________________________________________ -->
-                        <table id="sample_2" class="display" cellspacing="0" width="100%">
+                        <table id="sample_1" class="display" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -90,10 +90,6 @@
 <script src="<?= base_url('assets/global/scripts/datatable.js') ?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/global/plugins/datatables/datatables.min.js') ?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') ?>" type="text/javascript"></script>
-<script src="<?= base_url('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>" type="text/javascript"></script>
-<script src="<?= base_url('assets/pages/scripts/table-datatables-buttons.min.js') ?>" type="text/javascript"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
@@ -104,7 +100,15 @@
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 
-
+<script>
+$(document).ready(function() {
+    $('#sample_1').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );</script>
 <!--fin scrips-->
 
 <!--scrips pie de pagina-->
