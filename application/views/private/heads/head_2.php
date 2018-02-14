@@ -12,6 +12,10 @@
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <link href="<?= base_url('assets/global/plugins/fullcalendar/fullcalendar.min.css') ?>" rel="stylesheet" type="text/css" />
+<link href="<?= base_url('assets/global/css/components-md.min.css') ?>" rel="stylesheet" type="text/css" />
+<link href="<?= base_url('assets/global/css/plugins-md.min.css') ?>" rel="stylesheet" type="text/css" />
+<link href="<?= base_url('assets/global/css/components-md.min.css') ?>" rel="stylesheet" type="text/css" />
+<link href="<?= base_url('assets/global/css/plugins-md.min.css') ?>" rel="stylesheet" type="text/css" />
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL STYLES -->
 <link href="<?= base_url('assets/global/css/components-md.min.css') ?>" rel="stylesheet" id="style_components" type="text/css" />
@@ -23,5 +27,6 @@
 <link href="<?= base_url('assets/layouts/layout2/css/custom.min.css') ?>" rel="stylesheet" type="text/css" />
 <!-- END THEME LAYOUT STYLES -->
 <link rel="shortcut icon" href="<?= base_url('assets/images\logos\institucion/favicon.png')?>">
+
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md">

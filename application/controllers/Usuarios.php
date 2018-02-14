@@ -6,34 +6,78 @@ class Usuarios extends CI_Controller
     function __construct() {
         parent::__construct ();
         
+        $this->load->model('Users');
         $this->load->model('Logueo');
+        $this->load->helper('login_rules');
         $this->load->helper('url');
         $this->load->helper('form');
-        $this->load->model('Users');
     }
+    
+    
     public function index(){
         $this->load->view('public/registro');
     }
+    
+    
     public function registrar(){
-        
-        $username= $this->input->post('username');
-        $name= $this->input->post('name');
-        $lastname= $this->input->post('lastname');
-        $mail= $this->input->post('mail');
-        $password= $this->input->post('password');
-        $data= array(
-            'USER_username' =>$username,
-            'USER_names'    =>$name,
-            'USER_lastnames'=>$lastname,
-            'USER_email'    =>$mail,
-            'USER_password' =>$password,
-        );
-        
-        if(!$this->Users->registrar($data)){
-            echo "error";
+        $this->form_validation->set_error_delimiters('','');
+        $rules=getRulesAddUsers();
+        $this->form_validation->set_rules($rules);
+        if($this->form_validation->run() === FALSE){
+            $errors = array(
+                'USER_PK'       => form_error('USER_PK'),
+                'USER_names'    => form_error('USER_names'),
+                'USER_lastnames'=> form_error('USER_lastnames'),
+                'USER_email'    => form_error('USER_email'),
+                'USER_address'  => form_error('USER_address'),
+                'USER_telephone'=> form_error('USER_telephone'),
+                'USER_password' => form_error('USER_password'),
+            );
+            echo json_encode($errors);
+            $this->output->set_status_header(402);
+        }else{
+            $doc =$this->input->post('USER_PK');
+            
+            if($res = $this->Users->verificarUsuario($doc)){
+                    echo json_encode(array('msg'=> 'Usuario existente' ));
+                    $this->output->set_status_header(401);
+                    var_dump($res);
+                    exit;
+            }else{
+                    $name       = $this->input->post('USER_names');
+                    $lastname   = $this->input->post('USER_lastnames');
+                    $email      = $this->input->post('USER_email');
+                    $password   = $this->input->post('USER_password');
+                    $address    = $this->input->post('USER_address');
+                    $telephone  = $this->input->post('USER_telephone');
+                    $state      = $this->input->post('USER_FK_state');
+                    $type_identification= $this->input->post('USER_FK_type_identification');
+                    $gander     = $this->input->post('USER_FK_gander');
+                    $data= array(
+                        'USER_PK' =>$doc,
+                        'USER_username' =>$name.$lastname,
+                        'USER_names'    =>$name,
+                        'USER_lastnames'=>$lastname,
+                        'USER_email'    =>$email,
+                        'USER_password' =>$password,
+                        'USER_address'  =>$address,
+                        'USER_telephone'=>$telephone,
+                        'USER_FK_state' =>1,
+                        'USER_FK_type_identification' =>$type_identification,
+                        'USER_FK_gander'=>1,
+                    );
+                    if(!$this->Users->registrar($data)){
+                        echo "error";
+                    }
+                    echo json_encode(array('msg'=> 'usuario guardado' ));
+                    
+            }
+            
+            var_dump($res);
         }
-        $this->load->view('public/registro');
     }
+    
+  
     public function perfil(){
         if($this->session->userdata('logueado')){
                 $data = array();
@@ -70,7 +114,11 @@ class Usuarios extends CI_Controller
 
                $dato[] = array(
                     $r->USER_PK,
-                    $r->USER_names
+                    $r->USER_names,
+                    $r->USER_lastnames,
+                    $r->USER_email,
+                    $r->STTS_state,
+                   
                );
           }
             $output = array(
