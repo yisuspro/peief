@@ -66,6 +66,7 @@ class Usuarios extends CI_Controller
                         'USER_FK_type_identification' =>$type_identification,
                         'USER_FK_gander'=>1,
                     );
+                
                     if(!$this->Users->registrar($data)){
                         echo "error";
                     }
@@ -118,6 +119,9 @@ class Usuarios extends CI_Controller
                     $r->USER_lastnames,
                     $r->USER_email,
                     $r->STTS_state,
+                    $r->USER_address,
+                    $r->USER_telephone,
+                    '<a class="btn btn-warning" type="button" href="#" id="cerrar" name="cerrar"><i class="fa fa-pencil"></i>editar</a><a class="btn btn-danger" type="button" href="#" id="cerrar" name="cerrar"><i class="fa fa-remove"></i>eliminar</a>',
                    
                );
           }

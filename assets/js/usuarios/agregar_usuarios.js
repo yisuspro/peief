@@ -5,11 +5,13 @@
             url: 'registrar',
             type: 'POST',
             data: $(this).serialize(),
-            success: function (data, xhr) {
-                $('#sample_1').reload();
+            success: function (data, xhr) { 
+                $("#sample_1").DataTable().ajax.reload();
                 $('#agregar').removeClass('fade-in');
                 $('#agregar').addClass('fade');
                 document.getElementById('agregar').style.display = 'none';
+                document.getElementById('alerta_principal').style.display ='inherit';
+                $("#frm_agregar_usuario")[0].reset();
             },
             error: function (xhr) {
                 if (xhr.status == 402) {

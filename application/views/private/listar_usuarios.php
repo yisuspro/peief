@@ -20,7 +20,7 @@
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
-
+        <?php require_once 'heads/alertas.php'; ?>
         <h1 class="page-title"> USUARIOS
             <small>Lista de usuarios</small>
         </h1>
@@ -72,12 +72,12 @@
 
                                                         <div class="col-lg-6">
                                                             <label> Tipo de Documento</label>
-                                                            <select class="form-control" id="USER_type_identification">
+                                                            <select class="form-control" name="USER_FK_type_identification" id="USER_FK_type_identification">
                                                                 <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                                                <option value="1">Option 1</option>
-                                                                <option value="2">Option 2</option>
-                                                                <option value="3">Option 3</option>
-                                                                <option value="4">Option 4</option>
+                                                                <option value="1">C.C.</option>
+                                                                <option value="2">T.I.</option>
+                                                                <option value="3">Registro</option>
+                                                                <option value="4">pasaporte</option>
                                                                 <option value="5">Option 5</option>
                                                             </select>
                                                         </div>
@@ -134,8 +134,8 @@
                                                         </div>
 
                                                         <label> Genero</label>
-                                                        <div class="input-group" id="USER_gender"><span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
-                                                            <select class="form-control" id="USER_gender">
+                                                        <div class="input-group" name="USER_FK_gander" id="USER_FK_gender"><span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+                                                            <select class="form-control" id="USER_FK_gander" name="USER_FK_gander">
                                                                 <option value="1">Masculino</option>
                                                                 <option value="2">Femenino</option>
                                                                 <option value="3">Otro</option>
@@ -147,7 +147,7 @@
                                                         <div class="row">
                                                             <div class="modal-footer">
                                                                 <?= form_submit('agregar', 'Agregar','class="btn btn-success"') ?>
-                                                                    <a class="btn btn-primary" type="button" href="#" id="cerrar" name="cerrar">Cancelar</a>
+                                                                    <a class="btn btn-danger" type="button" href="#" id="cerrar" name="cerrar">Cancelar</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -165,7 +165,7 @@
                             </div>
                         </div>
                         <br><br><br>
-                        <table id="sample_1" class="display" cellspacing="0" width="100%">
+                        <table id="sample_1" class="table table-striped table-bordered table-hover dt-responsive" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Documento</th>
@@ -173,6 +173,10 @@
                                     <th>Apellidos</th>
                                     <th>correo</th>
                                     <th>Estado</th>
+                                    <th>Direccion</th>
+                                    <th>telefono</th>
+                                    <th>Acciones</th>
+                                    
 
                                 </tr>
                             </thead>
@@ -183,6 +187,10 @@
                                     <th>Apellidos</th>
                                     <th>Correos</th>
                                     <th>Estado</th>
+                                    <th>Direccion</th>
+                                    <th>telefono</th>
+                                    <th>Acciones</th>
+                                    
 
                                 </tr>
                             </tfoot>
@@ -211,7 +219,7 @@
 <!--contenido pies de pagina-->
 <?php require_once 'footers/foot_1.php';?>
 <!-- fin contenido pies de pagina-->
-<script src="<?= base_url('assets/js/usuarios/agregar_usuarios.js')?>"></script>
+
 <!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
 <script>
     $(document).ready(function() {
@@ -281,7 +289,7 @@
     });
 
 </script>
-
+<script src="<?= base_url('assets/js/usuarios/agregar_usuarios.js')?>"></script>
 <!--fin scrips-->
 
 <!--scrips pie de pagina-->
