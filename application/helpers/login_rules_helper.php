@@ -48,9 +48,11 @@ function getRulesAddUsers(){
         ),array(
             'field' =>'USER_email',
             'label' =>'USER_email',
-            'rules' =>'required',
+            'rules' =>'required|valid_email',
             'errors'=> array(
                 'required' => 'correo requerido',
+                'valid_email' => 'correo mal escrito',
+                
             ),
         ),array(
             'field' =>'USER_address',

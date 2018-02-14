@@ -1,8 +1,18 @@
 <?php
+/**
+*@autor jesus andres castellanos aguilar
+* controlador encargado de todos los procesos referente a los usuarios
+*
+* 
+*/
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Usuarios extends CI_Controller
 {
-    
+    /**
+    * metodo cnstructor donde se cargan todos los helpers, librerias y modelos necesarios en el controlador
+    *
+    * 
+    */
     function __construct() {
         parent::__construct ();
         
@@ -13,12 +23,20 @@ class Usuarios extends CI_Controller
         $this->load->helper('form');
     }
     
-    
+    /**
+    * funcion para mostrar la  vista principal el cual es perfil.
+    *
+    * @return view ()
+    */
     public function index(){
         $this->load->view('public/registro');
     }
     
-    
+    /**
+    * funcion para registrar un nuevo usuario, comprueba si los datos se encuentran llenos y si  el usuario a ingresar ya existe.
+    *
+    * @return json_encode() | var_dump()
+    */
     public function registrar(){
         $this->form_validation->set_error_delimiters('','');
         $rules=getRulesAddUsers();
@@ -64,7 +82,7 @@ class Usuarios extends CI_Controller
                         'USER_telephone'=>$telephone,
                         'USER_FK_state' =>1,
                         'USER_FK_type_identification' =>$type_identification,
-                        'USER_FK_gander'=>1,
+                        'USER_FK_gander'=>$gander,
                     );
                 
                     if(!$this->Users->registrar($data)){
@@ -78,7 +96,11 @@ class Usuarios extends CI_Controller
         }
     }
     
-  
+    /**
+    * funcion de perfil, redirecciona  si no existe sesion  a la vista de login.
+    *
+    * @return redirect() | view()
+    */
     public function perfil(){
         if($this->session->userdata('logueado')){
                 $data = array();
@@ -95,16 +117,24 @@ class Usuarios extends CI_Controller
                 $this->load->view('private/perfil', $data);
             
             }else{
-                redirect('login');
+                redirect('index.php/login');
             }
     }
     
-    
+    /**
+    * funcion para retonar la vista principal donde se listan los usuarios.
+    *
+    * @return  view()
+    */
     public function listarUsuarios(){
         $this->load->view('private/listar_usuarios');
     }
     
-    
+    /**
+    * funcion para enviar los datos pertinetes a la tabla para listar los usuarios.
+    *
+    * @return  json_encode()
+    */
     public function listarTabla(){
             $draw = intval($this->input->get("draw"));
             $start = intval($this->input->get("start"));
@@ -118,10 +148,10 @@ class Usuarios extends CI_Controller
                     $r->USER_names,
                     $r->USER_lastnames,
                     $r->USER_email,
-                    $r->STTS_state,
-                    $r->USER_address,
                     $r->USER_telephone,
-                    '<a class="btn btn-warning" type="button" href="#" id="cerrar" name="cerrar"><i class="fa fa-pencil"></i>editar</a><a class="btn btn-danger" type="button" href="#" id="cerrar" name="cerrar"><i class="fa fa-remove"></i>eliminar</a>',
+                    $r->USER_address,
+                    $r->STTS_state,
+                    '<input type="button" class="btn btn-warning fa fa-remove edit"  id="'.$r->USER_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove"  id="'.$r->USER_PK.'" value="eliminar" >',
                    
                );
           }
@@ -133,6 +163,24 @@ class Usuarios extends CI_Controller
             );
         echo json_encode($output);
         exit;
+    }
+    
+    /**
+    * funcion para  eliminar los usuarios.
+    *
+    * @return  json_encode()
+    */
+    public function eliminarUsuario($doc){
+        if($res = $this->Users->eliminar($doc)){
+            echo json_encode(array('msg'=> 'Usuario eliminado exitosamente' ));
+        }else{
+            echo json_encode($res);
+            $this->output->set_status_header(403);
+        }
+    }
+    
+    public function editar(){
+        $this->load->view('private/editar');
     }
 }
 

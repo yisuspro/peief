@@ -21,5 +21,12 @@ class Users extends CI_Model {
         $usuarios = $this->db->select('*')->from('users')->join('states','users.USER_FK_state = states.STTS_PK')->join('ganders','users.USER_FK_gander = ganders.GNDR_PK')->join('types_identifications','users.USER_FK_type_identification = types_identifications.TPDI_PK');
         return $usuarios->get();
     }
+    
+    public function eliminar($datos){
+        if(!$this->db->delete('users', array('USER_PK' => $datos))){
+            return FALSE;
+        }
+        return true;
+    }
 
 }
