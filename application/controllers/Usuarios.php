@@ -1,8 +1,9 @@
 <?php
 /**
-*@autor jesus andres castellanos aguilar
-* controlador encargado de todos los procesos referente a los usuarios
 *
+*@autor jesus andres castellanos aguilar
+*
+* controlador encargado de todos los procesos referente a los usuarios
 * 
 */
 defined('BASEPATH') OR exit('No direct script access allowed');

@@ -1,80 +1,102 @@
 <?php
+/**
+*
+*@autor jesus andres castellanos aguilar
+* helper encargado  de la reglas de validacion de los formularios del aplicativo
+*
+*/
+
+/**
+*
+*funcion encargada de las reglas de inicio de sesion.
+*retorna el vector de errores
+*@return array ()
+*
+*/
 function getRulesLogin(){
     return array(
         array(
-                'field' => 'email',
-                'label' => 'Correo',
-                'rules' => 'required',
-                'errors' => array(
-                        'required' => 'el correo es requerido',
-                ),
+            'field' => 'email',
+            'label' => 'Correo',
+            'rules' => 'required|valid_email',              //campo requerido y en formato de email
+             'errors' => array(
+                 'required' => 'el correo es requerido',    //mensajes de error
+                 'valid_email' => 'correo mal escrito',
+             ),
         ),
         array(
-                'field' => 'password',
-                'label' => 'contraseña',
-                'rules' => 'required',
-                'errors' => array(
-                        'required' => 'la contraseña es requerida.',
-                ),
+            'field' => 'password',
+            'label' => 'contraseña',
+            'rules' => 'required',                           //campo requerido
+            'errors' => array(
+                'required' => 'la contraseña es requerida.', //mensajes de error
+            ),
         ),
     );
 }
 
+/**
+*
+*funcion encargada de las reglas del formulario de registro y de edicion
+*retorna el vector de errores
+*@return array ()
+*
+*/
 function getRulesAddUsers(){
     return array(
         array(
             'field' =>'USER_PK',
             'label' =>'USER_PK',
-            'rules' =>'required',
-            'errors'=> array(
-                'required' => 'numero de documento necesario',
+            'rules' =>'required',                              //campo requerido 
+            'errors'=> array(       
+                'required' => 'numero de documento necesario', //mensajes de error         
             ),
         ),
         array(
             'field' =>'USER_names',
             'label' =>'USER_names',
-            'rules' =>'required',
+            'rules' =>'required',                               //campo requerido
             'errors'=> array(
-                'required' => 'Nombres requeridos',
+                'required' => 'Nombres requeridos',             //mensajes de error
             ),
         ),
         array(
             'field' =>'USER_lastnames',
             'label' =>'USER_lastnames',
-            'rules' =>'required',
+            'rules' =>'required',                               //campo requerido
             'errors'=> array(
-                'required' => 'Apellidos requeridos',
+                'required' => 'Apellidos requeridos',           //mensajes de error
             ),
         ),array(
             'field' =>'USER_email',
             'label' =>'USER_email',
-            'rules' =>'required|valid_email',
+            'rules' =>'required|valid_email',                   //campo requerido y en formato de email
             'errors'=> array(
-                'required' => 'correo requerido',
+                'required' => 'correo requerido',               //mensajes de error
                 'valid_email' => 'correo mal escrito',
                 
             ),
         ),array(
             'field' =>'USER_address',
             'label' =>'USER_address',
-            'rules' =>'required',
+            'rules' =>'required',                               //campo requerido  
             'errors'=> array(
-                'required' => 'Direccion requerida',
+                'required' => 'Direccion requerida',            //mensajes de error  
             ),
         ),array(
             'field' =>'USER_telephone',
             'label' =>'USER_telephone',
-            'rules' =>'required',
+            'rules' =>'required',                               //campo requerido
             'errors'=> array(
-                'required' => 'telefono requerido',
+                'required' => 'telefono requerido',             //mensajes de error
             ),
         ),
         array(
             'field' =>'USER_password',
             'label' =>'USER_password',
-            'rules' =>'required',
+            'rules' =>'required',                               //campo requerido
             'errors'=> array(
-                'required' => 'clave requerida',
+                'required' => 'clave requerida',                //mensajes de error
             ),
         ),
     );
