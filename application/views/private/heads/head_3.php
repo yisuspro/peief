@@ -16,10 +16,8 @@
         <!-- END RESPONSIVE MENU TOGGLER -->
         <!-- BEGIN PAGE ACTIONS -->
         <!-- DOC: Remove "hide" class to enable the page header actions -->
-
         <!-- BEGIN PAGE TOP -->
         <div class="page-top">
-
             <!-- BEGIN TOP NAVIGATION MENU -->
             <div class="top-menu">
                 <ul class="nav navbar-nav pull-right">
@@ -78,7 +76,7 @@
                                     </li>
                                     <li>
                                         <a href="javascript:;">
- <span class="time">2 days</span>
+                                            <span class="time">2 days</span>
                                                     <span class="details">
                                                         <span class="label label-sm label-icon label-danger">
                                                             <i class="fa fa-bolt"></i>
@@ -118,8 +116,8 @@
                                                     <span class="details">
                                                         <span class="label label-sm label-icon label-danger">
                                                             <i class="fa fa-bolt"></i>
-</span> Storage server failed. </span>
-                                                </a>
+                                                        </span> Storage server failed. </span>
+                                        </a>
                                     </li>
                                 </ul>
                             </li>

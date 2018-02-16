@@ -12,9 +12,7 @@
 <!--menu lateral-->
 <?php require_once 'heads/menus.php'; ?>
 <!--menu lateral fin-->
-
 <!--contenido pagina-->
-
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
@@ -36,23 +34,12 @@
                     </div>
                     <div class="portlet-body">
                         <!-- espacio de trabajo _______________________________________________________________________________________________________________________________________________________ -->
-
-
-
-
-
-
-
                         <div class="profile-userpic">
-
                             <img src="<?= base_url('assets/pages/media/profile/profile_user.jpg') ?>" class="img-responsive" alt="" width="100px" height="100px">
-
                         </div>
                         <!-- END SIDEBAR USERPIC -->
                         <!-- SIDEBAR USER TITLE -->
-
                         <!-- END SIDEBAR USER TITLE -->
-
                         <!-- SIDEBAR MENU -->
                         <div class="portlet-body">
                             <div class="mt-element-list">
@@ -223,17 +210,7 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- END MENU -->
-
-
-
-
-
-
-
-
-
                             <!-- fin espacio de trabajo_______________________________________________________________________________________________________________________ -->
                         </div>
                     </div>
@@ -249,7 +226,7 @@
     <!--contenido pies de pagina-->
     <?php require_once 'footers/foot_1.php';?>
     <!-- fin contenido pies de pagina-->
-
+<?php require_once 'footers/foot_3.php';?>
     <!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
 
 

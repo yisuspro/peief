@@ -28,5 +28,20 @@ class Users extends CI_Model {
         }
         return true;
     }
+    public function datosUsuario($datos){
+        if(!$usuario= $this->db->select('*')->from('users')->where('USER_PK',$datos)->join('states','users.USER_FK_state = states.STTS_PK')->join('ganders','users.USER_FK_gander = ganders.GNDR_PK')->join('types_identifications','users.USER_FK_type_identification = types_identifications.TPDI_PK')){
+            return false;
+        }else{
+            return $usuario->get();
+        }
+    }
+    public function modificarUsuario($datos,$datos2){
+        $this->db->where('USER_PK', $datos);
+        if($this->db->update('users', $datos2)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }

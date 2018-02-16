@@ -3,7 +3,7 @@
 <?php require_once 'heads/head_2.php'; ?>
 <!--titulo de la pagina fin-->
 <!--librerias extras-->
-<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+
 
 <!--librerias extras fin-->
 <!--cabeza de pagina-->
@@ -26,7 +26,6 @@
         <?php require_once 'heads/barra_url.php'; ?>
         <!-- END PAGE HEADER-->
         <div class="row">
-            <input type="button" class="" id="cambiar" value="cambiar el contenido de la pagina">
             <div class="contentAjax">
                 <!-- espacio de trabajo _______________________________________________________________________________________________________________________________________________________ -->
                 <div class="col-md-12">
@@ -225,15 +224,11 @@
     <!-- END CONTENT BODY -->
 </div>
 
-
-
-
-
 <!--fin del contenido de lapagina-->
 <!--contenido pies de pagina-->
 <?php require_once 'footers/foot_1.php';?>
+<?php require_once 'footers/foot_3.php';?>
 <!-- fin contenido pies de pagina-->
-
 <!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
 <script>
     $(document).ready(function() {
@@ -305,8 +300,10 @@
 
         });
         dt.on('click', '.edit', function(e) {
+            e.preventDefault();
             var tr = this.id;
-            alert(tr);
+            var url = 'editarUsuario/'+tr;
+            $(".contentAjax").load(url);
         });
 
         $("#archivo3").on('click', function(e) {
@@ -329,17 +326,11 @@
             $('#agregar').addClass('fade');
             document.getElementById('agregar').style.display = 'none';
         });
-        $("#cambiar").on('click', function(e) {
-            e.preventDefault();
-            var url = 'editar';
-            $(".contentAjax").load(url);
-        });
-
-
-    });
-
+});
 </script>
+
 <script src="<?= base_url('assets/js/usuarios/agregar_usuarios.js')?>"></script>
+
 <!--fin scrips-->
 
 <!--scrips pie de pagina-->

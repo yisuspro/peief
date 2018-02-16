@@ -27,6 +27,8 @@
 <link href="<?= base_url('assets/layouts/layout2/css/custom.min.css') ?>" rel="stylesheet" type="text/css" />
 <!-- END THEME LAYOUT STYLES -->
 <link rel="shortcut icon" href="<?= base_url('assets/images\logos\institucion/favicon.png')?>">
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+
 
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md">
