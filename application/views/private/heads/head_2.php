@@ -1,4 +1,5 @@
 </title>
+<!-- librerias y estilos cabeza -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta content="Preview page of Metronic Admin Theme #2 for calendar page" name="description" />
@@ -29,6 +30,6 @@
 <link rel="shortcut icon" href="<?= base_url('assets/images\logos\institucion/favicon.png')?>">
 <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 
-
+<!-- librerias y estilos cabeza -->
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md">

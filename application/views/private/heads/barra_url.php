@@ -1,3 +1,4 @@
+<!-- barra de dreccionamiento barra_url.php-->
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
@@ -32,3 +33,4 @@
         </div>
     </div>
 </div>
+<!-- end barra de dreccionamiento barra_url.php-->
