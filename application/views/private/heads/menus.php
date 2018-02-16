@@ -35,7 +35,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item start ">
-                        <a href="<?= base_url('index.php/Usuarios/listarUsuarios') ?>" class="nav-link ">
+                        <a href="<?= base_url('index.php/Roles') ?>" class="nav-link ">
                             <i class="fa fa-group">
                             </i>
                             <span class="title">
@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-item start ">
-                        <a href="<?= base_url('index.php/Usuarios/listarUsuarios') ?>" class="nav-link ">
+                        <a href="<?= base_url('index.php/Permisos') ?>" class="nav-link ">
                             <i class="fa fa-language">
                             </i>
                             <span class="title">
