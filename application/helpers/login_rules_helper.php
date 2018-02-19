@@ -139,3 +139,39 @@ function getRulesAddRol(){
     );
     
 }
+/**
+*
+*funcion encargada de las reglas del formulario de registro y de edicion
+*retorna el vector de errores
+*@return array ()
+*
+*/
+function getRulesAddPermiso(){
+    return array(
+        array(
+            'field' =>'PRMS_name',
+            'label' =>'PRMS_name',
+            'rules' =>'required',                              //campo requerido 
+            'errors'=> array(       
+                'required' => 'nombre del permiso necesario',       //mensajes de error         
+            ),
+        ),
+        array(
+            'field' =>'PRMS_shortname',
+            'label' =>'PRMS_shortname',
+            'rules' =>'required',                               //campo requerido
+            'errors'=> array(
+                'required' => 'Nombre corto requerido',        //mensajes de error
+            ),
+        ),
+        array(
+            'field' =>'PRMS_description',
+            'label' =>'PRMS_description',
+            'rules' =>'required',                               //campo requerido
+            'errors'=> array(
+                'required' => 'Descripcion requerida ',         //mensajes de error
+            ),
+        ),
+    );
+    
+}

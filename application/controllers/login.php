@@ -58,17 +58,17 @@ class login extends CI_Controller
                 exit;                                       //slida del proceso
             }else{                                          //si el email existe y conside las contraseña
                 $usuario_data = array(                      //creacion de vector con todos  los datos del usuarios
-                    'id'        => $res->USER_PK,
-                    'nombre'    => $res->USER_names,
-                    'apellido'    => $res->USER_lastnames,
-                    'email'    => $res->USER_email,
-                    'password'    => $res->USER_password,
-                    'address'    => $res->USER_address,
-                    'telephone'    => $res->USER_telephone,
-                    'state'    => $res->STTS_state,
-                    'type_identification'    => $res->TPDI_type_identification,
-                    'gander'    => $res->GNDR_gander,
-                    'logueado'  => TRUE,                    //hace verdadero el inicio de sesion del usuarios en el vector de datos
+                    'id'            => $res->USER_PK,
+                    'nombre'        => $res->USER_names,
+                    'apellido'      => $res->USER_lastnames,
+                    'email'         => $res->USER_email,
+                    'password'      => $res->USER_password,
+                    'address'       => $res->USER_address,
+                    'telephone'     => $res->USER_telephone,
+                    'state'         => $res->STTS_state,
+                    'type_identification'=> $res->TPDI_type_identification,
+                    'gander'        => $res->GNDR_gander,
+                    'logueado'      => TRUE,                //hace verdadero el inicio de sesion del usuarios en el vector de datos
             );
             $this->session->set_userdata($usuario_data);    //realiza el inicio de sesion del usuario
             }

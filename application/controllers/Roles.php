@@ -37,7 +37,7 @@ class Roles extends CI_Controller
     /**
     * funcion el envio de datos para dibujar la tabla de roles.
     *
-    * @return view ()
+    * @return json_encode ()
     */
     public function listarRoles(){
         $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla

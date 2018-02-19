@@ -9,7 +9,7 @@
                                 <span class="arrow"></span>
                             </a>
             </li>
-            <li class="nav-item start <?php if ($this->uri->segment(1)== "Usuarios"){?>active open<?php }?>">
+            <li class="nav-item start <?php if ($this->uri->segment(2)== "listarUsuarios"){?>active open<?php }?>">
                 <a href="<?= base_url('index.php/Usuarios/listarUsuarios') ?>" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
                     <span class="title">USUARIOS</span>

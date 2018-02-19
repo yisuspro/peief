@@ -59,4 +59,9 @@ $route['Usuarios/editarUsuario/(:num)'] = '/Usuarios/editarUsuario/$1';
 $route['Usuarios/modificarUsuario/(:num)'] = '/Usuarios/modificarUsuario/$1';
 //____________RUTAS_ROLES_____________________________________________________
 $route['Roles/eliminarRoles/(:num)'] = '/Roles/eliminarRoles/$1';
+$route['Roles/editarRol/(:num)'] = '/Roles/editarRol/$1';
 $route['Roles/modificarRol/(:num)'] = '/Roles/modificarRol/$1';
+//____________RUTAS_PERMISOS__________________________________________________
+$route['Permisos/eliminarPermisos/(:num)'] = '/Permisos/eliminarPermisos/$1';
+$route['Permisos/editarpermisos/(:num)'] = '/Permisos/editarpermisos/$1';
+$route['Permisos/modificarpermisos/(:num)'] = '/Permisos/modificarpermisos/$1';
