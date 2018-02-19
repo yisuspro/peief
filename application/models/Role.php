@@ -4,7 +4,7 @@
 *
 *@autor jesus andres castellanos aguilar
 *
-* modelor encargado de todos los procesos referente a los usuarios
+* modelor encargado de todos los procesos referente a los roles
 * 
 * contiene todas las consultas sql a la base de datos
 * 
@@ -20,10 +20,11 @@ class Role extends CI_Model {
     public function __construct(){
         
     }
+    
     /**
-    * funcion para la eliminacion de un usuario 
+    * funcion para la verificacion y envio de los datos del rol solicitado.
     * @param int $datos
-    * @return true | false
+    * @return get() | false
     */
     public function datosRol($datos){
         if(!$rol= $this->db->select('*')->from('roles')->where('ROLE_PK',$datos)){
@@ -33,8 +34,8 @@ class Role extends CI_Model {
         }
     }
     /**
-    * funcion para la verificacion y envio de los datos del usuario solicitado.
-    * @param int $doc
+    * funcion para la consulta de todos los roles a la base de datos.
+    * 
     * @return get() 
     */
     public function listar(){
@@ -43,7 +44,7 @@ class Role extends CI_Model {
     }
     
     /**
-    * funcion para la eliminacion de un usuario 
+    * funcion para la eliminacion de un rol de la base de datos
     * @param int $datos
     * @return true | false
     */
@@ -55,7 +56,7 @@ class Role extends CI_Model {
     }
     
     /**
-    * funcion para la eliminacion de un usuario 
+    * funcion para la modificacion de datos de los roles en la base de datos 
     * @param int $datos
     * @return true | false
     */
@@ -68,7 +69,7 @@ class Role extends CI_Model {
         }
     }
     /**
-    * funcion para la eliminacion de un usuario 
+    * funcion para agregar nuevos datos de roles en la base de datos
     * @param int $datos
     * @return true | false
     */
