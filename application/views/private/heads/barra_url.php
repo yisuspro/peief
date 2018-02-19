@@ -7,7 +7,15 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <span></span>
+            <span><?php echo $this->uri->segment(1); ?></span><i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span><?php if($this->uri->segment(2)){
+                echo $this->uri->segment(2); 
+                ?></span><i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <span><?php echo $this->uri->segment(3);} ?></span>
         </li>
     </ul>
     <div class="page-toolbar">

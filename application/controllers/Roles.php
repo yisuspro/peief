@@ -18,7 +18,7 @@ class Roles extends CI_Controller
     */
     function __construct() {
         parent::__construct ();
-        $this->load->model('Users');
+        $this->load->model('Role');
         $this->load->model('Logueo');
         $this->load->helper('login_rules');
         $this->load->helper('url');
@@ -39,8 +39,138 @@ class Roles extends CI_Controller
     *
     * @return view ()
     */
+    public function listarRoles(){
+        $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+        $data =$this->Role->listar();                      //utiliza el metodo listar() del modelo users() para traer los datos de todos los usuarios 
+        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
+            $dato[] = array(
+                $r->ROLE_name,
+                $r->ROLE_shortname,
+                $r->ROLE_description,
+                '<input type="button" class="btn btn-warning fa fa-remove edit"  id="'.$r->ROLE_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove"  id="'.$r->ROLE_PK.'" value="eliminar" >',
+            );
+        }
+        $output = array(                                    //creacion del vector de salida
+            "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
+            "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
+            "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
+            "data" => $dato                                 //envia todos los datos de la tabla
+        );
+        echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
+        exit;                                               //salida del proceso
+    }
+    
+    /**
+    * funcion para mostrar la  vista principal el cual es perfil.
+    *
+    * @return view ()
+    */
+    public function eliminarRoles($pk){
+        if($res = $this->Role->eliminar($pk)){                                  //realiza la verificacion y eliminacion del usuario
+            echo json_encode(array('msg'=> 'rol eliminado exitosamente' ));     // si el usuario fue eliminado correctamenre envia el mensaje de confirmacion
+        }else{                                                                  //si no fue posible eliminarlo
+            echo json_encode($res);                                             //envio de la respueta
+            $this->output->set_status_header(403);                              //envio del status de error en este caso 403
+        }
+        
+    }
+    
+    /**
+    *funcion para redirecionar a la visa de editar la informacion de los usuarios.
+    *@param  int $doc
+    *@return  view()
+    */
+    public function editarRol($doc){
+        $data=$this->Role->datosRol($doc);                                         //verifica por medio del metodo datosUsiarios() del modelo users() si el usuario existe ytae todos los datos pertinentes al usuario 
+        foreach($data->result() as $r) {                                                //ciclop para  convertir los datos en un arreglo
+            $dato = array();                                                            //creacion del vector que contendra los datos del usuario
+            $dato['ROLE_PK'] = $r->ROLE_PK;
+            $dato['ROLE_name'] = $r->ROLE_name;
+            $dato['ROLE_shortname']= $r->ROLE_shortname;
+            $dato['ROLE_description']= $r->ROLE_description;
+            
+        }
+        $this->load->view('private/view_ajax/editar_rol_ajax',$dato);               //envio de la vista y los datos para la edicion de los usuarios
+    }
+    
+    /**
+    *funcion para la modificacion de  la informacion de los usuarios.
+    *@param  int $doc
+    *@return  view()
+    */
+    public function modificarRol($doc){
+        $this->form_validation->set_error_delimiters('','');                        //quita los delimtadores de error
+        $rules=getRulesAddRol();                                                  //utiliza las reglas de agregar usuario para validar los campos del formulario
+        $this->form_validation->set_rules($rules);                                  //ejecuta las reglas del fromulario 
+        if($this->form_validation->run() === FALSE){                                //si se incumple algunade las regla
+            $errors = array(                                                        //creacion del vector de los errores
+                'ROLE_name'       => form_error('ROLE_name'),
+                'ROLE_shortname'    => form_error('ROLE_shortname'),
+                'ROLE_description'=> form_error('ROLE_description'),
+                
+            );
+            echo json_encode($errors);                                              //envio del vector de errores
+            $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
+        }else{                                                                      //si las reglas fueron cumplidas
+            $name           = $this->input->post('ROLE_name');                      //obtencion de todos los datos del formulario                    
+            $shortname      = $this->input->post('ROLE_shortname');
+            $description    = $this->input->post('ROLE_description');
+            $data= array(                                                           //creacion del vector de los nuevos datos del usuario
+                'ROLE_name'                     =>  $name,
+                'ROLE_shortname'                =>  $shortname,
+                'ROLE_description'              =>  $description,
+                
+            );
+            if(!$this->Role->modificarRol($doc,$data)){                        //utilizacion del metodo modificarUsuarios() del modelo users() para la modificacion del usuario  enviando el id y los datos pertinentes
+                echo "error";                                                       // en caso de  fallar envia un mensaje de error
+            }
+            echo json_encode(array('msg'=> 'Rol modificado' ));                 // si fue modificado con exito envia el mensaje correspondiente
+        }
+    }
+    /**
+    * funcion para mostrar la  vista principal el cual es perfil.
+    *
+    * @return view ()
+    */
     public function asignacionRoles(){
         $this->load->view('private/view_ajax/asignacion_roles_ajax');
+    }
+    
+    /**
+    * funcion para mostrar la  vista principal el cual es perfil.
+    *
+    * @return view ()
+    */
+    public function agregarRoles(){
+        $this->form_validation->set_error_delimiters('','');                        //quita los delimtadores de error
+        $rules=getRulesAddRol();                                                  //utiliza las reglas de agregar usuario para validar los campos del formulario
+        $this->form_validation->set_rules($rules);                                  //ejecuta las reglas del fromulario 
+        if($this->form_validation->run() === FALSE){                                //si se incumple algunade las regla
+            $errors = array(                                                        //creacion del vector de los errores
+                'ROLE_name'       => form_error('ROLE_name'),
+                'ROLE_shortname'    => form_error('ROLE_shortname'),
+                'ROLE_description'=> form_error('ROLE_description'),
+                
+            );
+            echo json_encode($errors);                                              //envio del vector de errores
+            $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
+        }else{                                                                      //si las reglas fueron cumplidas
+            $name           = $this->input->post('ROLE_name');                      //obtencion de todos los datos del formulario                    
+            $shortname      = $this->input->post('ROLE_shortname');
+            $description    = $this->input->post('ROLE_description');
+            $data= array(                                                           //creacion del vector de los nuevos datos del usuario
+                'ROLE_name'                     =>  $name,
+                'ROLE_shortname'                =>  $shortname,
+                'ROLE_description'              =>  $description,
+                
+            );
+            if(!$this->Role->agregarRol($data)){                        //utilizacion del metodo modificarUsuarios() del modelo users() para la modificacion del usuario  enviando el id y los datos pertinentes
+                echo "error";                                                       // en caso de  fallar envia un mensaje de error
+            }
+            echo json_encode(array('msg'=> 'Rol modificado' ));                 // si fue modificado con exito envia el mensaje correspondiente
+        }
     }
    
 }

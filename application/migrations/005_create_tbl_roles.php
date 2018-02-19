@@ -27,11 +27,12 @@ class Migration_create_tbl_roles extends CI_Migration {
                 'type' => 'VARCHAR',
                 'constraint' => '45',
             ),
-            'ROLE_shortname' => array(              //columna ROLE_shortname tipo text, tamaño 45,no vacio
-                'type' => 'TEXT',
+            'ROLE_shortname' => array(              //columna ROLE_shortname tipo VARCHAR, tamaño 45,no vacio
+                'type' => 'VARCHAR',
+                'constraint' => '45',
                 'null' => TRUE,
             ),
-            'USER_description' => array(            //columna USER_description tipo text, tamaño 45,no vacio
+            'ROLE_description' => array(            //columna USER_description tipo text, tamaño 45,no vacio
                 'type' => 'TEXT',
                 'null' => TRUE,
             ),

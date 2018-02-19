@@ -102,3 +102,40 @@ function getRulesAddUsers(){
     );
     
 }
+
+/**
+*
+*funcion encargada de las reglas del formulario de registro y de edicion
+*retorna el vector de errores
+*@return array ()
+*
+*/
+function getRulesAddRol(){
+    return array(
+        array(
+            'field' =>'ROLE_name',
+            'label' =>'ROLE_name',
+            'rules' =>'required',                              //campo requerido 
+            'errors'=> array(       
+                'required' => 'nombre del rol necesario',       //mensajes de error         
+            ),
+        ),
+        array(
+            'field' =>'ROLE_shortname',
+            'label' =>'ROLE_shortname',
+            'rules' =>'required',                               //campo requerido
+            'errors'=> array(
+                'required' => 'Nombre corto requerido',        //mensajes de error
+            ),
+        ),
+        array(
+            'field' =>'ROLE_description',
+            'label' =>'ROLE_description',
+            'rules' =>'required',                               //campo requerido
+            'errors'=> array(
+                'required' => 'Descripcion requerida ',         //mensajes de error
+            ),
+        ),
+    );
+    
+}

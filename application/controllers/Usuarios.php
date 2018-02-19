@@ -185,7 +185,7 @@ class Usuarios extends CI_Controller
         }
     }
     
-     /**
+    /**
     *funcion para redirecionar a la visa de editar la informacion de los usuarios.
     *@param  int $doc
     *@return  view()

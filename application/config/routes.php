@@ -52,6 +52,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Welcome';
 $route['404_override'] = 'errors/page_missing';
 $route['translate_uri_dashes'] = FALSE;
+
+//____________RUTAS___USUARIOS________________________________________________
 $route['Usuarios/eliminarUsuario/(:num)'] = '/Usuarios/eliminarUsuario/$1';
 $route['Usuarios/editarUsuario/(:num)'] = '/Usuarios/editarUsuario/$1';
 $route['Usuarios/modificarUsuario/(:num)'] = '/Usuarios/modificarUsuario/$1';
+//____________RUTAS_ROLES_____________________________________________________
+$route['Roles/eliminarRoles/(:num)'] = '/Roles/eliminarRoles/$1';
+$route['Roles/modificarRol/(:num)'] = '/Roles/modificarRol/$1';
