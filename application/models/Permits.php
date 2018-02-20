@@ -108,7 +108,7 @@ class Permits extends CI_Model {
     
     /**
     * funcion para consultar si un permisos esta asigando en la base de datos
-    * @param int $id    | String $pertmiso
+    * @param int $id, $pertmiso
     * @return true | false
     */
     public function consultarPermisoRol($rol,$permiso){
