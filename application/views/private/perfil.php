@@ -32,6 +32,7 @@
                             <span class="caption-subject font-green sbold uppercase">PERFIL</span>
                         </div>
                     </div>
+                    <?php ?>
                     <div class="portlet-body">
                         <!-- espacio de trabajo _______________________________________________________________________________________________________________________________________________________ -->
                         <div class="profile-userpic">
@@ -211,6 +212,7 @@
                                 </div>
                             </div>
                             <!-- END MENU -->
+                            
                             <!-- fin espacio de trabajo_______________________________________________________________________________________________________________________ -->
                         </div>
                     </div>

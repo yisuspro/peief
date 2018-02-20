@@ -1,6 +1,5 @@
 <div class="row">
     <div class="containerAjax">
-
         <!-- espacio de trabajo _______________________________________________________________________________________________________________________________________________________ -->
         <div class="col-md-12">
             <div class="portlet light portlet-fit  calendar">
@@ -90,7 +89,7 @@
                         document.getElementById('ROLE_description_alerta').style.display = 'none';
                         if (xhr.status == 402) {
                             var json = JSON.parse(xhr.responseText);
-                            
+
                             if (json.ROLE_name.length != 0) {
                                 $("#ROLE_name_alerta > div").html(json.ROLE_name);
                                 document.getElementById('ROLE_name_alerta').style.display = 'inherit';
@@ -117,8 +116,7 @@
         $("#atras").on('click', function(e) {
             e.preventDefault();
             var url = 'Roles';
-            location.href = "Roles";
-            location.href = "Roles";
+            location.href = url;
         });
     });
 

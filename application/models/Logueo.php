@@ -34,4 +34,15 @@ class Logueo extends CI_Model {
         $consulta =$rep;
         return $consulta->row();
     }
+    public function permisosUsuario($id,$permiso){
+        $where="USRL_FK_roles = ROLE_PK AND PRMS_PK=RLPR_FK_permits AND RLPR_FK_roles=ROLE_PK AND USRL_FK_users=USER_PK";
+        $this->db->select('PRMS_shortname')->from('users,roles,permits,users_roles,roles_permits')->where($where);
+        $this->db->where('USER_PK',$id);
+        if($res=$this->db->where('PRMS_shortname',$permiso)->get()->result()){
+            return true;
+        }else{
+           return false; 
+        }
+        
+    }
 }

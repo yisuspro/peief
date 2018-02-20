@@ -229,6 +229,12 @@
             var url = 'Roles/editarRol/' + tr;
             $(".contentAjax").load(url);
         });
+        dt.on('click', '.asignar', function(e) {
+            e.preventDefault();
+            var tr = this.id;
+            var url = 'Roles/asignarPermiso/' + tr;
+            $(".contentAjax").load(url);
+        });
 
         $("#archivo3").on('click', function(e) {
             e.preventDefault();

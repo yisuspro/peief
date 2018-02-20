@@ -9,13 +9,16 @@
                                 <span class="arrow"></span>
                             </a>
             </li>
+            <?php if($this->Logueo->permisosUsuario($id,'v_users')==true){?>
             <li class="nav-item start <?php if ($this->uri->segment(2)== "listarUsuarios"){?>active open<?php }?>">
                 <a href="<?= base_url('index.php/Usuarios/listarUsuarios') ?>" class="nav-link nav-toggle">
                     <i class="icon-users"></i>
                     <span class="title">USUARIOS</span>
                     <span class="arrow"></span>
                 </a></li>
+            <?php }?>
             
+             <?php if($this->Logueo->permisosUsuario($id,'v_permit')==true || $this->Logueo->permisosUsuario($id,'v_roles')==true){?>
             <li class="nav-item start <?php if ($this->uri->segment(1)== "Roles" || $this->uri->segment(1)== "Permisos" ){?>active open<?php }?>">
                 <a href="#" class="nav-link nav-toggle">
                     <i class="icon-lock"></i>
@@ -23,6 +26,7 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
+                    <?php if($this->Logueo->permisosUsuario($id,'v_roles')==true){?>
                     <li class="nav-item start ">
                         <a href="<?= base_url('index.php/Roles') ?>" class="nav-link ">
                             <i class="fa fa-group">
@@ -32,6 +36,8 @@
                             </span>
                         </a>
                     </li>
+                    <?php }?>
+                    <?php if($this->Logueo->permisosUsuario($id,'asig_rol')==true){?>
                     <li class="nav-item start ">
                         <a href="<?= base_url('index.php/Usuarios/listarUsuarios') ?>" class="nav-link ">
                             <i class="fa fa-hand-lizard-o">
@@ -41,6 +47,8 @@
                             </span>
                         </a>
                     </li>
+                    <?php }?>
+                    <?php if($this->Logueo->permisosUsuario($id,'v_permit')==true){?>
                     <li class="nav-item start ">
                         <a href="<?= base_url('index.php/Permisos') ?>" class="nav-link ">
                             <i class="fa fa-language">
@@ -50,18 +58,19 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item start ">
-                        <a href="<?= base_url('index.php/Usuarios/listarUsuarios') ?>" class="nav-link ">
-                            <i class="fa fa-eye-slash">
-                            </i>
-                            <span class="title">
-                               asignacion permisos
-                            </span>
-                        </a>
-                    </li>
+                    <?php }?>
                 </ul>
-
             </li>
+            <?php }?>
+            <?php if($this->session->userdata('v_notas')){?>
+            <li class="nav-item start <?php if ($this->uri->segment(2)== "listarUsuarios"){?>active open<?php }?>">
+                <a href="<?= base_url('index.php/Usuarios/listarUsuarios') ?>" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">Notas</span>
+                    <span class="arrow"></span>
+                </a>
+            </li>
+            <?php }?>
         </ul>
     </div>
 </div>

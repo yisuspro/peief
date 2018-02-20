@@ -8,5 +8,10 @@
     <!-- BEGIN HEAD -->
 
     <head>
+        <?php
+        $ci = &get_instance();
+        $ci->load->model("Logueo");
+        $id=$this->session->userdata('id');
+        ?>
         <meta charset="utf-8" />
         <title>

@@ -49,7 +49,7 @@ class Roles extends CI_Controller
                 $r->ROLE_name,
                 $r->ROLE_shortname,
                 $r->ROLE_description,
-                '<input type="button" class="btn btn-warning fa fa-remove edit"  id="'.$r->ROLE_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove"  id="'.$r->ROLE_PK.'" value="eliminar" >',
+                '<input type="button" class="btn btn-warning edit"  id="'.$r->ROLE_PK.'" value="editar" ><input type="button" class="btn btn-danger remove"  id="'.$r->ROLE_PK.'" value="eliminar" ><input type="button" class="btn btn-info asignar" id="'.$r->ROLE_PK.'" value="permisos" >',
             );
         }
         $output = array(                                    //creacion del vector de salida
@@ -106,9 +106,9 @@ class Roles extends CI_Controller
         $this->form_validation->set_rules($rules);                                  //ejecuta las reglas del fromulario 
         if($this->form_validation->run() === FALSE){                                //si se incumple algunade las regla
             $errors = array(                                                        //creacion del vector de los errores
-                'ROLE_name'       => form_error('ROLE_name'),
+                'ROLE_name'         => form_error('ROLE_name'),
                 'ROLE_shortname'    => form_error('ROLE_shortname'),
-                'ROLE_description'=> form_error('ROLE_description'),
+                'ROLE_description'  => form_error('ROLE_description'),
                 
             );
             echo json_encode($errors);                                              //envio del vector de errores
@@ -134,8 +134,9 @@ class Roles extends CI_Controller
     *
     * @return view ()
     */
-    public function asignacionRoles(){
-        $this->load->view('private/view_ajax/asignacion_roles_ajax');
+    public function asignarPermiso($PK){
+        $data['id'] =$PK;
+        $this->load->view('private/view_ajax/asignacion_permisos_ajax',$data);
     }
     
     /**

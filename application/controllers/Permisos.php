@@ -86,6 +86,21 @@ class Permisos extends CI_Controller
     }
     
     /**
+    * funcion para eliminar el  rol.
+    *
+    * @return json_encode() |set_status_header()
+    */
+    public function eliminarPermisosRol($pk){
+        if($res = $this->Permits->eliminarPermisoRol($pk)){                               //realiza la verificacion y eliminacion del rol
+            echo json_encode(array('msg'=> 'permiso eliminado exitosamente' )); //si el rol fue eliminado correctamenre envia el mensaje de confirmacion
+        }else{                                                                  //si no fue posible eliminarlo
+            echo json_encode($res);                                             //envio de la respueta
+            $this->output->set_status_header(403);                              //envio del status de error en este caso 403
+        }
+        
+    }
+    
+    /**
     *funcion para redirecionar a la visa de editar y envio de la informacion de los roles.
     *@param  int $doc
     *@return  view()
@@ -175,5 +190,75 @@ class Permisos extends CI_Controller
             echo json_encode(array('msg'=> 'Permiso modificado' ));                     //si fue modificado con exito envia el mensaje correspondiente
         }       
     }
-   
+    
+    /**
+    * funcion el envio de datos para dibujar la tabla de roles.
+    *
+    * @return json_encode()
+    */
+     public function listarPermisosRol($id){
+        $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+        $data =$this->Permits->listarPermisoRol($id);                    //utiliza el metodo listar() del modelo permits() para traer los datos de todos los usuarios 
+        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
+            $dato [] = array(
+                $r->PRMS_name,
+                $r->PRMS_shortname,
+                $r->PRMS_description,
+                '<input type="button" class="btn btn-danger fa fa-remove remove"  id="'.$r->RLPR_PK.'" value="eliminar" >',
+            );
+        }
+        $output = array(                                    //creacion del vector de salida
+            "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
+            "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
+            "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
+            "data" => $dato,                                 //envia todos los datos de la tabla
+        );
+        echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
+        exit;                                               //salida del proceso
+    }
+    
+    /**
+    * funcion el envio de datos para dibujar la tabla de roles.
+    *
+    * @return json_encode()
+    */
+    public function listarPermisosRolN($id){
+        $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+        $data =$this->Permits->listar();                    //utiliza el metodo listar() del modelo permits() para traer los datos de todos los usuarios 
+        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
+            $dato [] = array(
+                $r->PRMS_name,
+                $r->PRMS_shortname,
+                $r->PRMS_description,
+                '<input type="button" class="btn btn-success asignar" id="'.$r->PRMS_PK.'" value="asignar" >',
+            );
+        }
+        $output = array(                                    //creacion del vector de salida
+            "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
+            "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
+            "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
+            "data" => $dato,                                 //envia todos los datos de la tabla
+        );
+        echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
+        exit;                                               //salida del proceso
+    }
+    
+    public function asignarPermisoRol($rol,$permiso){
+        if ($this->Permits->consultarPermisoRol($rol,$permiso)){
+            $this->output->set_status_header(402);
+        }else{
+            $data= array(
+                'RLPR_FK_roles'                 =>  $rol,
+                'RLPR_FK_permits'               =>  $permiso,
+            );
+            if ($this->Permits->asignarPermiso($data)){
+                return true;
+            }
+            return false;  
+        }
+    }
 }

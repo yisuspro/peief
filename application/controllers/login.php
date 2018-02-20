@@ -57,6 +57,7 @@ class login extends CI_Controller
                 var_dump($res);                             //envio de respuesta vector de los datos encontrados
                 exit;                                       //slida del proceso
             }else{                                          //si el email existe y conside las contraseña
+                
                 $usuario_data = array(                      //creacion de vector con todos  los datos del usuarios
                     'id'            => $res->USER_PK,
                     'nombre'        => $res->USER_names,
@@ -87,7 +88,8 @@ class login extends CI_Controller
              'logueado' => FALSE
          );
          $this->session->set_userdata($usuario_data);
-         redirect('index.php/login');
+         redirect('login');
      }
+    
     
 }

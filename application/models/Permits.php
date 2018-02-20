@@ -42,7 +42,17 @@ class Permits extends CI_Model {
         $permiso= $this->db->select('*')->from('permits');
         return $permiso->get();
     }
+    /**
+    * funcion para la consulta de todos los permisos a la base de datos.
+    * 
+    * @return get() 
+    */
+    public function listarPermisoRol($id){
+        $permiso= $this->db->select('*')->from('roles_permits')->join('permits','roles_permits.RLPR_FK_permits = permits.PRMS_PK')->where('RLPR_FK_roles',$id);
+        return $permiso->get();
+    }
     
+   
     /**
     * funcion para la eliminacion de un permiso de la base de datos
     * @param int $datos
@@ -50,6 +60,18 @@ class Permits extends CI_Model {
     */
     public function eliminar($datos){
         if(!$this->db->delete('permits', array('PRMS_PK' => $datos))){
+            return FALSE;
+        }
+        return true;
+    }
+    
+    /**
+    * funcion para la eliminacion de un permiso de la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function eliminarPermisoRol($datos){
+        if(!$this->db->delete('roles_permits', array('RLPR_PK' => $datos))){
             return FALSE;
         }
         return true;
@@ -78,5 +100,26 @@ class Permits extends CI_Model {
             return false;
         }
         return true;
+    }
+    /**
+    * funcion para agregar nuevos datos de permisos en la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function consultarPermisoRol($rol,$permiso){
+        $where= "RLPR_fk_roles ='".$rol."' AND RLPR_FK_permits ='".$permiso."'";
+         if($this->db->from('roles_permits')->where($where)->get()->result()){
+            return true;
+        }
+    }
+    /**
+    * funcion para agregar nuevos datos de permisos en la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function asignarPermiso($datos){
+         if(!$this->db->insert('roles_permits',$datos)){
+            return false;
+        }
     }
 }
