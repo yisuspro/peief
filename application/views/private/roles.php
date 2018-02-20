@@ -13,7 +13,6 @@
 <!--menu lateral-->
 <?php require_once 'heads/menus.php'; ?>
 <!--menu lateral fin-->
-
 <!--contenido pagina-->
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -27,8 +26,7 @@
         <!-- END PAGE HEADER-->
         <div class="row">
             <div class="contentAjax">
-
-                <!-- espacio de trabajo _______________________________________________________________________________________________________________________________________________________ -->
+                <!--_________________________________________________espacio de trabajo______________________________________________________________________________________________________-->
                 <div class="col-md-12">
                     <div class="portlet light portlet-fit  calendar">
                         <div class="portlet-title">
@@ -61,8 +59,7 @@
                                                             <?php echo form_error ('ROLE_PK') ?>
                                                         </div>
                                                     </div>
-
-
+                                                    
                                                     <label>Nombre</label>
                                                     <div class="input-group" id="ROLE_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
                                                         <input type="text" id="ROLE_name" name="ROLE_name" class="form-control" placeholder="Nombre">
@@ -72,8 +69,7 @@
                                                             <?php echo form_error('ROLE_name') ?>
                                                         </div>
                                                     </div>
-
-
+                                                    
                                                     <label>Nombre Corto</label>
                                                     <div class="input-group" id="ROLE_shortname"><span class="input-group-addon"><i class="fa fa-users"></i></span>
                                                         <input type="text" id="ROLE_shortname" name="ROLE_shortname" class="form-control" placeholder="Nombre corto">
@@ -83,8 +79,7 @@
                                                             <?= form_error ('ROLE_shortname') ?>
                                                         </div>
                                                     </div>
-
-
+                                                    
                                                     <label>Descripcion</label>
                                                     <div class="input-group" id="ROLE_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
                                                         <input type="text" id="ROLE_description" name="ROLE_description" class="form-control" placeholder="Dscripcion">
@@ -142,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- fin espacio de trabajo_______________________________________________________________________________________________________________________ -->
+                <!-- ________________________________________________________________fin espacio de trabajo_______________________________________________________ -->
             </div>
         </div>
     </div>

@@ -305,6 +305,13 @@
             var url = 'editarUsuario/'+tr;
             $(".contentAjax").load(url);
         });
+        
+        dt.on('click', '.asignar', function(e) {
+            e.preventDefault();
+            var tr = this.id;
+            var url = 'asignarRol/'+tr;
+            $(".contentAjax").load(url);
+        });
 
         $("#archivo3").on('click', function(e) {
             e.preventDefault();

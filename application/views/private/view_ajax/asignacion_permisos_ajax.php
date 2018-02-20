@@ -4,7 +4,7 @@
         <div class="portlet light portlet-fit  calendar">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-check-square font-green"></i>
+                    <i class="fa fa-check-square font-yellow"></i>
                     <span class="caption-subject font-green sbold uppercase">PERMISOS ASIGNADOS</span>
                 </div>
             </div>
@@ -22,8 +22,6 @@
                             <th>Nombre corto</th>
                             <th>Descripcion</th>
                             <th>Acciones</th>
-
-
                         </tr>
                     </thead>
                     <tfoot>
@@ -41,11 +39,12 @@
             </div>
         </div>
     </div>
+    
     <div class="col-md-12">
         <div class="portlet light portlet-fit  calendar">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-remove font-green"></i>
+                    <i class="fa fa-remove font-red"></i>
                     <span class="caption-subject font-green sbold uppercase">PERMISOS PARA ASIGNAR</span>
                 </div>
             </div>
@@ -57,8 +56,6 @@
                             <th>Nombre corto</th>
                             <th>Descripcion</th>
                             <th>Acciones</th>
-
-
                         </tr>
                     </thead>
                     <tfoot>
@@ -70,7 +67,6 @@
                         </tr>
                     </tfoot>
                     <tbody>
-
                     </tbody>
                 </table>
             </div>
@@ -146,9 +142,7 @@
             }
 
         });
-
     });
-
 </script>
 <script>
     $(document).ready(function() {
@@ -160,7 +154,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?php echo base_url('index.php/Permisos/listarPermisosRolN/'.$id); ?>",
+                url: "<?php echo base_url('index.php/Permisos/listarPermisosRolN'); ?>",
                 type: 'GET'
             },
             "scrollX": true,
@@ -224,11 +218,11 @@
             }
 
         });
+        
         $("#atras").on('click', function(e) {
             e.preventDefault();
             var url = 'Roles';
             location.href = url;
         });
-
     });
 </script>

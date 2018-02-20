@@ -211,7 +211,7 @@
                         document.getElementById('alerta_principal').style.display = 'inherit';
                     },
                     error: function(xhr) {
-                        alert('ocurrio algo inesperado por lo cual no se pudo eliminar el usuario')
+                        alert('otro usuario tien este permiso por lo cual no se puede eliminar')
                         $("#sample_1").DataTable().ajax.reload();
                     },
                 });

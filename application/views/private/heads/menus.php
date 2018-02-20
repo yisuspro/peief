@@ -37,17 +37,7 @@
                         </a>
                     </li>
                     <?php }?>
-                    <?php if($this->Logueo->permisosUsuario($id,'asig_rol')==true){?>
-                    <li class="nav-item start ">
-                        <a href="<?= base_url('index.php/Usuarios/listarUsuarios') ?>" class="nav-link ">
-                            <i class="fa fa-hand-lizard-o">
-                            </i>
-                            <span class="title">
-                               asignacion roles
-                            </span>
-                        </a>
-                    </li>
-                    <?php }?>
+                    
                     <?php if($this->Logueo->permisosUsuario($id,'v_permit')==true){?>
                     <li class="nav-item start ">
                         <a href="<?= base_url('index.php/Permisos') ?>" class="nav-link ">

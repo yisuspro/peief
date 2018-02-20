@@ -44,6 +44,15 @@ class Role extends CI_Model {
     }
     
     /**
+    * funcion para la consulta de todos los roles a la base de datos.
+    * 
+    * @return get() 
+    */
+    public function listarRolUsuario($id){
+        $rol= $this->db->select('*')->from('users_roles')->join('roles','users_roles.USRL_FK_roles = roles.ROLE_PK')->where('USRL_FK_users',$id);
+        return $rol->get();
+    }
+    /**
     * funcion para la eliminacion de un rol de la base de datos
     * @param int $datos
     * @return true | false
@@ -80,4 +89,38 @@ class Role extends CI_Model {
         return true;
     }
     
+    /**
+    * funcion consultar si el rol ya se encuentra asignado a un usuario
+    * @param int $user, $rol
+    * @return true | false
+    */
+    public function consultarRolUsuario($user,$rol){
+        $where= "USRL_FK_users ='".$user."' AND USRL_FK_roles ='".$rol."'";
+        if($this->db->from('users_roles')->where($where)->get()->result()){
+            return true;
+        }
+    }
+    
+    /**
+    * funcion para asignar un rol a un usuario en la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function asignarRol($datos){
+         if(!$this->db->insert('users_roles',$datos)){
+            return false;
+        }
+    }
+    
+    /**
+    * funcion para la eliminacion de un rol asignado a un usuario de la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function eliminarRolUsuario($datos){
+        if(!$this->db->delete('users_roles', array('USRL_PK' => $datos))){
+            return FALSE;
+        }
+        return true;
+    }
 }

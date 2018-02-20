@@ -226,7 +226,7 @@ class Permisos extends CI_Controller{
     *
     * @return json_encode()
     */
-    public function listarPermisosRolN($id){
+    public function listarPermisosRolN(){
         $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
@@ -251,7 +251,7 @@ class Permisos extends CI_Controller{
     
     /**
     * funcion para asignar los permisos a los roles.
-    * @param int rol | String permiso
+    * @param int $rol, $permiso
     * @return true | false
     */
     public function asignarPermisoRol($rol,$permiso){

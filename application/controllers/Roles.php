@@ -175,4 +175,95 @@ class Roles extends CI_Controller
         }       
     }
    
+    /**
+    * funcion el envio de datos para dibujar la tabla de roles que contiene un usuario.
+    *
+    * @return json_encode()
+    */
+     public function listarRolUsuario($id){
+        $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+        $data =$this->Role->listarRolUsuario($id);          //utiliza el metodo listarPermisoRol() del modelo permits() para traer los datos de todos los usuarios 
+        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
+            $dato [] = array(
+                $r->ROLE_name,
+                $r->ROLE_shortname,
+                $r->ROLE_description,
+                '<input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar rol" id="'.$r->USRL_PK.'" value="eliminar" >',
+            );
+        }
+        $output = array(                                    //creacion del vector de salida
+            "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
+            "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
+            "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
+            "data" => $dato,                                 //envia todos los datos de la tabla
+        );
+        echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
+        exit;                                               //salida del proceso
+    }
+    
+    /**
+    * funcion el envio de datos para dibujar la tabla de roles que pueden ser asignados a un usuario.
+    *
+    * @return json_encode()
+    */
+     public function listarRolUsuarioN(){
+        $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+        $data =$this->Role->listar();                       //utiliza el metodo listarPermisoRol() del modelo permits() para traer los datos de todos los usuarios 
+        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
+            $dato [] = array(
+                $r->ROLE_name,
+                $r->ROLE_shortname,
+                $r->ROLE_description,
+                '<input type="button" class="btn btn-success fa fa-remove asignar" title="Eliminar rol" id="'.$r->ROLE_PK.'" value="asignar" >',
+            );
+        }
+        $output = array(                                    //creacion del vector de salida
+            "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
+            "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
+            "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
+            "data" => $dato,                                 //envia todos los datos de la tabla
+        );
+        echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
+        exit;                                               //salida del proceso
+    }
+    
+    /**
+    * funcion para asignar los roles a un usuario.
+    * @param int $usuario,$rol
+    * @return true | false
+    */
+    public function asignarRolUsuario($usuario,$rol){
+        if ($this->Role->consultarRolUsuario($usuario,$rol)){ //verifica si el permiso ya fue asignado
+            $this->output->set_status_header(402);            //envia el error en caso de existir
+        }else{
+            $data= array(
+                'USRL_FK_users'            =>  $usuario,      //crea el vector con los datos
+                'USRL_FK_roles'            =>  $rol,
+            );
+            if ($this->Role->asignarRol($data)){       //envia y valida la insercion del nuevo permiso en el rol 
+                return true;
+            }
+            return false;  
+        }
+    }
+    
+    /**
+    * funcion para eliminar el rol asignado a un usuario.
+    * @param int $pk
+    * @return json_encode() |set_status_header()
+    */
+    public function eliminarRolUsuario($pk){
+        if($res = $this->Role->eliminarRolUsuario($pk)){                               //realiza la verificacion y eliminacion del rol
+            echo json_encode(array('msg'=> 'permiso eliminado exitosamente' )); //si el rol fue eliminado correctamenre envia el mensaje de confirmacion
+        }else{                                                                  //si no fue posible eliminarlo
+            echo json_encode($res);                                             //envio de la respueta
+            $this->output->set_status_header(403);                              //envio del status de error en este caso 403
+        }
+        
+    }
+    
 }

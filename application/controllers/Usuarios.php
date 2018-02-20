@@ -263,4 +263,14 @@ class Usuarios extends CI_Controller
         }
     }
     
+     /**
+    * funcion de perfil, redirecciona  si no existe sesion  a la vista de login.
+    *
+    * @return redirect() | view()
+    */
+    public function AsignarRol($doc){
+        $data['id'] =$doc;
+        $this->load->view('private/view_ajax/asignacion_roles_ajax',$data);
+    }
+    
 }
