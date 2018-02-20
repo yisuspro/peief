@@ -3,13 +3,10 @@
 <?php require_once 'heads/head_2.php'; ?>
 <!--titulo de la pagina fin-->
 <!--librerias extras-->
-
-
 <!--librerias extras fin-->
 <!--cabeza de pagina-->
 <?php require_once 'heads/head_3.php'; ?>
 <!--fin de cabeza-->
-
 <!--menu lateral-->
 <?php require_once 'heads/menus.php'; ?>
 <!--menu lateral fin-->
@@ -27,11 +24,12 @@
         <div class="row">
             <div class="contentAjax">
                 <!--_________________________________________________espacio de trabajo______________________________________________________________________________________________________-->
+                
                 <div class="col-md-12">
                     <div class="portlet light portlet-fit  calendar">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class=" icon-ROLEs font-green"></i>
+                                <i class="fa fa-group font-green"></i>
                                 <span class="caption-subject font-green sbold uppercase">ROLES</span>
                             </div>
                         </div>
@@ -41,14 +39,10 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header modal-header-success">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                                         <h1><i class="glyphicon glyphicon-thumbs-up"></i> AGREGAR ROL</h1>
                                     </div>
-                                    <div class="form-group" id="alerta" style="display:none">
-                                        <div class="alert alert-danger" role="alert">
-                                            El usuario ya existe porfavor comprobar los datos
-                                        </div>
-                                    </div>
+                                    
                                     <div class="modal-body">
                                         <?php echo validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_rol"');?>
@@ -59,7 +53,7 @@
                                                             <?php echo form_error ('ROLE_PK') ?>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <label>Nombre</label>
                                                     <div class="input-group" id="ROLE_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
                                                         <input type="text" id="ROLE_name" name="ROLE_name" class="form-control" placeholder="Nombre">
@@ -69,6 +63,7 @@
                                                             <?php echo form_error('ROLE_name') ?>
                                                         </div>
                                                     </div>
+                                                    
                                                     
                                                     <label>Nombre Corto</label>
                                                     <div class="input-group" id="ROLE_shortname"><span class="input-group-addon"><i class="fa fa-users"></i></span>
@@ -80,6 +75,8 @@
                                                         </div>
                                                     </div>
                                                     
+                                                    
+
                                                     <label>Descripcion</label>
                                                     <div class="input-group" id="ROLE_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
                                                         <input type="text" id="ROLE_description" name="ROLE_description" class="form-control" placeholder="Dscripcion">
@@ -143,7 +140,6 @@
     </div>
     <!-- END CONTENT BODY -->
 </div>
-
 <!--fin del contenido de lapagina-->
 <!--contenido pies de pagina-->
 <?php require_once 'footers/foot_1.php';?>
@@ -255,9 +251,7 @@
 
 </script>
 <script src="<?= base_url('assets/js/roles/agregar_roles.js')?>"></script>
-
 <!--fin scrips-->
-
 <!--scrips pie de pagina-->
 <?php require_once 'footers/foot_2.php';?>
 <!--fin scrips pie de pagina-->

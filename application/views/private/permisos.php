@@ -38,19 +38,12 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Cerrar</button>
                                         <h1><i class="glyphicon glyphicon-thumbs-up"></i> AGREGAR PERMISO</h1>
                                     </div>
-                                    <div class="form-group" id="alerta" style="display:none">
-                                        <div class="alert alert-danger" role="alert">
-                                            El usuario ya existe porfavor comprobar los datos
-                                        </div>
-                                    </div>
+                                    
                                     <div class="modal-body">
                                         <?php echo validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_permiso"');?>
                                             <div class="form-wizard">
                                                 <div class="form-group">
-                                                    
-
-
                                                     <label>Nombre</label>
                                                     <div class="input-group" id="PRMS_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
                                                         <input type="text" id="PRMS_name" name="PRMS_name" class="form-control" placeholder="Nombre">
@@ -60,8 +53,7 @@
                                                             <?php echo form_error('PRMS_name') ?>
                                                         </div>
                                                     </div>
-
-
+                                                    
                                                     <label>Nombre Corto</label>
                                                     <div class="input-group" id="PRMS_shortname"><span class="input-group-addon"><i class="fa fa-users"></i></span>
                                                         <input type="text" id="PRMS_shortname" name="PRMS_shortname" class="form-control" placeholder="Nombre corto">
@@ -71,8 +63,7 @@
                                                             <?= form_error ('PRMS_shortname') ?>
                                                         </div>
                                                     </div>
-
-
+                                                    
                                                     <label>Descripcion</label>
                                                     <div class="input-group" id="PRMS_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
                                                         <input type="text" id="PRMS_description" name="PRMS_description" class="form-control" placeholder="Dscripcion">
@@ -83,6 +74,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="form-actions">
                                                     <div class="row">
                                                         <div class="modal-footer">
@@ -101,10 +93,11 @@
                     <div class="portlet light portlet-fit  calendar">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-check-square font-red"></i>
+                                <i class="fa fa-language font-green"></i>
                                 <span class="caption-subject font-green sbold uppercase">PERMISOS</span>
                             </div>
                         </div>
+                        
                         <div class="portlet-body">
                             <div class="col-md-12">
                             <div class="actions">
@@ -140,7 +133,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- fin espacio de trabajo_______________________________________________________________________________________________________________________ -->
+                <!-- ___________________________________________________fin espacio de trabajo____________________________________________________________________ -->
             </div>
         </div>
     </div>
@@ -211,7 +204,7 @@
                         document.getElementById('alerta_principal').style.display = 'inherit';
                     },
                     error: function(xhr) {
-                        alert('otro usuario tien este permiso por lo cual no se puede eliminar')
+                        alert('otro usuario tiene este permiso por lo cual no se puede eliminar')
                         $("#sample_1").DataTable().ajax.reload();
                     },
                 });

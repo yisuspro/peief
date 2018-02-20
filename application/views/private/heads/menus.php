@@ -21,7 +21,7 @@
              <?php if($this->Logueo->permisosUsuario($id,'v_permit')==true || $this->Logueo->permisosUsuario($id,'v_roles')==true){?>
             <li class="nav-item start <?php if ($this->uri->segment(1)== "Roles" || $this->uri->segment(1)== "Permisos" ){?>active open<?php }?>">
                 <a href="#" class="nav-link nav-toggle">
-                    <i class="icon-lock"></i>
+                    <i class="glyphicon glyphicon-minus-sign"></i>
                     <span class="title">ROLES/PERMISOS</span>
                     <span class="arrow"></span>
                 </a>
