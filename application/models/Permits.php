@@ -10,7 +10,8 @@
 * 
 */
 class Permits extends CI_Model {
-   /**
+    
+    /**
     * metodo constructor donde se cargan todos los helpers, librerias necesarios en el modelo
     *@library 
     *
@@ -33,6 +34,7 @@ class Permits extends CI_Model {
             return $permiso->get();
         }
     }
+    
     /**
     * funcion para la consulta de todos los permisos a la base de datos.
     * 
@@ -42,6 +44,7 @@ class Permits extends CI_Model {
         $permiso= $this->db->select('*')->from('permits');
         return $permiso->get();
     }
+    
     /**
     * funcion para la consulta de todos los permisos de un rol a la base de datos.
     * 
@@ -90,6 +93,7 @@ class Permits extends CI_Model {
             return false;
         }
     }
+    
     /**
     * funcion para agregar nuevos datos de permisos en la base de datos
     * @param int $datos
@@ -101,6 +105,7 @@ class Permits extends CI_Model {
         }
         return true;
     }
+    
     /**
     * funcion para consultar si un permisos esta asigando en la base de datos
     * @param int $id    | String $pertmiso
@@ -112,6 +117,7 @@ class Permits extends CI_Model {
             return true;
         }
     }
+    
     /**
     * funcion para asignar un permiso a un rol en la base de datos
     * @param int $datos

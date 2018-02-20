@@ -97,18 +97,18 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End Modal -->
+                    <!-- End Modal -->
                     <div class="portlet light portlet-fit  calendar">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class=" icon-users font-green"></i>
+                                <i class="fa fa-check-square font-red"></i>
                                 <span class="caption-subject font-green sbold uppercase">PERMISOS</span>
                             </div>
                         </div>
                         <div class="portlet-body">
                             <div class="col-md-12">
                             <div class="actions">
-                                <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un rol"><i class="fa fa-plus"></i> Agregar</a>
+                                <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un permiso"><i class="fa fa-plus"></i> Agregar</a>
                             </div>
                         </div>
                         <br>
@@ -214,13 +214,12 @@
                         alert('ocurrio algo inesperado por lo cual no se pudo eliminar el usuario')
                         $("#sample_1").DataTable().ajax.reload();
                     },
-
                 });
             } else {
                 alert('No se ha eliminado el usuario')
             }
-
         });
+        
         dt.on('click', '.edit', function(e) {
             e.preventDefault();
             var tr = this.id;
@@ -234,6 +233,7 @@
             $('#agregar').addClass('fade-in');
             document.getElementById('agregar').style.display = 'inherit';
         });
+        
         $(".close").on('click', function(e) {
             e.preventDefault();
             $("#frm_agregar_permiso")[0].reset();
@@ -241,6 +241,7 @@
             $('#agregar').addClass('fade');
             document.getElementById('agregar').style.display = 'none';
         });
+        
         $("#cerrar").on('click', function(e) {
             e.preventDefault();
             $("#frm_agregar_permiso")[0].reset();

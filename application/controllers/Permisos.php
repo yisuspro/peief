@@ -1,4 +1,5 @@
 <?php
+
 /**
 *
 *@autor jesus andres castellanos aguilar
@@ -7,8 +8,8 @@
 * 
 */
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Permisos extends CI_Controller
-{
+class Permisos extends CI_Controller{
+    
     /**
     * metodo cnstructor donde se cargan todos los helpers, librerias y modelos necesarios en el controlador
     *@library 
@@ -42,6 +43,7 @@ class Permisos extends CI_Controller
     public function asignacionPermisos(){
         $this->load->view('private/view_ajax/asignacion_permisos_ajax');
     }
+    
     /**
     * funcion el envio de datos para dibujar la tabla de roles.
     *
@@ -57,7 +59,7 @@ class Permisos extends CI_Controller
                 $r->PRMS_name,
                 $r->PRMS_shortname,
                 $r->PRMS_description,
-                '<input type="button" class="btn btn-warning fa fa-remove edit"  id="'.$r->PRMS_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove"  id="'.$r->PRMS_PK.'" value="eliminar" >',
+                '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar permiso" id="'.$r->PRMS_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar permiso" id="'.$r->PRMS_PK.'" value="eliminar" >',
             );
         }
         $output = array(                                    //creacion del vector de salida
@@ -200,13 +202,13 @@ class Permisos extends CI_Controller
         $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
-        $data =$this->Permits->listarPermisoRol($id);                    //utiliza el metodo listar() del modelo permits() para traer los datos de todos los usuarios 
+        $data =$this->Permits->listarPermisoRol($id);       //utiliza el metodo listarPermisoRol() del modelo permits() para traer los datos de todos los usuarios 
         foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
             $dato [] = array(
                 $r->PRMS_name,
                 $r->PRMS_shortname,
                 $r->PRMS_description,
-                '<input type="button" class="btn btn-danger fa fa-remove remove"  id="'.$r->RLPR_PK.'" value="eliminar" >',
+                '<input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar rol" id="'.$r->RLPR_PK.'" value="eliminar" >',
             );
         }
         $output = array(                                    //creacion del vector de salida
@@ -234,14 +236,14 @@ class Permisos extends CI_Controller
                 $r->PRMS_name,
                 $r->PRMS_shortname,
                 $r->PRMS_description,
-                '<input type="button" class="btn btn-success asignar" id="'.$r->PRMS_PK.'" value="asignar" >',
+                '<input type="button" class="btn btn-success asignar" title="Asignar rol" id="'.$r->PRMS_PK.'" value="asignar" >',
             );
         }
         $output = array(                                    //creacion del vector de salida
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $dato,                                 //envia todos los datos de la tabla
+            "data" => $dato,                                //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;                                               //salida del proceso
@@ -253,14 +255,14 @@ class Permisos extends CI_Controller
     * @return true | false
     */
     public function asignarPermisoRol($rol,$permiso){
-        if ($this->Permits->consultarPermisoRol($rol,$permiso)){
-            $this->output->set_status_header(402);
+        if ($this->Permits->consultarPermisoRol($rol,$permiso)){//verifica si el permiso ya fue asignado
+            $this->output->set_status_header(402);              //envia el error en caso de existir
         }else{
             $data= array(
-                'RLPR_FK_roles'                 =>  $rol,
+                'RLPR_FK_roles'                 =>  $rol,      //crea el vector con los datos
                 'RLPR_FK_permits'               =>  $permiso,
             );
-            if ($this->Permits->asignarPermiso($data)){
+            if ($this->Permits->asignarPermiso($data)){         //envia y valida la insercion del nuevo permiso en el rol 
                 return true;
             }
             return false;  

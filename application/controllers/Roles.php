@@ -49,7 +49,7 @@ class Roles extends CI_Controller
                 $r->ROLE_name,
                 $r->ROLE_shortname,
                 $r->ROLE_description,
-                '<input type="button" class="btn btn-warning edit"  id="'.$r->ROLE_PK.'" value="editar" ><input type="button" class="btn btn-danger remove"  id="'.$r->ROLE_PK.'" value="eliminar" ><input type="button" class="btn btn-info asignar" id="'.$r->ROLE_PK.'" value="permisos" >',
+                '<input type="button" class="btn btn-warning edit" title="Editar rol" id="'.$r->ROLE_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar rol" id="'.$r->ROLE_PK.'" value="eliminar" ><input type="button" class="btn btn-info asignar" title="asignar permisos" id="'.$r->ROLE_PK.'" value="permisos" >',
             );
         }
         $output = array(                                    //creacion del vector de salida

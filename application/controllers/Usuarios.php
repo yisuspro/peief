@@ -158,7 +158,7 @@ class Usuarios extends CI_Controller
                 $r->USER_telephone,
                 $r->USER_address,
                 $r->STTS_state,
-                '<input type="button" class="btn btn-warning fa fa-remove edit"  id="'.$r->USER_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove"  id="'.$r->USER_PK.'" value="eliminar" >',
+                '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar un usuario" id="'.$r->USER_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar un usuario" id="'.$r->USER_PK.'" value="eliminar" ><input type="button" class="btn btn-info fa fa-remove asignar" title="Asignar un rol" id="'.$r->USER_PK.'" value="asignar" >',
             );
         }
         $output = array(                                    //creacion del vector de salida
