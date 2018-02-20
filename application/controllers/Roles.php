@@ -129,6 +129,7 @@ class Roles extends CI_Controller
             echo json_encode(array('msg'=> 'Rol modificado' ));                     // si fue modificado con exito envia el mensaje correspondiente
         }
     }
+    
     /**
     * funcion para mostrar la  vista de asigar roles.
     *

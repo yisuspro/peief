@@ -192,7 +192,7 @@ class Permisos extends CI_Controller
     }
     
     /**
-    * funcion el envio de datos para dibujar la tabla de roles.
+    * funcion el envio de datos para dibujar la tabla de permisos que contiene un rol.
     *
     * @return json_encode()
     */
@@ -220,7 +220,7 @@ class Permisos extends CI_Controller
     }
     
     /**
-    * funcion el envio de datos para dibujar la tabla de roles.
+    * funcion el envio de datos para dibujar la tabla de permisos que se pueden asignar.
     *
     * @return json_encode()
     */
@@ -247,6 +247,11 @@ class Permisos extends CI_Controller
         exit;                                               //salida del proceso
     }
     
+    /**
+    * funcion para asignar los permisos a los roles.
+    * @param int rol | String permiso
+    * @return true | false
+    */
     public function asignarPermisoRol($rol,$permiso){
         if ($this->Permits->consultarPermisoRol($rol,$permiso)){
             $this->output->set_status_header(402);

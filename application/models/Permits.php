@@ -43,7 +43,7 @@ class Permits extends CI_Model {
         return $permiso->get();
     }
     /**
-    * funcion para la consulta de todos los permisos a la base de datos.
+    * funcion para la consulta de todos los permisos de un rol a la base de datos.
     * 
     * @return get() 
     */
@@ -66,7 +66,7 @@ class Permits extends CI_Model {
     }
     
     /**
-    * funcion para la eliminacion de un permiso de la base de datos
+    * funcion para la eliminacion de un permiso asignado a un rol de la base de datos
     * @param int $datos
     * @return true | false
     */
@@ -102,8 +102,8 @@ class Permits extends CI_Model {
         return true;
     }
     /**
-    * funcion para agregar nuevos datos de permisos en la base de datos
-    * @param int $datos
+    * funcion para consultar si un permisos esta asigando en la base de datos
+    * @param int $id    | String $pertmiso
     * @return true | false
     */
     public function consultarPermisoRol($rol,$permiso){
@@ -113,7 +113,7 @@ class Permits extends CI_Model {
         }
     }
     /**
-    * funcion para agregar nuevos datos de permisos en la base de datos
+    * funcion para asignar un permiso a un rol en la base de datos
     * @param int $datos
     * @return true | false
     */
