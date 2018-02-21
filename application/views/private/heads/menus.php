@@ -4,10 +4,10 @@
         <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
             <li class="nav-item start <?php if ($this->uri->segment(2)== "perfil"){?>active open<?php }?>">
                 <a href="<?= base_url('index.php/Usuarios/perfil') ?>" class="nav-link nav-toggle" title="perfil">
-                                <i class="icon-user"></i>
-                                <span class="title">PERFIL</span>
-                                <span class="arrow"></span>
-                            </a>
+                    <i class="icon-user"></i>
+                    <span class="title">PERFIL</span>
+                    <span class="arrow"></span>
+                </a>
             </li>
             <?php if($this->Logueo->permisosUsuario($id,'v_users')==true){?>
             <li class="nav-item start <?php if ($this->uri->segment(2)== "listarUsuarios"){?>active open<?php }?>">

@@ -3,17 +3,13 @@
 <?php require_once 'heads/head_2.php'; ?>
 <!--titulo de la pagina fin-->
 <!--librerias extras-->
-
-
 <!--librerias extras fin-->
 <!--cabeza de pagina-->
 <?php require_once 'heads/head_3.php'; ?>
 <!--fin de cabeza-->
-
 <!--menu lateral-->
 <?php require_once 'heads/menus.php'; ?>
 <!--menu lateral fin-->
-
 <!--contenido pagina-->
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
@@ -127,7 +123,6 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-
                                 </tbody>
                             </table>
                         </div>
