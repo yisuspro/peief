@@ -3,50 +3,64 @@
 *
 *@autor jesus andres castellanos aguilar
 *
-*archivo de migracion encargado de la cracion y eliminacion de la tabla roles en la base de datos
+*archivo de migracion encargado de la cracion y eliminacion de la tabla users_members_cicles en la base de datos
 * 
 */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration_create_tbl_roles extends CI_Migration {
+class Migration_create_tbl_users_members_cicles extends CI_Migration {
     
     /**
-    * funcion para crreacion de la tabla roles
+    * funcion para crreacion de la tabla users_members_cicles
     *
     * @return create_table()
     */
     public function up(){
-        $this->dbforge->add_field(array(            //creacion del vector que contiene los campos de la tabla
-            'ROLE_PK' => array(                     //columna ROLE_PK tipo int, tamaño 10, auto icremental, solo positivos
+        $this->dbforge->add_field(array(                            //creacion del vector que contiene los campos de la tabla
+            'UMCL_PK' => array(                                     //columna UMCL_PK tipo int, tamaño 10, auto icremental, solo positivos
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ),
-            'ROLE_name' => array(                   //columna ROLE_name tipo VARCHAR, tamaño 45
-                'type' => 'VARCHAR',
-                'constraint' => '45',
+            'UMCL_FK_users' => array(                               //columna UMCL_FK_users tipo int, tamaño 10, auto icremental, solo positivos
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
             ),
-            'ROLE_shortname' => array(              //columna ROLE_shortname tipo VARCHAR, tamaño 45,no vacio
-                'type' => 'VARCHAR',
-                'constraint' => '45',
-                'null' => TRUE,
+            'UMCL_FK_cicles' => array(                              //columna UMCL_FK_cicles tipo int, tamaño 10, auto icremental, solo positivos
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
             ),
-            'ROLE_description' => array(            //columna USER_description tipo text, tamaño 45,no vacio
-                'type' => 'TEXT',
-                'null' => TRUE,
+            'UMCL_FK_roles' => array(                               //columna UMCL_FK_roles tipo int, tamaño 10, auto icremental, solo positivos
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
             ),
         ));
-        $this->dbforge->add_key('ROLE_PK', TRUE);   //agregar atributo de llave primaria al campo ROLE_PK    
-        $this->dbforge->create_table('roles');      //creacion de la tabla roles con los atributos y columnas  
+        $this->dbforge->add_key('UMCL_PK', TRUE);                   //agregar atributo de llave primaria al campo UMCL_PK    
+        $this->dbforge->create_table('users_members_cicles');       //creacion de la tabla users_members_cicles con los atributos y columnas
+        $this->dbforge->add_column('versions_plans',[
+            'CONSTRAINT VRPL_FK_users FOREIGN KEY(VRPL_FK_users) REFERENCES users(USER_PK)',
+        ]);
+        $this->dbforge->add_column('versions_plans',[
+            'CONSTRAINT VRPL_FK_cicles FOREIGN KEY(VRPL_FK_cicles) REFERENCES cicles(CCLS_PK)',
+        ]); 
+        $this->dbforge->add_column('versions_plans',[
+            'CONSTRAINT VRPL_FK_roles FOREIGN KEY(VRPL_FK_roles) REFERENCES roles(ROLE_PK)',
+        ]); 
     }
     
     /**
-    * funcion para eliminacion de la tabla roles
+    * funcion para eliminacion de la tabla users_members_cicles
     *
     * @return drop_table()
     */
     public function down(){
-        $this->dbforge->drop_table('roles');        //eliminacion de la tabla roles
+        $this->dbforge->drop_table('users_members_cicles');        //eliminacion de la tabla users_members_cicles
     }
 }
