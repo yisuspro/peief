@@ -45,8 +45,8 @@ function getRulesLogin(){
 function getRulesAddUsers(){
     return array(
         array(
-            'field' =>'USER_PK',
-            'label' =>'USER_PK',
+            'field' =>'USER_identification',
+            'label' =>'USER_identification',
             'rules' =>'required',                              //campo requerido 
             'errors'=> array(       
                 'required' => 'numero de documento necesario', //mensajes de error         
@@ -170,6 +170,47 @@ function getRulesAddPermiso(){
             'rules' =>'required',                               //campo requerido
             'errors'=> array(
                 'required' => 'Descripcion requerida ',         //mensajes de error
+            ),
+        ),
+    );
+    
+}
+/**
+*
+*funcion encargada de las reglas del formulario de registro y de edicion
+*retorna el vector de errores
+*@return array ()
+*
+*/
+function getRulesAddPlan(){
+    return array(
+        array(
+            'field' =>'PLAN_name',
+            'label' =>'PLAN_name',
+            'rules' =>'required',                                   //campo requerido 
+            'errors'=> array(       
+                'required' => 'nombre del plan es necesario',       //mensajes de error         
+            ),
+        ),
+    );
+    
+}
+
+/**
+*
+*funcion encargada de las reglas del formulario de registro y de edicion
+*retorna el vector de errores
+*@return array ()
+*
+*/
+function getRulesAddVersion(){
+    return array(
+        array(
+            'field' =>'VRSN_name',
+            'label' =>'VRSN_name',
+            'rules' =>'required',                                        //campo requerido 
+            'errors'=> array(       
+                'required' => 'nombre de la version es necesario',       //mensajes de error         
             ),
         ),
     );

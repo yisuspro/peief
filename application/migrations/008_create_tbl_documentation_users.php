@@ -38,6 +38,7 @@ class Migration_create_tbl_documentation_users extends CI_Migration {
             'DOCU_FK_users' => array(                                                       //columna DOCU_FK_users tipo int, tamaño 10
                 'type' => 'INT',
                 'constraint' => 10,
+                'unsigned' => TRUE,
             ),
         ));
         $this->dbforge->add_key('DOCU_PK', TRUE);                                           //agregar atributo de llave primaria al campo DOCU_PK 

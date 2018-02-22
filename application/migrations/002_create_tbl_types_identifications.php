@@ -24,7 +24,7 @@ class Migration_create_tbl_types_identifications extends CI_Migration {
                 'auto_increment' => TRUE
             ),
             'TPDI_type_identification' => array(                //columna TPDI_type_identification tipo VARCHAR, tamaño 45
-                'type' => 'VARCHAR'
+                'type' => 'VARCHAR',
                 'constraint' => '45',
             ),
         ));

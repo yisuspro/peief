@@ -35,7 +35,19 @@ class Migration_create_tbl_subjects extends CI_Migration {
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
-                'auto_increment' => TRUE,
+            ),
+            
+            'SBJC_date_create' => array(                    //columna SBJC_address tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'SBJC_date_update' => array(                  //columna SBJC_telephone tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'SBJC_PK_create' => array(                    //columna SBJC_address tipo VARCHAR, tamaño 45
+                'type' => 'INT',
+            ),
+            'SBJC_PK_update' => array(                  //columna SBJC_telephone tipo VARCHAR, tamaño 45
+                'type' => 'INT',
             ),
         ));
         $this->dbforge->add_key('SBJC_PK', TRUE);                                               //agregar atributo de llave primaria al campo SBJC_PK 

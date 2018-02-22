@@ -23,6 +23,7 @@ class Usuarios extends CI_Controller
         $this->load->helper('login_rules');
         $this->load->helper('url');
         $this->load->helper('form');
+        date_default_timezone_set('UTC');
     }
     
     /**
@@ -45,7 +46,7 @@ class Usuarios extends CI_Controller
         $this->form_validation->set_rules($rules);                                          //valida las reglas del formulario
         if($this->form_validation->run() === FALSE){                                        //si las reglas son incumplidas
             $errors = array(                                                                //creacion del vector de errores    
-                'USER_PK'       => form_error('USER_PK'),
+                'USER_identification'=> form_error('USER_identification'),
                 'USER_names'    => form_error('USER_names'),
                 'USER_lastnames'=> form_error('USER_lastnames'),
                 'USER_email'    => form_error('USER_email'),
@@ -64,6 +65,7 @@ class Usuarios extends CI_Controller
                     var_dump($res);                                                         //envio de la respuesta 
                     exit;                                                                   //salida del proceso
             }else{                                                                          // si el usuario no existe
+                    $doc =$this->input->post('USER_identification');    
                     $name       = $this->input->post('USER_names');                         // obtencion de todos los datos del formulario
                     $lastname   = $this->input->post('USER_lastnames');
                     $email      = $this->input->post('USER_email');
@@ -74,7 +76,8 @@ class Usuarios extends CI_Controller
                     $type_identification= $this->input->post('USER_FK_type_identification');
                     $gander     = $this->input->post('USER_FK_gander');
                     $data= array(                                                           //creacion de vector con los datos de los usuarios
-                        'USER_PK' =>$doc,
+                        
+                        'USER_identification'=> $doc,
                         'USER_username' =>$name.$lastname,
                         'USER_names'    =>$name,
                         'USER_lastnames'=>$lastname,
@@ -82,6 +85,10 @@ class Usuarios extends CI_Controller
                         'USER_password' =>$password,
                         'USER_address'  =>$address,
                         'USER_telephone'=>$telephone,
+                        'USER_date_create'=>date("Y-m-d H:i:s"),
+                        'USER_date_update'=>date("Y-m-d H:i:s"),
+                        'USER_PK_create'=>$this->session->userdata('id'),
+                        'USER_PK_update'=>$this->session->userdata('id'),
                         'USER_FK_state' =>1,
                         'USER_FK_type_identification' =>$type_identification,
                         'USER_FK_gander'=>$gander,
@@ -151,7 +158,7 @@ class Usuarios extends CI_Controller
         $data =$this->Users->listar();                      //utiliza el metodo listar() del modelo users() para traer los datos de todos los usuarios 
         foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
             $dato[] = array(                                //creacion de la matriz que lleva todos los datos
-                $r->USER_PK,
+                $r->USER_identification,
                 $r->USER_names,
                 $r->USER_lastnames,
                 $r->USER_email,
@@ -195,6 +202,7 @@ class Usuarios extends CI_Controller
         foreach($data->result() as $r) {                                                //ciclop para  convertir los datos en un arreglo
             $dato = array();                                                            //creacion del vector que contendra los datos del usuario
             $dato['USER_PK'] = $r->USER_PK;
+            $dato['USER_identification'] = $r->USER_identification;
             $dato['USER_names'] = $r->USER_names;
             $dato['USER_lastnames']= $r->USER_lastnames;
             $dato['USER_email']= $r->USER_email;
@@ -222,7 +230,7 @@ class Usuarios extends CI_Controller
         $this->form_validation->set_rules($rules);                                  //ejecuta las reglas del fromulario 
         if($this->form_validation->run() === FALSE){                                //si se incumple algunade las regla
             $errors = array(                                                        //creacion del vector de los errores
-                'USER_PK'       => form_error('USER_PK'),
+                'USER_identification'=> form_error('USER_identification'),
                 'USER_names'    => form_error('USER_names'),
                 'USER_lastnames'=> form_error('USER_lastnames'),
                 'USER_email'    => form_error('USER_email'),
@@ -233,7 +241,7 @@ class Usuarios extends CI_Controller
             echo json_encode($errors);                                              //envio del vector de errores
             $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
         }else{                                                                      //si las reglas fueron cumplidas
-            $pk       = $this->input->post('USER_PK');                              //obtencion de todos los datos del formulario
+            $pk         = $this->input->post('USER_identification');                              //obtencion de todos los datos del formulario
             $name       = $this->input->post('USER_names');
             $lastname   = $this->input->post('USER_lastnames');
             $email      = $this->input->post('USER_email');
@@ -244,7 +252,7 @@ class Usuarios extends CI_Controller
             $type_identification= $this->input->post('USER_FK_type_identification');
             $gander     = $this->input->post('USER_FK_gander');
             $data= array(                                                           //creacion del vector de los nuevos datos del usuario
-                'USER_PK'                       =>  $pk,
+                'USER_identification'           =>  $pk,
                 'USER_username'                 =>  $name.$lastname,
                 'USER_names'                    =>  $name,
                 'USER_lastnames'                =>  $lastname,
@@ -252,6 +260,8 @@ class Usuarios extends CI_Controller
                 'USER_password'                 =>  $password,
                 'USER_address'                  =>  $address,
                 'USER_telephone'                =>  $telephone,
+                'USER_date_update'=>date("Y-m-d H:i:s"),
+                'USER_PK_update'=>$this->session->userdata('id'),
                 'USER_FK_state'                 =>  $state,
                 'USER_FK_type_identification'   =>  $type_identification,
                 'USER_FK_gander'                =>  $gander,

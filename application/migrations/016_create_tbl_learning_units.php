@@ -36,6 +36,18 @@ class Migration_create_tbl_learning_units extends CI_Migration {
                 'constraint' => 10,
                 'unsigned' => TRUE,
             ),
+            'LNUT_date_create' => array(                                                                    //columna LNUT_address tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'LNUT_date_update' => array(                                                                     //columna LNUT_telephone tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'LNUT_PK_create' => array(                                                                         //columna LNUT_address tipo VARCHAR, tamaño 45
+                'type' => 'INT',
+            ),
+            'LNUT_PK_update' => array(                                                                          //columna LNUT_telephone tipo VARCHAR, tamaño 45
+                'type' => 'INT',
+            ),
         ));
         $this->dbforge->add_key('LNUT_PK', TRUE);                                                           //agregar atributo de llave primaria al campo LNUT_PK
         $this->dbforge->create_table('learning_units');                                                     //creacion de la tabla users con los atributos y columnas

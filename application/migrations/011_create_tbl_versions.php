@@ -24,7 +24,7 @@ class Migration_create_tbl_versions extends CI_Migration {
                 'auto_increment' => TRUE
             ),
             'VRSN_name' => array(                               //columna VRSN_name tipo VARCHAR, tamaño 45
-                'type' => 'VARCHAR'
+                'type' => 'VARCHAR',
                 'constraint' => '45',
             ),
         ));

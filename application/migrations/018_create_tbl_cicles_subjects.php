@@ -27,21 +27,32 @@ class Migration_create_tbl_cicles_subjects extends CI_Migration {
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
-                'auto_increment' => TRUEcicles
             ),
             'CLSB_FK_subjects' => array(                              //columna CLSB_FK_subjects tipo int, tamaño 10, auto icremental, solo positivos
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
-                'auto_increment' => TRUE
+            ),
+             
+            'CLSB_date_create' => array(                    //columna CLSB_address tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'CLSB_date_update' => array(                  //columna CLSB_telephone tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'CLSB_PK_create' => array(                    //columna CLSB_address tipo VARCHAR, tamaño 45
+                'type' => 'INT',
+            ),
+            'CLSB_PK_update' => array(                  //columna CLSB_telephone tipo VARCHAR, tamaño 45
+                'type' => 'INT',
             ),
         ));
         $this->dbforge->add_key('CLSB_PK', TRUE);                       //agregar atributo de llave primaria al campo CLSB_PK    
         $this->dbforge->create_table('cicles_subjects');                //creacion de la tabla users_members_cicles con los atributos y columnas
-        $this->dbforge->add_column('cicles_sunjects',[
+        $this->dbforge->add_column('cicles_subjects',[
             'CONSTRAINT CLSB_FK_cicles FOREIGN KEY(CLSB_FK_cicles) REFERENCES cicles(CCLS_PK)',
         ]);
-        $this->dbforge->add_column('cicles_sunjects',[
+        $this->dbforge->add_column('cicles_subjects',[
             'CONSTRAINT CLSB_FK_subjects FOREIGN KEY(CLSB_FK_subjects) REFERENCES subjects(SBJC_PK)',
         ]);                                                             //creacion de relacion a la tabla users
     }

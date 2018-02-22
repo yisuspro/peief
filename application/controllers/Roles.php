@@ -121,6 +121,8 @@ class Roles extends CI_Controller
                 'ROLE_name'                     =>  $name,
                 'ROLE_shortname'                =>  $shortname,
                 'ROLE_description'              =>  $description,
+                'ROLE_date_update'=>date("Y-m-d H:i:s"),
+                'ROLE_PK_update'=>$this->session->userdata('id'),
                 
             );
             if(!$this->Role->modificarRol($doc,$data)){                             //utilizacion del metodo modificarRol() del modelo role() para la modificacion del rol  enviando el id y los datos pertinentes
@@ -166,6 +168,10 @@ class Roles extends CI_Controller
                 'ROLE_name'                     =>  $name,
                 'ROLE_shortname'                =>  $shortname,
                 'ROLE_description'              =>  $description,
+                'ROLE_date_create'=>date("Y-m-d H:i:s"),
+                'ROLE_date_update'=>date("Y-m-d H:i:s"),
+                'ROLE_PK_create'=>$this->session->userdata('id'),
+                'ROLE_PK_update'=>$this->session->userdata('id'),
                 
             );
             if(!$this->Role->agregarRol($data)){                                    //utilizacion del metodo modificarRol() del modelo Role() para la modificacion del usuario  enviando el id y los datos pertinentes

@@ -146,6 +146,8 @@ class Permisos extends CI_Controller{
                 'PRMS_name'                     =>  $name,
                 'PRMS_shortname'                =>  $shortname,
                 'PRMS_description'              =>  $description,
+                'PRMS_date_update'=>date("Y-m-d H:i:s"),
+                'PRMS_PK_update'=>$this->session->userdata('id'),
                 
             );
             if(!$this->Permits->modificarPermisos($doc,$data)){                      //utilizacion del metodo modificarRol() del modelo role() para la modificacion del rol  enviando el id y los datos pertinentes
@@ -184,6 +186,10 @@ class Permisos extends CI_Controller{
                 'PRMS_name'                     =>  $name,
                 'PRMS_shortname'                =>  $shortname,
                 'PRMS_description'              =>  $description,
+                'PRMS_date_create'=>date("Y-m-d H:i:s"),
+                'PRMS_date_update'=>date("Y-m-d H:i:s"),
+                'PRMS_PK_create'=>$this->session->userdata('id'),
+                'PRMS_PK_update'=>$this->session->userdata('id'),
                 
             );
             if(!$this->Permits->agregarPermiso($data)){                                    //utilizacion del metodo modificarRol() del modelo Role() para la modificacion del usuario  enviando el id y los datos pertinentes

@@ -61,7 +61,11 @@
                 </a>
             </li>
             <?php }?>
+            <?php require_once 'menus_cicles.php'; ?>
         </ul>
+        
     </div>
 </div>
+
+
 <!--end menus dashboard -->

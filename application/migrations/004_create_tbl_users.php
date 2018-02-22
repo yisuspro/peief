@@ -47,6 +47,26 @@ class Migration_create_tbl_users extends CI_Migration {
                 'constraint' => '45',
                 'null' => TRUE,
             ),
+            'USER_address' => array(                    //columna USER_address tipo VARCHAR, tamaño 45
+                'type' => 'VARCHAR',
+                'constraint' => '45',
+            ),
+            'USER_telephone' => array(                  //columna USER_telephone tipo VARCHAR, tamaño 45
+                'type' => 'VARCHAR',
+                'constraint' => '45',
+            ),
+            'USER_date_create' => array(                    //columna USER_address tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'USER_date_update' => array(                  //columna USER_telephone tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'USER_PK_create' => array(                    //columna USER_address tipo VARCHAR, tamaño 45
+                'type' => 'INT',
+            ),
+            'USER_PK_update' => array(                  //columna USER_telephone tipo VARCHAR, tamaño 45
+                'type' => 'INT',
+            ),
             'USER_FK_type_identification' => array(     //columna USER_FK_type_identification tipo int, tamaño 10, solo positivos
                 'type' => 'INT',
                 'constraint' => 10,
@@ -61,14 +81,6 @@ class Migration_create_tbl_users extends CI_Migration {
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
-            ),
-            'USER_address' => array(                    //columna USER_address tipo VARCHAR, tamaño 45
-                'type' => 'VARCHAR',
-                'constraint' => '45',
-            ),
-            'USER_telephone' => array(                  //columna USER_telephone tipo VARCHAR, tamaño 45
-                'type' => 'VARCHAR',
-                'constraint' => '45',
             ),
         ));
         $this->dbforge->add_key('USER_PK', TRUE);       //agregar atributo de llave primaria al campo USER_PK 

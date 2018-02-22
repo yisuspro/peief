@@ -14,17 +14,17 @@
                     <?= form_open('','id="frm_editar_usuario"');?>
                         <div class="form-wizard">
                             <div class="form-group">
-                                <div class="alert alert-danger" id="USER_PK_alerta" role="alert" style="display:none">
+                                <div class="alert alert-danger" id="USER_identification_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error ('USER_PK') ?>
+                                        <?php echo form_error ('USER_identification') ?>
                                     </div>
                                 </div>
                                 <input type="hidden" id="USER_PK_hidden" value="<?php echo $USER_PK; ?>">
                                 <div class="col-lg-6">
                                     <label>Documento</label>
-                                    <div class="input-group" id="USER_PK">
+                                    <div class="input-group" id="USER_identification">
                                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-                                        <input type="text" id="USER_PK" name="USER_PK" class="form-control is-invalid" placeholder="Documento de identidad" value="<?php echo $USER_PK; ?>">
+                                        <input type="text" id="USER_identification" name="USER_identification" class="form-control is-invalid" placeholder="Documento de identidad" value="<?php echo $USER_identification; ?>">
                                     </div>
                                 </div>
 
@@ -156,7 +156,7 @@
                     type: 'POST',
                     data: $(this).serialize(),
                     success: function(data, xhr) {
-                        document.getElementById('USER_PK_alerta').style.display = 'none';
+                        document.getElementById('USER_identification_alerta').style.display = 'none';
                         document.getElementById('USER_names_alerta').style.display = 'none';
                         document.getElementById('USER_lastnames_alerta').style.display = 'none';
                         document.getElementById('USER_email_alerta').style.display = 'none';
@@ -169,7 +169,7 @@
 
                     },
                     error: function(xhr) {
-                        document.getElementById('USER_PK_alerta').style.display = 'none';
+                        document.getElementById('USER_identification_alerta').style.display = 'none';
                         document.getElementById('USER_names_alerta').style.display = 'none';
                         document.getElementById('USER_lastnames_alerta').style.display = 'none';
                         document.getElementById('USER_email_alerta').style.display = 'none';
@@ -178,9 +178,9 @@
                         document.getElementById('USER_password_alerta').style.display = 'none';
                         if (xhr.status == 402) {
                             var json = JSON.parse(xhr.responseText);
-                            if (json.USER_PK.length != 0) {
-                                $("#USER_PK_alerta > div").html(json.USER_PK);
-                                document.getElementById('USER_PK_alerta').style.display = 'inherit';
+                            if (json.USER_identification.length != 0) {
+                                $("#USER_identification_alerta > div").html(json.USER_identification);
+                                document.getElementById('USER_identification_alerta').style.display = 'inherit';
                             }
                             if (json.USER_names.length != 0) {
                                 $("#USER_names_alerta > div").html(json.USER_names);

@@ -36,6 +36,19 @@ class Migration_create_tbl_roles extends CI_Migration {
                 'type' => 'TEXT',
                 'null' => TRUE,
             ),
+            
+            'ROLE_date_create' => array(                    //columna ROLE_address tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'ROLE_date_update' => array(                  //columna ROLE_telephone tipo VARCHAR, tamaño 45
+                'type' => 'DATETIME',
+            ),
+            'ROLE_PK_create' => array(                    //columna ROLE_address tipo VARCHAR, tamaño 45
+                'type' => 'INT',
+            ),
+            'ROLE_PK_update' => array(                  //columna ROLE_telephone tipo VARCHAR, tamaño 45
+                'type' => 'INT',
+            ),
         ));
         $this->dbforge->add_key('ROLE_PK', TRUE);   //agregar atributo de llave primaria al campo ROLE_PK    
         $this->dbforge->create_table('roles');      //creacion de la tabla roles con los atributos y columnas  

@@ -6,7 +6,7 @@
             type: 'POST',
             data: $(this).serialize(),
             success: function (data, xhr) {
-                document.getElementById('USER_PK_alerta').style.display = 'none';
+                document.getElementById('USER_identification_alerta').style.display = 'none';
                 document.getElementById('USER_names_alerta').style.display = 'none';
                 document.getElementById('USER_lastnames_alerta').style.display = 'none';
                 document.getElementById('USER_email_alerta').style.display = 'none';
@@ -21,7 +21,7 @@
                 $("#frm_agregar_usuario")[0].reset();
             },
             error: function (xhr) {
-                document.getElementById('USER_PK_alerta').style.display = 'none';
+                document.getElementById('USER_identification_alerta').style.display = 'none';
                 document.getElementById('USER_names_alerta').style.display = 'none';
                 document.getElementById('USER_lastnames_alerta').style.display = 'none';
                 document.getElementById('USER_email_alerta').style.display = 'none';
@@ -30,9 +30,9 @@
                 document.getElementById('USER_password_alerta').style.display = 'none';
                 if (xhr.status == 402) {
                     var json = JSON.parse(xhr.responseText);
-                    if (json.USER_PK.length != 0) {
-                        $("#USER_PK_alerta > div").html(json.USER_PK);
-                        document.getElementById('USER_PK_alerta').style.display = 'inherit';
+                    if (json.USER_identification.length != 0) {
+                        $("#USER_identification_alerta > div").html(json.USER_identification);
+                        document.getElementById('USER_identification_alerta').style.display = 'inherit';
                     }
                     if (json.USER_names.length != 0) {
                         $("#USER_names_alerta > div").html(json.USER_names);
