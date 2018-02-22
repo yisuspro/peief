@@ -1,16 +1,7 @@
-<!--titulo de la pagina-->
 <?php require_once 'heads/head_1.php'; ?> Planes de estudio
 <?php require_once 'heads/head_2.php'; ?>
-<!--titulo de la pagina fin-->
-<!--librerias extras-->
-<!--librerias extras fin-->
-<!--cabeza de pagina-->
 <?php require_once 'heads/head_3.php'; ?>
-<!--fin de cabeza-->
-<!--menu lateral-->
 <?php require_once 'heads/menus.php'; ?>
-<!--menu lateral fin-->
-<!--contenido pagina-->
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
@@ -41,7 +32,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                                         <h1><i class="glyphicon glyphicon-thumbs-up"></i> AGREGAR PLAN DE ESTUDIO</h1>
                                     </div>
-                                    
+
                                     <div class="modal-body">
                                         <?php echo validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_plan"');?>
@@ -62,8 +53,8 @@
                                                             <?php echo form_error('PLAN_name') ?>
                                                         </div>
                                                     </div>
-                                                                                                    
-                                                    
+
+
                                                     <div class="alert alert-danger invalid-feedback" id="PLAN_description_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
                                                             <?= form_error ('PLAN_description') ?>

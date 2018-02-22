@@ -23,19 +23,18 @@
                         </tr>
                     </thead>
                     <tfoot>
-                        <tr>
+                        <tr> 
                             <th>Versions</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
                     <tbody>
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    
+     
     <div class="col-md-12">
         <div class="portlet light portlet-fit  calendar">
             <div class="portlet-title">
@@ -64,6 +63,7 @@
             </div>
         </div>
     </div>
+    
     <!-- fin espacio de trabajo_______________________________________________________________________________________________________________________ -->
 </div>
 <script>
@@ -76,7 +76,8 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: '<?= base_url('index.php/Plans/listarVersionsPlans/'.$id); ?>',
+                url: '<?= base_url('
+                index.php / Plans / listarVersionsPlans / '.$id); ?>',
                 type: 'GET'
             },
             "scrollX": true,
@@ -135,7 +136,9 @@
 
         });
     });
+
 </script>
+
 <script>
     $(document).ready(function() {
         var dt;
@@ -210,11 +213,12 @@
             }
 
         });
-        
+
         $("#atras").on('click', function(e) {
             e.preventDefault();
             var url = 'Plans';
             location.href = url;
         });
     });
+
 </script>

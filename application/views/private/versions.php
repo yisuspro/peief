@@ -1,16 +1,7 @@
-<!--titulo de la pagina-->
-<?php require_once 'heads/head_1.php'; ?>Versiones de los planes
-<?php require_once 'heads/head_2.php'; ?>
-<!--titulo de la pagina fin-->
-<!--librerias extras-->
-<!--librerias extras fin-->
-<!--cabeza de pagina-->
+<?php require_once 'heads/head_1.php'; ?>Versiones de los planes <?php require_once 'heads/head_2.php'; ?>
 <?php require_once 'heads/head_3.php'; ?>
-<!--fin de cabeza-->
-<!--menu lateral-->
 <?php require_once 'heads/menus.php'; ?>
-<!--menu lateral fin-->
-<!--contenido pagina-->
+
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
@@ -23,8 +14,7 @@
         <!-- END PAGE HEADER-->
         <div class="row">
             <div class="contentAjax">
- <!--_________________________________________________espacio de trabajo______________________________________________________________________________________________________-->
-                
+                <!--_________________________________________________espacio de trabajo______________________________________________________________________________________________________-->
                 <div class="col-md-12">
                     <div class="portlet light portlet-fit  calendar">
                         <div class="portlet-title">
@@ -42,13 +32,13 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                                         <h1><i class="glyphicon glyphicon-thumbs-up"></i> AGREGAR VERSION</h1>
                                     </div>
-                                    
+
                                     <div class="modal-body">
                                         <?php echo validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_version"');?>
                                             <div class="form-wizard">
                                                 <div class="form-group">
-                                                    
+
                                                     <label>Nombre</label>
                                                     <div class="input-group" id="VRSN_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
                                                         <input type="text" id="VRSN_name" name="VRSN_name" class="form-control" placeholder="Nombre">
@@ -216,10 +206,7 @@
             document.getElementById('agregar').style.display = 'none';
         });
     });
-
 </script>
 <script src="<?= base_url('assets/js/versions/agregar_versions.js')?>"></script>
-<!--fin scrips-->
-<!--scrips pie de pagina-->
+
 <?php require_once 'footers/foot_2.php';?>
-<!--fin scrips pie de pagina-->

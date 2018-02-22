@@ -1,7 +1,7 @@
 <!-- menus modulo ciclos -->
 
 <?php if($this->Logueo->permisosUsuario($id,'v_versions')==true || $this->Logueo->permisosUsuario($id,'v_plans')==true){?>
-<li class="nav-item start <?php if ($this->uri->segment(1)== "Versions" || $this->uri->segment(1)== "Plans"){?>active open<?php }?>">
+<li class="nav-item start <?php if ($this->uri->segment(1)== " Versions " || $this->uri->segment(1)== "Plans "){?>active open<?php }?>">
     <a href="#" class="nav-link nav-toggle" title="Planes y Versiones">
         <i class="fa fa-map-signs"></i>
         <span class="title">PLANES/VERSIONES</span>
