@@ -11,7 +11,7 @@
             <div class="portlet-body">
                 <div class="col-md-12">
                     <div class="actions">
-                        <a id="atras" href="javascript:;" class="btn btn-simple btn-danger btn-icon create" title="Agregar un usuario"><i class="fa fa-reply"></i>atras</a>
+                        <a id="atras" href="javascript:;" class="btn btn-simple btn-danger btn-icon create" title="Atras"><i class="fa fa-reply"></i>atras</a>
                     </div>
                 </div>
                 <br><br><br>

@@ -9,7 +9,7 @@
 * contiene todas las consultas sql a la base de datos
 * 
 */
-class Plan extends CI_Model {
+class Cicle extends CI_Model {
     
     /**
     * metodo constructor donde se cargan todos los helpers, librerias necesarios en el modelo
@@ -27,8 +27,8 @@ class Plan extends CI_Model {
     * @param int $datos
     * @return get() | false
     */
-    public function datosPlan($datos){
-        if(!$rol= $this->db->select('*')->from('plans')->where('PLAN_PK',$datos)){
+    public function datosCicle($datos){
+        if(!$rol= $this->db->select('*')->from('cicles')->join('versions_plans','cicles.CCLS_FK_versions_plans = versions_plans.VRPL_PK')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->join('plans','versions_plans.VRPL_FK_plans = plans.PLAN_PK')->where('CCLS_PK',$datos)){
             return false;
         }else{
             return $rol->get();
@@ -41,7 +41,7 @@ class Plan extends CI_Model {
     * @return get() 
     */
     public function listar(){
-        $rol= $this->db->select('*')->from('plans');
+        $rol= $this->db->select('*')->from('cicles')->join('versions_plans','cicles.CCLS_FK_versions_plans = versions_plans.VRPL_PK')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->join('plans','versions_plans.VRPL_FK_plans = plans.PLAN_PK');
         return $rol->get();
     }
     
@@ -51,10 +51,10 @@ class Plan extends CI_Model {
     * @return true | false
     */
     public function eliminar($datos){
-        if(!$this->db->delete('plans', array('PLAN_PK' => $datos))){
+        if(!$this->db->delete('cicles', array('CCLS_PK' => $datos))){
             return FALSE;
         }
-        return true;
+        return TRUE;
     }
     
     /**
@@ -62,9 +62,9 @@ class Plan extends CI_Model {
     * @param int $datos |String $datos2
     * @return true | false
     */
-    public function modificarPlan($datos,$datos2){
-        $this->db->where('PLAN_PK', $datos);
-        if($this->db->update('plans', $datos2)){
+    public function modificarCicle($datos,$datos2){
+        $this->db->where('CCLS_PK', $datos);
+        if($this->db->update('cicles', $datos2)){
             return true;
         }else{
             return false;
@@ -76,28 +76,19 @@ class Plan extends CI_Model {
     * @param int $datos
     * @return true | false
     */
-    public function agregarPlan($datos){
-        if(!$this->db->insert('plans',$datos)){
+    public function agregarCicle($datos){
+        if(!$this->db->insert('cicles',$datos)){
             return false;
         }
         return true;
     }
     
     /**
-    * funcion para listartodas las versiones y los planes
-    * 
-    * @return true | false
-    */
-    public function listarVersionsPlans(){
-        $version= $this->db->select('*')->from('versions_plans')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->join('plans','versions_plans.VRPL_FK_plans = plans.PLAN_PK');
-        return $version->get();
-    }
-    /**
     * funcion para listar las versiones que contiene los planes
     * @param int $id
     * @return true | false
     */
-    public function listarVersionPlan($id){
+    public function listarVersionCicle($id){
         $version= $this->db->select('*')->from('versions_plans')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->where('VRPL_FK_plans',$id);
         return $version->get();
     }
@@ -107,7 +98,7 @@ class Plan extends CI_Model {
     * @param int $datos
     * @return true | false
     */
-    public function eliminarVersionPlan($datos){
+    public function eliminarVersionCicle($datos){
         if(!$this->db->delete('versions_plans', array('VRPL_PK' => $datos))){
             return FALSE;
         }
@@ -119,7 +110,7 @@ class Plan extends CI_Model {
     * @param int $datos
     * @return true | false
     */
-    public function consultarVersioPlan($plan,$version){
+    public function consultarVersioCicle($plan,$version){
         $where= "VRPL_FK_versions ='".$version."' AND VRPL_FK_plans ='".$plan."'";
          if($this->db->from('versions_plans')->where($where)->get()->result()){
             return true;
@@ -136,4 +127,15 @@ class Plan extends CI_Model {
             return false;
         }
     }
+    
+    /**
+    * funcion para la consulta de todos los planes a la base de datos.
+    * 
+    * @return get() 
+    */
+    public function listarMiembros($cicle){
+        $rol= $this->db->select('*')->from('users_members_cicles')->join('users','users_members_cicles.UMCL_FK_users = users.USER_PK')->join('roles','users_members_cicles.UMCL_FK_roles = roles.ROLE_PK')->where('UMCL_FK_cicles',$cicle);
+        return $rol->get();
+    }
+    
 }

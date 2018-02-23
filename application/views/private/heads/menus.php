@@ -62,6 +62,7 @@
             </li>
             <?php }?>
             <?php require_once 'menus_cicles.php'; ?>
+            <?php require_once 'menus_learning_units.php'; ?>
         </ul>
         
     </div>

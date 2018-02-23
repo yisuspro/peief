@@ -66,7 +66,7 @@
                         <!-- End Modal -->
                         <div class="col-md-12">
                             <div class="actions">
-                                <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un rol"><i class="fa fa-plus"></i> Agregar</a>
+                                <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar Version"><i class="fa fa-plus"></i> Agregar</a>
                             </div>
                         </div>
                         <br>

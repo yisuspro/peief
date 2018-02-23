@@ -216,3 +216,24 @@ function getRulesAddVersion(){
     );
     
 }
+
+/**
+*
+*funcion encargada de las reglas del formulario de registro y de edicion
+*retorna el vector de errores
+*@return array ()
+*
+*/
+function getRulesAddCicle(){
+    return array(
+        array(
+            'field' =>'CCLS_name',
+            'label' =>'CCLS_name',
+            'rules' =>'required',                                    //campo requerido 
+            'errors'=> array(       
+                'required' => 'nombre delcurso es necesario',       //mensajes de error         
+            ),
+        ),
+    );
+    
+}

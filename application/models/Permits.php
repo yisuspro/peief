@@ -55,7 +55,6 @@ class Permits extends CI_Model {
         return $permiso->get();
     }
     
-   
     /**
     * funcion para la eliminacion de un permiso de la base de datos
     * @param int $datos

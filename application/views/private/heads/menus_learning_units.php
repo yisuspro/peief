@@ -1,10 +1,10 @@
 <!-- menus modulo ciclos -->
 
 <?php if($this->Logueo->permisosUsuario($id,'v_versions')==true || $this->Logueo->permisosUsuario($id,'v_plans')==true){?>
-<li class="nav-item start <?php if ($this->uri->segment(1)== "Versions" || $this->uri->segment(1)== "Plans"){?>active open<?php }?>">
+<li class="nav-item start <?php if ($this->uri->segment(1)== "Learning_Units"){?>active open<?php }?>">
     <a href="#" class="nav-link nav-toggle" title="Planes y Versiones">
-        <i class="fa fa-map-signs"></i>
-        <span class="title">PLANES/VERSIONES</span>
+        <i class="fa fa-graduation-cap"></i>
+        <span class="title">UNIDADES DE APRENDIZAJE</span>
         <span class="arrow"></span>
     </a>
     <ul class="sub-menu">
@@ -32,10 +32,10 @@
 </li>
 <?php }?>
 <?php if($this->Logueo->permisosUsuario($id,'v_cicles')==true){?>
-<li class="nav-item start <?php if ($this->uri->segment(1)== "Cicles"){?>active open<?php }?>">
-    <a href="<?= base_url('index.php/Cicles') ?>" class="nav-link nav-toggle" title="Cursos/Ciclos">
-        <i class="fa fa-cubes"></i>
-        <span class="title">CURSOS/CICLOS</span>
+<li class="nav-item start <?php if ($this->uri->segment(1)== "Subjects"){?>active open<?php }?>">
+    <a href="#" class="nav-link nav-toggle" title="Cursos/Ciclos">
+        <i class="fa fa-tasks"></i>
+        <span class="title">ASIGNATURAS</span>
         <span class="arrow"></span>
     </a>
 </li>

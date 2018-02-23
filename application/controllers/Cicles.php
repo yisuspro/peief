@@ -7,7 +7,7 @@
 * 
 */
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Plans extends CI_Controller
+class Cicles extends CI_Controller
 {
     /**
     * metodo cnstructor donde se cargan todos los helpers, librerias y modelos necesarios en el controlador
@@ -18,8 +18,9 @@ class Plans extends CI_Controller
     */
     function __construct() {
         parent::__construct ();
+        $this->load->model('Cicle');
         $this->load->model('Plan');
-        $this->load->model('Version');
+        $this->load->model('users');
         $this->load->model('Logueo');
         $this->load->helper('login_rules');
         $this->load->helper('url');
@@ -32,7 +33,9 @@ class Plans extends CI_Controller
     * @return view ()
     */
     public function index(){
-        $this->load->view('private/Plans');
+        $versiones = $this->Plan->listarVersionsPlans();
+        $data['versiones']=$versiones;
+        $this->load->view('private/Cicles',$data);
     }
     
     /**
@@ -40,15 +43,16 @@ class Plans extends CI_Controller
     *
     * @return json_encode ()
     */
-    public function listarPlans(){
-        $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
+    public function listarCicles(){
+        $draw = intval($this->input->get("draw"));             //trae las varibles draw, start, length para la creacion de la tabla
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
-        $data =$this->Plan->listar();                       //utiliza el metodo listar() del modelo plan() para traer los datos de todos los planes 
+        $data =$this->Cicle->listar();                       //utiliza el metodo listar() del modelo plan() para traer los datos de todos los planes 
         foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
             $dato[] = array(
-                $r->PLAN_name,
-                '<input type="button" class="btn btn-warning edit" title="Editar Plan" id="'.$r->PLAN_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar Plan" id="'.$r->PLAN_PK.'" value="eliminar" ><input type="button" class="btn btn-success asignar" title="Asignar Version" id="'.$r->PLAN_PK.'" value="asignar" >',
+                $r->CCLS_name,
+                $r->VRSN_name.'/'.$r->PLAN_name,
+                '<input type="button" class="btn btn-warning edit" title="Editar Curso" id="'.$r->CCLS_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar Curso" id="'.$r->CCLS_PK.'" value="eliminar" ><input type="button" class="btn btn-success asignar" title="Agregar asignaturas" id="'.$r->CCLS_PK.'" value="asignaturas" >',
             );
         }
         $output = array(                                    //creacion del vector de salida
@@ -66,24 +70,30 @@ class Plans extends CI_Controller
     *
     * @return json_encode()
     */
-    public function agregarPlans(){
+    public function agregarCicles(){
         $this->form_validation->set_error_delimiters('','');   //quita los delimtadores de error
-        $rules=getRulesAddPlan();                              //utiliza las reglas de agregar plan para validar los campos del formulario
+        $rules=getRulesAddCicle();                              //utiliza las reglas de agregar plan para validar los campos del formulario
         $this->form_validation->set_rules($rules);             //ejecuta las reglas del fromulario 
         if($this->form_validation->run() === FALSE){           //si se incumple algunade las regla
             $errors = array(
-                'PLAN_name' => form_error('PLAN_name'),
+                'CCLS_name' => form_error('CCLS_name'),
             );
             echo json_encode($errors);                          //envio del vector de errores
             $this->output->set_status_header(402);              //envio del estatus del error en este caso 402
         }else{                                                  //si las reglas fueron cumplidas
-            $name = $this->input->post('PLAN_name');            //obtencion de todos los datos del formulario
+            $name = $this->input->post('CCLS_name');            //obtencion de todos los datos del formulario
+            $versions = $this->input->post('CCLS_FK_versions_plans');            
             $data= array(                                       //creacion del vector de los nuevos datos del plan
-                'PLAN_name' =>  $name,
+                'CCLS_name'             =>  $name,
+                'CCLS_FK_versions_plans'=>  $versions,
+                'CCLS_date_create'      =>  date("Y-m-d H:i:s"),
+                'CCLS_date_update'      =>  date("Y-m-d H:i:s"),
+                'CCLS_PK_create'        =>  $this->session->userdata('id'),
+                'CCLS_PK_update'        =>  $this->session->userdata('id'),
             );
-            if(!$this->Plan->agregarPlan($data)){               //utilizacion del metodo agregarPlan() del modelo Plan() para la agregacion de un nuevo plan los datos pertinentes
-                echo "error";                                   // en caso de  fallar envia un mensaje de
-            echo json_encode(array('msg'=> 'Plan agregado' ));  //si fue agregado con exito envia el mensaje correspondiente
+            if(!$this->Cicle->agregarCicle($data)){                       //utilizacion del metodo agregarPlan() del modelo Plan() para la agregacion de un nuevo plan los datos pertinentes
+                echo "error";                                             // en caso de  fallar envia un mensaje de
+            echo json_encode(array('msg'=> 'Curso agregado agregado' ));  //si fue agregado con exito envia el mensaje correspondiente
             }
         }
     }
@@ -93,9 +103,9 @@ class Plans extends CI_Controller
     * @param int $pk
     * @return view ()
     */
-    public function eliminarPlans($pk){
-        if($res = $this->Plan->eliminar($pk)){                                      //realiza la verificacion y eliminacion del plan
-            echo json_encode(array('msg'=> 'plan eliminado exitosamente' ));        //si el plan fue eliminado correctamente envia el mensaje de confirmacion
+    public function eliminarCicles($pk){
+        if($res = $this->Cicle->eliminar($pk)){                                      //realiza la verificacion y eliminacion del plan
+            echo json_encode(array('msg'=> 'curso eliminado exitosamente' ));        //si el plan fue eliminado correctamente envia el mensaje de confirmacion
         }else{                                                                      //si no fue posible eliminarlo
             echo json_encode($res);                                                 //envio de la respueta
             $this->output->set_status_header(403);                                  //envio del status de error en este caso 403
@@ -107,39 +117,48 @@ class Plans extends CI_Controller
     * @param INT $pk
     * @return view () | $datos
     */
-    public function editarPlan($pk){
-         $data=$this->Plan->datosPlan($pk);                             //verifica por medio del metodo datosPlan() del modelo Plan() si el usuario existe ytrae todos los datos pertinentes al usuario 
+    public function editarCicle($pk){
+        $data=$this->Cicle->datosCicle($pk);                             //verifica por medio del metodo datosPlan() del modelo Plan() si el usuario existe ytrae todos los datos pertinentes al usuario 
         foreach($data->result() as $r) {                                //ciclo para  convertir los datos en un arreglo
             $dato = array();                                            //creacion del vector que contendra los datos del plan
-            $dato['PLAN_PK'] = $r->PLAN_PK;
-            $dato['PLAN_name'] = $r->PLAN_name;
+            $dato['CCLS_PK']    = $r->CCLS_PK;
+            $dato['CCLS_name']  = $r->CCLS_name;
+            $dato['CCLS_FK_versions_plans']= $r->CCLS_FK_versions_plans;
+            $dato['VRSN_name']  = $r->VRSN_name;
+            $dato['PLAN_name']  = $r->PLAN_name;
         }
-        $this->load->view('private/view_ajax/editar_plan_ajax',$dato);  //envio de la vista y los datos para la edicion de los planes
+        $versiones = $this->Plan->listarVersionsPlans();
+        $dato['versiones']=$versiones;
+        $this->load->view('private/view_ajax/editar_cicle_ajax',$dato);  //envio de la vista y los datos para la edicion de los planes
     }
     /**
     * funcion para la modificacion de los datos del plan
     * @param int $doc
     * @return json_encode()
     */
-    public function modificarPlan($doc){
+    public function modificarCicle($doc){
         $this->form_validation->set_error_delimiters('','');             //quita los delimtadores de error
-        $rules=getRulesAddPlan();                                        //utiliza las reglas de agregar plan para validar los campos del formulario
+        $rules=getRulesAddCicle();                                        //utiliza las reglas de agregar plan para validar los campos del formulario
         $this->form_validation->set_rules($rules);                       //ejecuta las reglas del fromulario 
         if($this->form_validation->run() === FALSE){                     //si se incumple algunade las regla
             $errors = array(                                             //creacion del vector de los errores
-                'PLAN_name' => form_error('PLAN_name'),
+                'CCLS_name' => form_error('CCLS_name'),
             );
             echo json_encode($errors);                                   //envio del vector de errores
             $this->output->set_status_header(402);                       //envio del estatus del error en este caso 402
         }else{                                                           //si las reglas fueron cumplidas
-            $name = $this->input->post('PLAN_name');                     //obtencion de todos los datos del formulario
+            $name = $this->input->post('CCLS_name');                     //obtencion de todos los datos del formulario
+            $versions = $this->input->post('CCLS_FK_versions_plans');                    
             $data = array(                                               //creacion del vector de los nuevos datos del plan
-                'PLAN_name' =>  $name,
+                'CCLS_name'             =>  $name,
+                'CCLS_FK_versions_plans'=>  $versions,
+                'CCLS_date_update'      =>  date("Y-m-d H:i:s"),
+                'CCLS_PK_update'        =>  $this->session->userdata('id'),
             );
-            if(!$this->Plan->modificarPlan($doc,$data)){                 //utilizacion del metodo modificarPlan() del modelo Plan() para la modificacion del plan  enviando el id y los datos pertinentes
+            if(!$this->Cicle->modificarCicle($doc,$data)){                 //utilizacion del metodo modificarPlan() del modelo Plan() para la modificacion del plan  enviando el id y los datos pertinentes
                 echo "error";                                            //en caso de  fallar envia un mensaje de error
             }
-            echo json_encode(array('msg'=> 'Plan modificado' ));         //si fue modificado con exito envia el mensaje correspondiente
+            echo json_encode(array('msg'=> 'Cicle modificado' ));         //si fue modificado con exito envia el mensaje correspondiente
         }
     }
     
@@ -158,11 +177,11 @@ class Plans extends CI_Controller
     *
     * @return view ()
     */
-    public function listarVersionsPlans($id){
+    public function listarVersionsCicles($id){
         $draw = intval($this->input->get("draw"));                                  //trae las varibles draw, start, length para la creacion de la tabla
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
-        $data =$this->Plan->listarVersionPlan($id);                                 //utiliza el metodo listarVersionsPlans() del modelo Plan() para traer los datos de todos las versiones de los planes
+        $data =$this->Plan->listarVersionPlan($id);                                 //utiliza el metodo listarVersionsCicles() del modelo Plan() para traer los datos de todos las versiones de los planes
         foreach($data->result() as $r) {                                            //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
             $dato [] = array(
                 $r->VRSN_name,
@@ -242,4 +261,52 @@ class Plans extends CI_Controller
         }
     }
     
+    /**
+    * funcion para listar los planes de estudio en la data teble.
+    *
+    * @return json_encode ()
+    */
+    public function listarMiembrosCicles($id){
+        $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+        $data =$this->Cicle->listarMiembros($id);              //utiliza el metodo listar() del modelo plan() para traer los datos de todos los planes 
+        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
+            $dato[] = array(
+                $r->USER_names.' '.$r->USER_lastnames,
+                $r->ROLE_name,
+                '<input type="button" class="btn btn-danger remove" title="Eliminar Curso" id="'.$r->UMCL_PK.'" value="eliminar" >',
+            );
+        }
+        $output = array(                                    //creacion del vector de salida
+            "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
+            "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
+            "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
+            "data" => $dato                                 //envia todos los datos de la tabla
+        );
+        echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
+        exit;    
+    }
+    
+    /**
+    * funcion para agregar los nuevos planes de  estudio.
+    *
+    * @return json_encode()
+    */
+    public function agregarMiembro(){
+        $doc    = $this->input->post('UMCL_FK_user');                      //obtencion de todos los datos del formulario
+        $pkuser = $this->user
+        $data   = array(
+            'CCLS_name'             =>  $name,
+            'CCLS_FK_versions_plans'=>  $versions,
+            'CCLS_date_create'      =>  date("Y-m-d H:i:s"),
+            'CCLS_date_update'      =>  date("Y-m-d H:i:s"),
+            'CCLS_PK_create'        =>  $this->session->userdata('id'),
+            'CCLS_PK_update'        =>  $this->session->userdata('id'),
+        );
+        if(!$this->Cicle->agregarCicle($data)){                         //utilizacion del metodo agregarPlan() del modelo Plan() para la agregacion de un nuevo plan los datos pertinentes
+            echo "error";                                               // en caso de  fallar envia un mensaje de
+            echo json_encode(array('msg'=> 'Curso agregado agregado' ));//si fue agregado con exito envia el mensaje correspondiente
+        }
+    }
 }

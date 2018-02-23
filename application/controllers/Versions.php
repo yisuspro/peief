@@ -50,7 +50,7 @@ class Versions extends CI_Controller{
         foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
             $dato[] = array(
                 $r->VRSN_name,
-                '<input type="button" class="btn btn-warning edit" title="Editar rol" id="'.$r->VRSN_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar rol" id="'.$r->VRSN_PK.'" value="eliminar" >',
+                '<input type="button" class="btn btn-warning edit" title="Editar Version" id="'.$r->VRSN_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar Version" id="'.$r->VRSN_PK.'" value="eliminar" >',
             );
         }
         $output = array(                                    //creacion del vector de salida
