@@ -4,7 +4,7 @@
 *
 *@autor jesus andres castellanos aguilar
 *
-* modelor encargado de todos los procesos referente a los permisos
+* modelor encargado de todos los procesos referente a las versiones
 * 
 * contiene todas las consultas sql a la base de datos
 * 
@@ -23,7 +23,7 @@ class Version extends CI_Model {
     }
     
    /**
-    * funcion para la verificacion y envio de los datos del rol solicitado.
+    * funcion para la verificacion y envio de los datos de la version solicitada.
     * @param int $datos
     * @return get() | false
     */
@@ -34,8 +34,9 @@ class Version extends CI_Model {
             return $rol->get();
         }
     }
+    
     /**
-    * funcion para la consulta de todos los roles a la base de datos.
+    * funcion para la consulta de todos las versiones a la base de datos.
     * 
     * @return get() 
     */
@@ -46,7 +47,7 @@ class Version extends CI_Model {
     
    
     /**
-    * funcion para la eliminacion de un rol de la base de datos
+    * funcion para la eliminacion de una version en la base de datos
     * @param int $datos
     * @return true | false
     */
@@ -58,8 +59,8 @@ class Version extends CI_Model {
     }
     
     /**
-    * funcion para la modificacion de datos de los roles en la base de datos 
-    * @param int $datos
+    * funcion para la modificacion de datos de las versiones en la base de datos 
+    * @param int $datos | String $datos2
     * @return true | false
     */
     public function modificarVersion($datos,$datos2){
@@ -70,8 +71,9 @@ class Version extends CI_Model {
             return false;
         }
     }
+    
     /**
-    * funcion para agregar nuevos datos de roles en la base de datos
+    * funcion para agregar nuevas versiones en la base de datos
     * @param int $datos
     * @return true | false
     */

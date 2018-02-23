@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tfoot>
-                        <tr> 
+                        <tr>
                             <th>Versions</th>
                             <th>Acciones</th>
                         </tr>
@@ -34,7 +34,6 @@
             </div>
         </div>
     </div>
-     
     <div class="col-md-12">
         <div class="portlet light portlet-fit  calendar">
             <div class="portlet-title">
@@ -63,7 +62,6 @@
             </div>
         </div>
     </div>
-    
     <!-- fin espacio de trabajo_______________________________________________________________________________________________________________________ -->
 </div>
 <script>

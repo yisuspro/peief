@@ -4,12 +4,13 @@
 *
 *@autor jesus andres castellanos aguilar
 *
-* modelor encargado de todos los procesos referente a los roles
+* modelor encargado de todos los procesos referente a los planes
 * 
 * contiene todas las consultas sql a la base de datos
 * 
 */
 class Plan extends CI_Model {
+    
     /**
     * metodo constructor donde se cargan todos los helpers, librerias necesarios en el modelo
     *@library 
@@ -22,7 +23,7 @@ class Plan extends CI_Model {
     }
     
     /**
-    * funcion para la verificacion y envio de los datos del rol solicitado.
+    * funcion para la verificacion y envio de los datos del plan solicitado.
     * @param int $datos
     * @return get() | false
     */
@@ -33,8 +34,9 @@ class Plan extends CI_Model {
             return $rol->get();
         }
     }
+    
     /**
-    * funcion para la consulta de todos los roles a la base de datos.
+    * funcion para la consulta de todos los planes a la base de datos.
     * 
     * @return get() 
     */
@@ -44,7 +46,7 @@ class Plan extends CI_Model {
     }
     
     /**
-    * funcion para la eliminacion de un rol de la base de datos
+    * funcion para la eliminacion de un plan de la base de datos
     * @param int $datos
     * @return true | false
     */
@@ -56,8 +58,8 @@ class Plan extends CI_Model {
     }
     
     /**
-    * funcion para la modificacion de datos de los roles en la base de datos 
-    * @param int $datos
+    * funcion para la modificacion de datos de los planes en la base de datos 
+    * @param int $datos |String $datos2
     * @return true | false
     */
     public function modificarPlan($datos,$datos2){
@@ -68,24 +70,31 @@ class Plan extends CI_Model {
             return false;
         }
     }
+    
     /**
-    * funcion para agregar nuevos datos de roles en la base de datos
+    * funcion para agregar nuevos datos de planes en la base de datos
     * @param int $datos
     * @return true | false
     */
     public function agregarPlan($datos){
-         if(!$this->db->insert('plans',$datos)){
+        if(!$this->db->insert('plans',$datos)){
             return false;
         }
         return true;
     }
     
+    /**
+    * funcion para listar las versiones que contiene los planes
+    * @param int $id
+    * @return true | false
+    */
     public function listarVersionPlan($id){
         $version= $this->db->select('*')->from('versions_plans')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->where('VRPL_FK_plans',$id);
         return $version->get();
     }
+    
     /**
-    * funcion para la eliminacion de un permiso asignado a un rol de la base de datos
+    * funcion para la eliminacion de una version asignada a un plan de la base de datos
     * @param int $datos
     * @return true | false
     */
@@ -95,8 +104,9 @@ class Plan extends CI_Model {
         }
         return true;
     }
+    
     /**
-    * funcion para la eliminacion de un permiso asignado a un rol de la base de datos
+    * funcion para la consulta de una version de un plan en la bse de datos
     * @param int $datos
     * @return true | false
     */
@@ -108,7 +118,7 @@ class Plan extends CI_Model {
     }
     
     /**
-    * funcion para la eliminacion de un permiso asignado a un rol de la base de datos
+    * funcion para la asignacion de  versiones a un plan existente
     * @param int $datos
     * @return true | false
     */
