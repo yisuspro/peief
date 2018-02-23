@@ -70,6 +70,13 @@
                                             <?php echo form_error('UMCL_FK_users') ?>
                                         </div>
                                     </div>
+                                    <label>Rol</label>
+                                <select class="form-control" name="CCLS_FK_versions_plans" id="CCLS_FK_versions_plans">
+                                    <span class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                    <?php foreach($roles->result_array() as $r) { ?>
+                                    <option value="<?php echo $r['ROLE_PK'];?>"><?php echo $r['ROLE_name']; ?></option>
+                                    <?php }?>
+                                </select>
                                 </div>
                                 <div class="form-actions">
                                     <div class="row">

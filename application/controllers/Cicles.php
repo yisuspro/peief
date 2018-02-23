@@ -20,6 +20,7 @@ class Cicles extends CI_Controller
         parent::__construct ();
         $this->load->model('Cicle');
         $this->load->model('Plan');
+        $this->load->model('Role');
         $this->load->model('users');
         $this->load->model('Logueo');
         $this->load->helper('login_rules');
@@ -127,8 +128,10 @@ class Cicles extends CI_Controller
             $dato['VRSN_name']  = $r->VRSN_name;
             $dato['PLAN_name']  = $r->PLAN_name;
         }
+        $roles = $this->Role->listar();
         $versiones = $this->Plan->listarVersionsPlans();
         $dato['versiones']=$versiones;
+        $dato['roles']=$roles;
         $this->load->view('private/view_ajax/editar_cicle_ajax',$dato);  //envio de la vista y los datos para la edicion de los planes
     }
     /**
@@ -294,15 +297,18 @@ class Cicles extends CI_Controller
     * @return json_encode()
     */
     public function agregarMiembro(){
+        $cicle  = $this->input->post('CCLS_PK');
         $doc    = $this->input->post('UMCL_FK_user');                      //obtencion de todos los datos del formulario
-        $pkuser = $this->user
+        $user = $this->users->verificarUsuario($doc);
+        
         $data   = array(
-            'CCLS_name'             =>  $name,
-            'CCLS_FK_versions_plans'=>  $versions,
-            'CCLS_date_create'      =>  date("Y-m-d H:i:s"),
-            'CCLS_date_update'      =>  date("Y-m-d H:i:s"),
-            'CCLS_PK_create'        =>  $this->session->userdata('id'),
-            'CCLS_PK_update'        =>  $this->session->userdata('id'),
+            'UMCL_FK_users'         =>  $name,
+            'UMCL_FK_cicles'        =>  $versions,
+            'UMCL_FK_roles'         =>  $versions,
+            'UMCL_date_create'      =>  date("Y-m-d H:i:s"),
+            'UMCL_date_update'      =>  date("Y-m-d H:i:s"),
+            'UMCL_PK_create'        =>  $this->session->userdata('id'),
+            'UMCL_PK_update'        =>  $this->session->userdata('id'),
         );
         if(!$this->Cicle->agregarCicle($data)){                         //utilizacion del metodo agregarPlan() del modelo Plan() para la agregacion de un nuevo plan los datos pertinentes
             echo "error";                                               // en caso de  fallar envia un mensaje de
