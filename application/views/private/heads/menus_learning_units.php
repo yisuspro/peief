@@ -1,5 +1,13 @@
 <!-- menus modulo ciclos -->
-
+<?php if($this->Logueo->permisosUsuario($id,'v_enfoques')==true){?>
+<li class="nav-item start <?php if ($this->uri->segment(1)== "Focus"){?>active open<?php }?>">
+    <a href="<?= base_url('index.php/Focus') ?>" class="nav-link nav-toggle" title="Cursos/Ciclos">
+        <i class="fa fa-tripadvisor"></i>
+        <span class="title">ENFOQUES PEDAGOGICOS</span>
+        <span class="arrow"></span>
+    </a>
+</li>
+<?php }?>
 <?php if($this->Logueo->permisosUsuario($id,'v_versions')==true || $this->Logueo->permisosUsuario($id,'v_plans')==true){?>
 <li class="nav-item start <?php if ($this->uri->segment(1)== "Learning_Units"){?>active open<?php }?>">
     <a href="#" class="nav-link nav-toggle" title="Planes y Versiones">

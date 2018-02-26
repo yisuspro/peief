@@ -26,8 +26,8 @@
                     }
                 } else if (xhr.status == 401) {
                     document.getElementById('alerta').style.display = 'inherit';
-                } else if (xhr.status == 403){
-                    document.getElementById('alerta').style.display = 'inherit';   
+                } else if (xhr.status == 403) {
+                    document.getElementById('alerta').style.display = 'inherit';
                 }
                 document.getElementById('alerta').style.display = 'inherit';
             },

@@ -235,5 +235,33 @@ function getRulesAddCicle(){
             ),
         ),
     );
+}
+
+/**
+*
+*funcion encargada de las reglas del formulario de registro y de edicion
+*retorna el vector de errores
+*@return array ()
+*
+*/
+function getRulesAddFocus(){
+    return array(
+        array(
+            'field' =>'FOCS_name',
+            'label' =>'FOCS_name',
+            'rules' =>'required',                                    //campo requerido 
+            'errors'=> array(       
+                'required' => 'nombre del enfocque es necesario',    //mensajes de error         
+            ),
+        ),
+        array(
+            'field' =>'FOCS_description',
+            'label' =>'FOCS_description',
+            'rules' =>'required',                                    //campo requerido 
+            'errors'=> array(       
+                'required' => 'descripcion del enfocque es necesario',    //mensajes de error         
+            ),
+        ),
+    );
     
 }

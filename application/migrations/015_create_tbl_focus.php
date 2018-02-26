@@ -23,13 +23,12 @@ class Migration_create_tbl_focus extends CI_Migration {
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ),
-            'PRMS_name' => array(                       //columna PRMS_name tipo VARCHAR, tamaño 45
+            'FOCS_name' => array(                       //columna FOCS_name tipo VARCHAR, tamaño 45
                 'type' => 'VARCHAR',
                 'constraint' => '45',
             ),
-            'PRMS_description' => array(                //columna PRMS_description tipo VARCHAR, tamaño 45
-                'type' => 'VARCHAR',
-                'constraint' => '45',
+            'FOCS_description' => array(                //columna FOCS_description tipo VARCHAR, tamaño 45
+                'type' => 'TEXT',
             ),
         ));
         $this->dbforge->add_key('FOCS_PK', TRUE);       //agregar atributo de llave primaria al campo FOCS_PK 

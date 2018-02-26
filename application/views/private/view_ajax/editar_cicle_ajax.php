@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    
+
                     <a class="btn btn-danger" type="button" href="#" id="atras" name="atras"><i class="fa fa-mail-reply"></i>atras</a>
                     <?= form_open('','id="frm_editar_cicle"');?>
                         <div class="form-wizard">
@@ -38,7 +38,7 @@
                                 <div class="row">
                                     <div class="modal-footer">
                                         <?= form_submit('agregar', 'Editar','class="btn btn-success"') ?>
-                                            
+
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                         <?= form_open('Usuarios/registrar','id="frm_agregar_miembro"');?>
                             <div class="form-wizard">
                                 <div class="form-group">
-                                    
+
                                     <input type="hidden" name='CICLE_PK' id="CICLE_PK" value="<?php echo $CCLS_PK; ?>">
                                     <div class="alert alert-danger invalid-feedback" id="alerta" role="alert" style="display:none">
                                         <div class="invalid-feedback">
@@ -78,7 +78,7 @@
                                             <?php echo form_error('UMCL_FK_users') ?>
                                         </div>
                                     </div>
-                                    
+
                                     <label>Rol</label>
                                     <select class="form-control" name="UMCL_FK_roles" id="UMCL_FK_roles">
                                     <span class="input-group-addon"><i class="fa fa-plus"></i></span>
