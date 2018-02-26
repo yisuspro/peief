@@ -129,7 +129,7 @@ class Cicle extends CI_Model {
     }
     
     /**
-    * funcion para la consulta de todos los planes a la base de datos.
+    * funcion para la consulta de todos miembros de un un curso en la base de datos.
     * 
     * @return get() 
     */
@@ -139,7 +139,7 @@ class Cicle extends CI_Model {
     }
     
     /**
-    * funcion para agregar nuevos datos de planes en la base de datos
+    * funcion para agregar nuevos datos miembros en un curso en la base de datos
     * @param int $datos
     * @return true | false
     */
@@ -151,8 +151,8 @@ class Cicle extends CI_Model {
     }
     
     /**
-    * funcion para agregar nuevos datos de planes en la base de datos
-    * @param int $datos
+    * funcion para verificar si un miembro en un curso se encuentraen la base de datos
+    * @param int $cicle, $user 
     * @return true | false
     */
     public function verificarMiembroCicle($cicle,$user){
@@ -163,7 +163,7 @@ class Cicle extends CI_Model {
     }
     
     /**
-    * funcion para agregar nuevos datos de planes en la base de datos
+    * funcion para eliminar los miembros de un curso en la bse de datos
     * @param int $datos
     * @return true | false
     */
@@ -175,7 +175,7 @@ class Cicle extends CI_Model {
     }
     
     /**
-    * funcion para la consulta de todos los roles a la base de datos.
+    * funcion para la consulta de todas las marterias en un curso en la base de datos.
     * 
     * @return get() 
     */
@@ -185,7 +185,7 @@ class Cicle extends CI_Model {
     }
     
     /**
-    * funcion para agregar nuevos datos de planes en la base de datos
+    * funcion para aeliminar materias  en un curso en la base de datos
     * @param int $datos
     * @return true | false
     */
@@ -197,7 +197,7 @@ class Cicle extends CI_Model {
     }
     
     /**
-    * funcion para la consulta de todos los roles a la base de datos.
+    * funcion para listar todas las asignatras que se pueden agregra al curso.
     * 
     * @return get() 
     */
@@ -207,8 +207,8 @@ class Cicle extends CI_Model {
     }
     
     /**
-    * funcion consultar si el rol ya se encuentra asignado a un usuario
-    * @param int $user, $rol
+    * funcion consultar si la materia  se encuentra ya registrada enn el curso en la base de datos
+    * @param int $curso, $materia
     * @return true | false
     */
     public function consultarMateriaCicle($curso,$materia){
@@ -219,7 +219,7 @@ class Cicle extends CI_Model {
     }
     
     /**
-    * funcion para asignar un rol a un usuario en la base de datos
+    * funcion para asignar una materia a un curso en la base de datos
     * @param int $datos
     * @return true | false
     */

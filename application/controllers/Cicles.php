@@ -265,16 +265,16 @@ class Cicles extends CI_Controller{
     }
     
     /**
-    * funcion para listar los planes de estudio en la data teble.
+    * funcion para listar los miembros dentro de un curso.
     *
     * @return json_encode ()
     */
     public function listarMiembrosCicles($id){
-        $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
+        $draw = intval($this->input->get("draw"));              //trae las varibles draw, start, length para la creacion de la tabla
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
-        $data =$this->Cicle->listarMiembros($id);              //utiliza el metodo listar() del modelo plan() para traer los datos de todos los planes 
-        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
+        $data =$this->Cicle->listarMiembros($id);               //utiliza el metodo listarMiembros() del modelo Cicle() para traer los datos de todos los planes 
+        foreach($data->result() as $r) {                        //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
             $dato[] = array(
                 $r->USER_names.' '.$r->USER_lastnames,
                 $r->ROLE_name,
@@ -292,25 +292,25 @@ class Cicles extends CI_Controller{
     }
     
     /**
-    * funcion para agregar los nuevos planes de  estudio.
+    * funcion para agregar los nuevos miembros a los cursos.
     *
     * @return json_encode()
     */
     public function agregarMiembro(){
-        $cicle  = $this->input->post('CICLE_PK');
+        $cicle  = $this->input->post('CICLE_PK');                           //obtencion de todos los datos del formulario
         $doc    = $this->input->post('UMCL_FK_users');                      //obtencion de todos los datos del formulario
-        $role    = $this->input->post('UMCL_FK_roles');                      //obtencion de todos los datos del formulario
+        $role    = $this->input->post('UMCL_FK_roles');                     //obtencion de todos los datos del formulario
         if($user = $this->users->verificarUsuarioDoc($doc)){
             foreach ($user->result() as $r){
                 $hola=$r->USER_PK;
             }
-            if($this->Cicle->verificarMiembroCicle($cicle,$hola)){
+            if($this->Cicle->verificarMiembroCicle($cicle,$hola)){          //verifica si el miembro ya existe en el curso
                 echo json_encode($this->Cicle->verificarMiembroCicle($cicle,$hola));
-                $this->output->set_status_header(403);
+                $this->output->set_status_header(403);                      //envio de  estatus de error;
                 exit;
             }
         }
-        $data   = array(
+        $data   = array(                                                    //creacion de arreglo para la insercion de datos
             'UMCL_FK_users'         =>  $hola,
             'UMCL_FK_cicles'        =>  $cicle,
             'UMCL_FK_roles'         =>  $role,
@@ -320,30 +320,30 @@ class Cicles extends CI_Controller{
             'UMCL_PK_update'        =>  $this->session->userdata('id'),
         );
         
-        if(!$this->Cicle->agregarMiembroCicle($data)){                   //utilizacion del metodo agregarPlan() del modelo Plan() para la agregacion de un nuevo plan los datos pertinentes
-            echo "error";                                               // en caso de  fallar envia un mensaje de
-            echo json_encode(array('msg'=> 'Curso agregado agregado' ));//si fue agregado con exito envia el mensaje correspondiente
+        if(!$this->Cicle->agregarMiembroCicle($data)){                      //utilizacion del metodo agregarMiembroCicle() del modelo Cicle() para la agregacion de un nuevos miembros al curso
+            echo "error";                                                   // en caso de  fallar envia un mensaje de
+            echo json_encode(array('msg'=> 'Curso agregado agregado' ));    //si fue agregado con exito envia el mensaje correspondiente
         }
     }
     
     /**
-    * funcion para agregar los nuevos planes de  estudio.
-    *
-    * @return json_encode()
+    * funcion para eliminar los miembros de un curso.
+    * @param int $pk
+    * @return json_encode() | set_status_header()
     */
     public function eliminarMiembro($pk){
-        if($res = $this->Cicle->eliminarrMiembroCicle($pk)){                           //realiza la verificacion y eliminacion de la version del plan
-            echo json_encode(array('msg'=> 'miembro eliminado del curso correctamente'));//si la version del plan fue eliminado correctamenre envia el mensaje de confirmacion
-        }else{                                                                      //si no fue posible eliminarlo
-            echo json_encode($res);                                                 //envio de la respueta
-            $this->output->set_status_header(403);                                  //envio del status de error en este caso 403
+        if($res = $this->Cicle->eliminarrMiembroCicle($pk)){                                //realiza la verificacion y eliminacion de la version del plan
+            echo json_encode(array('msg'=> 'miembro eliminado del curso correctamente'));   //si la version del plan fue eliminado correctamenre envia el mensaje de confirmacion
+        }else{                                                                              //si no fue posible eliminarlo
+            echo json_encode($res);                                                         //envio de la respueta
+            $this->output->set_status_header(403);                                          //envio del status de error en este caso 403
         }
     }
         
     /**
-    * funcion para mostrar la  vista de asigar roles.
+    * funcion para mostrar la  vista de asigar materias.
     *
-    * @return view ()
+    * @return view () | $data
     */
     public function asignarMateria($PK){
         $data['id'] =$PK;
@@ -351,16 +351,16 @@ class Cicles extends CI_Controller{
     }
     
     /**
-    * funcion para mostrar la  vista de asigar roles.
-    *
-    * @return view ()
+    * funcion para listar las materias agregadas al curso.
+    * @param  int $PK
+    * @return json_encode()
     */
     public function listarMateriasCicle($PK){
-        $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
+        $draw = intval($this->input->get("draw"));                  //trae las varibles draw, start, length para la creacion de la tabla
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
-        $data =$this->Cicle->listarMateriaCicle($PK);              //utiliza el metodo listar() del modelo plan() para traer los datos de todos los planes 
-        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
+        $data =$this->Cicle->listarMateriaCicle($PK);               //utiliza el metodo listarMateriaCicle0() del modelo Cicle() para traer los datos de todos los planes 
+        foreach($data->result() as $r) {                            //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
             $dato[] = array(
                 $r->SBJC_name,
                 '<input type="button" class="btn btn-danger remove" title="Eliminar Curso" id="'.$r->CLSB_PK.'" value="eliminar" >',
@@ -377,29 +377,29 @@ class Cicles extends CI_Controller{
     }
     
     /**
-    * funcion para mostrar la  vista de asigar roles.
-    *
-    * @return view ()
+    * funcion para eliminar las materias agregadas a un curso.
+    * @param int $PK
+    * @return json_encode ()    | set_status_header()
     */
     public function eliminarMateriaCicle($PK){
-        if($res = $this->Cicle->eliminarMateriaCicle($PK)){                           //realiza la verificacion y eliminacion de la version del plan
-            echo json_encode(array('msg'=> 'materia eliminada del curso correctamente'));//si la version del plan fue eliminado correctamenre envia el mensaje de confirmacion
-        }else{                                                                      //si no fue posible eliminarlo
-            echo json_encode($res);                                                 //envio de la respueta
-            $this->output->set_status_header(403);                                  //envio del status de error en este caso 403
+        if($res = $this->Cicle->eliminarMateriaCicle($PK)){                                 //realiza la verificacion y eliminacion de la materia en el curso
+            echo json_encode(array('msg'=> 'materia eliminada del curso correctamente'));   //si la version del plan fue eliminado correctamenre envia el mensaje de confirmacion
+        }else{                                                                              //si no fue posible eliminarlo
+            echo json_encode($res);                                                         //envio de la respueta
+            $this->output->set_status_header(403);                                          //envio del status de error en este caso 403
         }
     }
     
     /**
-    * funcion para mostrar la  vista de asigar roles.
+    * funcion para listar las materias que se pueden agregar a el curso
     *
-    * @return view ()
+    * @return json_encode ()
     */
     public function listarMaterias(){
         $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
-        $data =$this->Cicle->listarMaterias();              //utiliza el metodo listar() del modelo plan() para traer los datos de todos los planes 
+        $data =$this->Cicle->listarMaterias();              //utiliza el metodo listarMaterias() del modelo Cicle() para traer los datos de todos las materias
         foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
             $dato[] = array(
                 $r->SBJC_name,
@@ -417,23 +417,23 @@ class Cicles extends CI_Controller{
     }
     
     /**
-    * funcion para asignar los roles a un usuario.
-    * @param int $usuario,$rol
+    * funcion para asignar materias al curso.
+    * @param int $curso,$matria
     * @return true | false
     */
     public function asignarMateriaCurso($curso,$materia){
-        if ($this->Cicle->consultarMateriaCicle($curso,$materia)){ //verifica si el permiso ya fue asignado
+        if ($this->Cicle->consultarMateriaCicle($curso,$materia)){  //verifica si la materia ya fue asignada ya fue asignado
             $this->output->set_status_header(402);                  //envia el error en caso de existir
         }else{
             $data= array(
-                'CLSB_FK_cicles'   =>  $curso,      //crea el vector con los datos
+                'CLSB_FK_cicles'   =>  $curso,                      //crea el vector con los datos
                 'CLSB_FK_subjects' =>  $materia,
                 'CLSB_date_create'      =>  date("Y-m-d H:i:s"),
                 'CLSB_date_update'      =>  date("Y-m-d H:i:s"),
                 'CLSB_PK_create'        =>  $this->session->userdata('id'),
                 'CLSB_PK_update'        =>  $this->session->userdata('id'),
             );
-            if ($this->Cicle->asignarMateria($data)){       //envia y valida la insercion del nuevo permiso en el rol 
+            if ($this->Cicle->asignarMateria($data)){               //envia y valida la insercion de la nueva materia en el curso
                 return true;
             }
             return false;  
