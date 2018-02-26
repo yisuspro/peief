@@ -36,6 +36,18 @@ class Users extends CI_Model {
     }
     
     /**
+    * funcion para la verificacion y envio de los datos del usuario solicitado.
+    * @param int $doc
+    * @return row() | false
+    */
+    public function verificarUsuarioDoc($doc){
+        if (!$rep=$this->db->select('USER_PK')->from('users')->where('USER_identification',$doc)->get()){
+            return FALSE;
+        }
+        return $rep;
+    }
+    
+    /**
     * funcion para el registro de usuario 
     * @param String $datos
     * @return true | false

@@ -10,6 +10,8 @@
                     </div>
                 </div>
                 <div class="portlet-body">
+                    
+                    <a class="btn btn-danger" type="button" href="#" id="atras" name="atras"><i class="fa fa-mail-reply"></i>atras</a>
                     <?= form_open('','id="frm_editar_cicle"');?>
                         <div class="form-wizard">
                             <div class="form-group">
@@ -36,7 +38,7 @@
                                 <div class="row">
                                     <div class="modal-footer">
                                         <?= form_submit('agregar', 'Editar','class="btn btn-success"') ?>
-                                            <a class="btn btn-danger" type="button" href="#" id="atras" name="atras">Cancelar</a>
+                                            
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +62,13 @@
                         <?= form_open('Usuarios/registrar','id="frm_agregar_miembro"');?>
                             <div class="form-wizard">
                                 <div class="form-group">
-                                    <input type="hidden" id="CCLS_PK_hidden" value="<?php echo $CCLS_PK; ?>">
+                                    
+                                    <input type="hidden" name='CICLE_PK' id="CICLE_PK" value="<?php echo $CCLS_PK; ?>">
+                                    <div class="alert alert-danger invalid-feedback" id="alerta" role="alert" style="display:none">
+                                        <div class="invalid-feedback">
+                                            el usuario no existe o ya se encutra en el grupo
+                                        </div>
+                                    </div>
                                     <label>Numero de Docuemnto</label>
                                     <div class="input-group" id="UMCL_FK_users"><span class="input-group-addon"><i class="fa fa-user"></i></span>
                                         <input type="text" id="UMCL_FK_users" name="UMCL_FK_users" class="form-control" placeholder="Nombre">
@@ -70,8 +78,9 @@
                                             <?php echo form_error('UMCL_FK_users') ?>
                                         </div>
                                     </div>
+                                    
                                     <label>Rol</label>
-                                <select class="form-control" name="CCLS_FK_versions_plans" id="CCLS_FK_versions_plans">
+                                    <select class="form-control" name="UMCL_FK_roles" id="UMCL_FK_roles">
                                     <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                     <?php foreach($roles->result_array() as $r) { ?>
                                     <option value="<?php echo $r['ROLE_PK'];?>"><?php echo $r['ROLE_name']; ?></option>
@@ -272,5 +281,5 @@
     });
 
 </script>
-<script src="<?= base_url('assets/js/cicles/agregar_miembro_cicles.js')?>">
-    < /script
+<script src="<?= base_url('assets/js/cicles/agregar_miembro_cicle.js')?>">
+</script>

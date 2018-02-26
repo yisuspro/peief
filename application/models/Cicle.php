@@ -138,4 +138,94 @@ class Cicle extends CI_Model {
         return $rol->get();
     }
     
+    /**
+    * funcion para agregar nuevos datos de planes en la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function agregarMiembroCicle($datos){
+        if(!$this->db->insert('users_members_cicles',$datos)){
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+    * funcion para agregar nuevos datos de planes en la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function verificarMiembroCicle($cicle,$user){
+        if($this->db->select('*')->from('users_members_cicles')->where('UMCL_FK_cicles',$cicle)->where('UMCL_FK_users',$user)->get()->result()){
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+    * funcion para agregar nuevos datos de planes en la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function eliminarrMiembroCicle($datos){
+        if(!$this->db->delete('users_members_cicles', array('UMCL_PK' => $datos))){
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+    * funcion para la consulta de todos los roles a la base de datos.
+    * 
+    * @return get() 
+    */
+    public function listarMateriaCicle($id){
+        $rol= $this->db->select('*')->from('cicles_subjects')->join('subjects','cicles_subjects.CLSB_FK_subjects = subjects.SBJC_PK')->where('CLSB_FK_cicles',$id);
+        return $rol->get();
+    }
+    
+    /**
+    * funcion para agregar nuevos datos de planes en la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function eliminarMateriaCicle($datos){
+        if(!$this->db->delete('cicles_subjects', array('CLSB_PK' => $datos))){
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+    * funcion para la consulta de todos los roles a la base de datos.
+    * 
+    * @return get() 
+    */
+    public function listarMaterias(){
+        $rol= $this->db->select('*')->from('subjects');
+        return $rol->get();
+    }
+    
+    /**
+    * funcion consultar si el rol ya se encuentra asignado a un usuario
+    * @param int $user, $rol
+    * @return true | false
+    */
+    public function consultarMateriaCicle($curso,$materia){
+        $where= "CLSB_FK_cicles ='".$curso."' AND CLSB_FK_subjects ='".$materia."'";
+        if($this->db->from('cicles_subjects')->where($where)->get()->result()){
+            return true;
+        }
+    }
+    
+    /**
+    * funcion para asignar un rol a un usuario en la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function asignarMateria($datos){
+         if(!$this->db->insert('cicles_subjects',$datos)){
+            return false;
+        }
+    }
 }

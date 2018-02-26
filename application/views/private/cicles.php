@@ -195,7 +195,7 @@
         dt.on('click', '.asignar', function(e) {
             e.preventDefault();
             var tr = this.id;
-            var url = 'Plans/asignarVersionPlan/' + tr;
+            var url = 'Cicles/asignarMateria/' + tr;
             $(".contentAjax").load(url);
         });
 

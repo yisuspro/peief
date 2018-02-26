@@ -78,6 +78,7 @@ class Usuarios extends CI_Controller
                     $data= array(                                                           //creacion de vector con los datos de los usuarios
                         
                         'USER_identification'=> $doc,
+                        'USER_PK'=> $doc,
                         'USER_username' =>$name.$lastname,
                         'USER_names'    =>$name,
                         'USER_lastnames'=>$lastname,
