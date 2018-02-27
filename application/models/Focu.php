@@ -4,7 +4,7 @@
 *
 *@autor jesus andres castellanos aguilar
 *
-* modelor encargado de todos los procesos referente a los planes
+* modelor encargado de todos los procesos referente a los enfoques 
 * 
 * contiene todas las consultas sql a la base de datos
 * 
@@ -23,7 +23,7 @@ class Focu extends CI_Model {
     }
     
      /**
-    * funcion para la verificacion y envio de los datos del plan solicitado.
+    * funcion para la verificacion y envio de los datos del enfoque pedagogico solicitado.
     * @param int $datos
     * @return get() | false
     */
@@ -35,7 +35,7 @@ class Focu extends CI_Model {
         }
     }
     /**
-    * funcion para la consulta de todos los planes a la base de datos.
+    * funcion para la consulta de todos los enfoques pedagogicos a la base de datos.
     * 
     * @return get() 
     */
@@ -45,7 +45,7 @@ class Focu extends CI_Model {
     }
     
     /**
-    * funcion para la eliminacion de un plan de la base de datos
+    * funcion para la eliminacion de un enfoque pedagogico de la base de datos
     * @param int $datos
     * @return true | false
     */
@@ -57,7 +57,7 @@ class Focu extends CI_Model {
     }
     
     /**
-    * funcion para la modificacion de datos de los planes en la base de datos 
+    * funcion para la modificacion de datos de los enfoque pedagogicos en la base de datos 
     * @param int $datos |String $datos2
     * @return true | false
     */
@@ -71,7 +71,7 @@ class Focu extends CI_Model {
     }
     
     /**
-    * funcion para agregar nuevos datos de planes en la base de datos
+    * funcion para agregar nuevos datos de enfoque pedagogicos en la base de datos
     * @param int $datos
     * @return true | false
     */
