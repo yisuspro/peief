@@ -1,5 +1,5 @@
 <!--titulo de la pagina-->
-<?php require_once 'heads/head_1.php'; ?> Unidades de aprendizaje
+<?php require_once 'heads/head_1.php'; ?> asignaturas
 <?php require_once 'heads/head_2.php'; ?>
 <!--titulo de la pagina fin-->
 <!--librerias extras-->
@@ -16,8 +16,8 @@
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
         <?php require_once 'heads/alertas.php'; ?>
-        <h1 class="page-title"> UNIDADES DE APRENDIZAJE
-            <small>Lista de unidades de aprendizaje</small>
+        <h1 class="page-title">ASIGNATURAS
+            <small>Lista de asignaturas</small>
         </h1>
         <?php require_once 'heads/barra_url.php'; ?>
         <!-- END PAGE HEADER-->
@@ -32,38 +32,38 @@
                             <div class="modal-content">
                                 <div class="modal-header modal-header-success">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                                    <h1><i class="glyphicon glyphicon-thumbs-up"></i> AGREGAR UNIDAD</h1>
+                                    <h1><i class="glyphicon glyphicon-thumbs-up"></i> AGREGAR ASIGNATURA</h1>
                                 </div>
 
                                 <div class="modal-body">
                                     <?php echo validation_errors(); ?>
-                                    <?= form_open('','id="frm_agregar_unidad"');?>
+                                    <?= form_open('','id="frm_agregar_asignatura"');?>
                                         <div class="form-wizard">
-                                            <div class="form-group"><label>Nombre unidad</label>
-                                                <div class="input-group" id="LNUT_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                    <input type="text" id="LNUT_name" name="LNUT_name" class="form-control" placeholder="Nombre" >
+                                            <div class="form-group"><label>Nombre asignatura</label>
+                                                <div class="input-group" id="SBJC_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                    <input type="text" id="SBJC_name" name="SBJC_name" class="form-control" placeholder="Nombre" >
                                                 </div>
-                                                <div class="alert alert-danger invalid-feedback" id="LNUT_name_alerta" role="alert" style="display:none">
+                                                <div class="alert alert-danger invalid-feedback" id="SBJC_name_alerta" role="alert" style="display:none">
                                                     <div class="invalid-feedback">
-                                                        <?php echo form_error('LNUT_name') ?>
+                                                        <?php echo form_error('SBJC_name') ?>
                                                     </div>
                                                 </div>
                                                 <label>Descripcion</label>
-                                                <div class="input-group" id="LNUT_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                    <textarea type="text" id="LNUT_description" name="LNUT_description" class="form-control" placeholder="Descripcion" rows="3"></textarea>
+                                                <div class="input-group" id="SBJC_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                                    <textarea type="text" id="SBJC_description" name="SBJC_description" class="form-control" placeholder="Descripcion" rows="3"></textarea>
                                                 </div>
-                                                <div class="alert alert-danger invalid-feedback" id="LNUT_description_alerta" role="alert" style="display:none">
+                                                <div class="alert alert-danger invalid-feedback" id="SBJC_description_alerta" role="alert" style="display:none">
                                                     <div class="invalid-feedback">
-                                                        <?= form_error ('LNUT_description') ?>
+                                                        <?= form_error ('SBJC_description') ?>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <label> Tipo de enfoque pedagogico</label>
-                                            <select class="form-control" name="LNUT_FK_focus" id="LNUT_FK_focus">
+                                            <select class="form-control" name="SBJC_FK_learning_units" id="SBJC_FK_learning_units">
                                                 <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                                <?php foreach($focus->result_array() as $r) { ?>
-                                                <option value="<?php echo $r['FOCS_PK'];?>"><?php echo $r['FOCS_name']; ?></option>
+                                                <?php foreach($unidades->result_array() as $r) { ?>
+                                                <option value="<?php echo $r['LNUT_PK'];?>"><?php echo $r['LNUT_name']; ?></option>
                                                 <?php }?>
                                             </select>
 
@@ -85,8 +85,8 @@
                     <div class="portlet light portlet-fit  calendar">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-graduation-cap font-green"></i>
-                                <span class="caption-subject font-green sbold uppercase">UNIDADES DE APRENDIZAJE</span>
+                                <i class="fa fa-tasks font-green"></i>
+                                <span class="caption-subject font-green sbold uppercase">ASIGATURAS</span>
                             </div>
                         </div>
 
@@ -102,19 +102,17 @@
                             <table id="sample_1" class="table table-striped table-bordered table-hover dt-responsive" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Unidad</th>
+                                        <th>Asignaturas</th>
                                         <th>Descripcion</th>
-                                        <th>Enfoque pedagogico</th>
+                                        <th>Unidade de aprendizaje</th>
                                         <th>Acciones</th>
-
-
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Unidad</th>
+                                        <th>Asignaturas</th>
                                         <th>Descripcion</th>
-                                        <th>Enfoque pedagogico</th>
+                                        <th>Unidade de aprendizaje</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>
@@ -146,7 +144,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?= base_url('index.php/Learning_units/listarUnidades'); ?>",
+                url: "<?= base_url('index.php/Subjects/listarAsignaturas'); ?>",
                 type: 'GET'
             },
 
@@ -187,7 +185,7 @@
             eliminar = confirm("Seguro desea eliminar la unidad " + tr);
             if (eliminar) {
                 $.ajax({
-                    url: 'Learning_units/eliminarUnidades/' + tr,
+                    url: 'Subjects/eliminarAsignatura/' + tr,
                     type: 'POST',
                     data: tr,
                     success: function(data, xhr) {
@@ -207,13 +205,7 @@
         dt.on('click', '.edit', function(e) {
             e.preventDefault();
             var tr = this.id;
-            var url = 'Learning_units/editarUnidades/'+tr;
-            $(".contentAjax").load(url);
-        });
-        dt.on('click', '.asignar', function(e) {
-            e.preventDefault();
-            var tr = this.id;
-            var url = 'Learning_units/asignarUsuarios/'+tr;
+            var url = 'Subjects/editarAsignatura/'+tr;
             $(".contentAjax").load(url);
         });
         
@@ -226,16 +218,15 @@
         
         $(".close").on('click', function(e) {
             e.preventDefault();
-            $("#frm_agregar_unidad")[0].reset();
+            $("#frm_agregar_asignatura")[0].reset();
             $('#agregar').removeClass('fade-in');
             $('#agregar').addClass('fade');
             document.getElementById('agregar').style.display = 'none';
         });
         
-        
         $("#cerrar").on('click', function(e) {
             e.preventDefault();
-            $("#frm_agregar_unidad")[0].reset();
+            $("#frm_agregar_asignatura")[0].reset();
             $('#agregar').removeClass('fade-in');
             $('#agregar').addClass('fade');
             document.getElementById('agregar').style.display = 'none';
@@ -243,7 +234,7 @@
 });
 </script>
 
-<script src="<?= base_url('assets/js/learning_units/agregar_learning_units.js')?>"></script>
+<script src="<?= base_url('assets/js/subjects/agregar_asignaturas.js')?>"></script>
 
 <!--fin scrips-->
 

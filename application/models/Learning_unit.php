@@ -93,6 +93,46 @@ class Learning_unit extends CI_Model {
         return true;
     }
     
+    public function listarUsuarios($id){
+        $permiso= $this->db->select('*')->from('users_learning_units')->join('users','users_learning_units.USLE_FK_users = users.USER_PK')->join('roles','users_learning_units.USLE_FK_roles = roles.ROLE_PK')->join('learning_units','users_learning_units.USLE_FK_learning_units = learning_units.LNUT_PK')->where('USLE_FK_learning_units',$id);
+        return $permiso->get();
+    }
+    
+    /**
+    * funcion para la eliminacion de un permiso de la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function eliminarUsuario($datos){
+        if(!$this->db->delete('users_learning_units', array('USLE_PK' => $datos))){
+            return FALSE;
+        }
+        return true;
+    }
+    
+    /**
+    * funcion para agregar nuevos datos miembros en un curso en la base de datos
+    * @param int $datos
+    * @return true | false
+    */
+    public function agregarUsuario($datos){
+        if(!$this->db->insert('users_learning_units',$datos)){
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+    * funcion para verificar si un miembro en un curso se encuentraen la base de datos
+    * @param int $cicle, $user 
+    * @return true | false
+    */
+    public function verificarUsuario($unit,$user){
+        if($this->db->select('*')->from('users_learning_units')->where('USLE_FK_learning_units',$unit)->where('USLE_FK_users',$user)->get()->result()){
+            return true;
+        }
+        return false;
+    }
     
     
 }

@@ -292,3 +292,30 @@ function getRulesAddUnidad(){
         ),
     );
 }
+/**
+*
+*funcion encargada de las reglas del formulario de registro y de edicion
+*retorna el vector de errores
+*@return array ()
+*
+*/
+function getRulesAddAsignatura(){
+    return array(
+        array(
+            'field' =>'SBJC_name',
+            'label' =>'SBJC_name',
+            'rules' =>'required',                                           //campo requerido 
+            'errors'=> array(       
+                'required' => 'nombre de la asignatura es necesario',       //mensajes de error         
+            ),
+        ),
+        array(
+            'field' =>'SBJC_description',
+            'label' =>'SBJC_description',
+            'rules' =>'required',                                           //campo requerido 
+            'errors'=> array(       
+                'required' => 'descripcion de la asignatura es necesario',  //mensajes de error         
+            ),
+        ),
+    );
+}

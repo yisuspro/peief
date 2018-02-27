@@ -6,7 +6,7 @@
             <div class="portlet light portlet-fit  calendar">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class=" icon-users font-green"></i>
+                        <i class="fa fa-graduation-cap font-green"></i>
                         <span class="caption-subject font-green sbold uppercase">EDITAR UNIDAD PEDAGOGICA</span>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                                 </div>
                                 <label>Descripcion</label>
                                 <div class="input-group" id="LNUT_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                    <input type="text" id="LNUT_description" name="LNUT_description" class="form-control" placeholder="Direccion" value="<?php echo $LNUT_description; ?>">
+                                    <textarea type="text" id="LNUT_description" name="LNUT_description" class="form-control" placeholder="Direccion" ><?php echo $LNUT_description; ?></textarea>
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="LNUT_description_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
