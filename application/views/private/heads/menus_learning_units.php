@@ -8,9 +8,9 @@
     </a>
 </li>
 <?php }?>
-<?php if($this->Logueo->permisosUsuario($id,'v_versions')==true || $this->Logueo->permisosUsuario($id,'v_plans')==true){?>
-<li class="nav-item start <?php if ($this->uri->segment(1)== "Learning_Units"){?>active open<?php }?>">
-    <a href="#" class="nav-link nav-toggle" title="Planes y Versiones">
+<?php if($this->Logueo->permisosUsuario($id,'v_learning_u')==true){?>
+<li class="nav-item start <?php if ($this->uri->segment(1)== "Learning_units"){?>active open<?php }?>">
+    <a href="<?= base_url('index.php/Learning_units') ?>" class="nav-link nav-toggle" title="Planes y Versiones">
         <i class="fa fa-graduation-cap"></i>
         <span class="title">UNIDADES DE APRENDIZAJE</span>
         <span class="arrow"></span>

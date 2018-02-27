@@ -263,5 +263,32 @@ function getRulesAddFocus(){
             ),
         ),
     );
-    
+}
+
+/**
+*
+*funcion encargada de las reglas del formulario de registro y de edicion
+*retorna el vector de errores
+*@return array ()
+*
+*/
+function getRulesAddUnidad(){
+    return array(
+        array(
+            'field' =>'LNUT_name',
+            'label' =>'LNUT_name',
+            'rules' =>'required',                                           //campo requerido 
+            'errors'=> array(       
+                'required' => 'nombre de la unidad es necesario',           //mensajes de error         
+            ),
+        ),
+        array(
+            'field' =>'LNUT_description',
+            'label' =>'LNUT_description',
+            'rules' =>'required',                                           //campo requerido 
+            'errors'=> array(       
+                'required' => 'descripcion de la unidad es necesario',      //mensajes de error         
+            ),
+        ),
+    );
 }
