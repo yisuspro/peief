@@ -75,8 +75,7 @@ class Usuarios extends CI_Controller
                     $state      = $this->input->post('USER_FK_state');
                     $type_identification= $this->input->post('USER_FK_type_identification');
                     $gander     = $this->input->post('USER_FK_gander');
-                    $data= array(                                                           //creacion de vector con los datos de los usuarios
-                        
+                    $data= array(
                         'USER_identification'=> $doc,
                         'USER_PK'=> $doc,
                         'USER_username' =>$name.$lastname,
