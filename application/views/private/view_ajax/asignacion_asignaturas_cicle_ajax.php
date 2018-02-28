@@ -4,7 +4,7 @@
         <div class="portlet light portlet-fit  calendar">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-check-square font-yellow"></i>
+                    <i class="fa fa-check-square font-green"></i>
                     <span class="caption-subject font-green sbold uppercase">MATERIAS ASIGNADAS</span>
                 </div>
             </div>

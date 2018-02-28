@@ -1,3 +1,4 @@
+</div>
 <!-- scripts foot_3 -->
 <script src="<?= base_url('assets/global/plugins/jquery.min.js') ?>" type="text/javascript"></script>
 <script src="<?= base_url('assets/global/plugins/bootstrap/js/bootstrap.min.js') ?>" type="text/javascript"></script>

@@ -178,7 +178,7 @@ class Learning_units extends CI_Controller{
     }
     
     /**
-    *funcion para redirecionar a la visa de editar y envio de la informacion de las unidades pedagogicas.
+    *funcion para redirecionar a la visa de asignar usuarios a la unidad de aprendizaje
     *@param  int $doc
     *@return  view()
     */
@@ -190,7 +190,7 @@ class Learning_units extends CI_Controller{
     }
     
     /**
-    * funcion el envio de datos para dibujar la tabla de roles.
+    * funcion el envio de datos para dibujar la tabla de usuarios dentro de la unidad de aprendizaje.
     *
     * @return json_encode()
     */
@@ -218,12 +218,12 @@ class Learning_units extends CI_Controller{
     }
     
     /**
-    * funcion para eliminar la unidad pedagogica.
+    * funcion para eliminar un usuario de la unida de aprendizaje
     *
     * @return json_encode() |set_status_header()
     */
     public function eliminarUsuario($pk){
-        if($res = $this->Learning_unit->eliminarUsuario($pk)){                         //realiza la verificacion y eliminacion de la unidad pedagogica
+        if($res = $this->Learning_unit->eliminarUsuario($pk)){                  //realiza la verificacion y eliminacion de la unidad pedagogica
             echo json_encode(array('msg'=> 'usuario eliminado exitosamente' )); //si el rol fue eliminado correctamenre envia el mensaje de confirmacion
         }else{                                                                  //si no fue posible eliminarlo
             echo json_encode($res);                                             //envio de la respueta
@@ -231,8 +231,9 @@ class Learning_units extends CI_Controller{
         }
         
     }
+    
     /**
-    * funcion para agregar los nuevos miembros a los cursos.
+    * funcion para agregar los nuevos miembros a la unida de aprendizaje.
     *
     * @return json_encode()
     */

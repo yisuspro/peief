@@ -93,13 +93,18 @@ class Learning_unit extends CI_Model {
         return true;
     }
     
+    /**
+    * funcion para listar los usuarios que pertenecen a una unidad
+    * @param int $datos
+    * @return true | false
+    */
     public function listarUsuarios($id){
         $permiso= $this->db->select('*')->from('users_learning_units')->join('users','users_learning_units.USLE_FK_users = users.USER_PK')->join('roles','users_learning_units.USLE_FK_roles = roles.ROLE_PK')->join('learning_units','users_learning_units.USLE_FK_learning_units = learning_units.LNUT_PK')->where('USLE_FK_learning_units',$id);
         return $permiso->get();
     }
     
     /**
-    * funcion para la eliminacion de un permiso de la base de datos
+    * funcion para la eliminacion de un usuarios que pertenece a una unidad
     * @param int $datos
     * @return true | false
     */
@@ -111,7 +116,7 @@ class Learning_unit extends CI_Model {
     }
     
     /**
-    * funcion para agregar nuevos datos miembros en un curso en la base de datos
+    * funcion para agregar nuevos datos de un miembro a una unidad en la base de datos
     * @param int $datos
     * @return true | false
     */
@@ -123,8 +128,8 @@ class Learning_unit extends CI_Model {
     }
     
     /**
-    * funcion para verificar si un miembro en un curso se encuentraen la base de datos
-    * @param int $cicle, $user 
+    * funcion para verificar si un miembro de una unidad se encuentra ya registrado la base de datos
+    * @param int $unit, $user 
     * @return true | false
     */
     public function verificarUsuario($unit,$user){
