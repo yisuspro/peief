@@ -69,8 +69,8 @@
                                                 <div class="list-item-content">
                                                     NOMBRE Y APELLIDOS
                                                     <p>
-                                                        <?php echo $nombre; ?>
-                                                        <?php echo $this->session->userdata('id'); ?>
+                                                        <?php echo $nombre; ?> <?php echo $this->session->userdata('apellido'); ?>
+                                                        
                                                     </p>
                                                 </div>
                                             </li>
@@ -83,9 +83,8 @@
                                                 </div>
                                                 <div class="list-item-content">
                                                     TIPO Y NUMERO DE DOCUMENTO
-                                                    <p>
-                                                        <?php echo $type_identification; ?>
-                                                        <?php echo $id; ?>
+                                                    <p><?php echo $this->session->userdata('type_identification'); ?> :
+                                                        <?php echo $this->session->userdata('doc'); ?>
                                                     </p>
                                                 </div>
                                             </li>

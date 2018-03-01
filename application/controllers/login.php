@@ -60,6 +60,7 @@ class login extends CI_Controller
                 
                 $usuario_data = array(                      //creacion de vector con todos  los datos del usuarios
                     'id'            => $res->USER_PK,
+                    'doc'           => $res->USER_identification,
                     'nombre'        => $res->USER_names,
                     'apellido'      => $res->USER_lastnames,
                     'email'         => $res->USER_email,
