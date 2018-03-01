@@ -83,8 +83,7 @@
                                                 </div>
                                                 <div class="list-item-content">
                                                     TIPO Y NUMERO DE DOCUMENTO
-                                                    <p><?php echo $this->session->userdata('type_identification'); ?> :
-                                                        <?php echo $this->session->userdata('doc'); ?>
+                                                    <p><?php echo $this->session->userdata('type_identification'); ?> : <?php echo $this->session->userdata('doc'); ?>
                                                     </p>
                                                 </div>
                                             </li>
