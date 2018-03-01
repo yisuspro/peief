@@ -23,6 +23,11 @@ class Migration_create_tbl_users extends CI_Migration {
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ),
+            'USER_identification' => array(                         //columna USER_PK tipo int, tamaño 10, auto icremental, solo positivos
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => TRUE,
+            ),
             'USER_username' => array(                   //columna USER_username tipo VARCHAR, tamaño 45
                 'type' => 'VARCHAR',
                 'constraint' => '45',

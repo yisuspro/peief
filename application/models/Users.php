@@ -107,5 +107,39 @@ class Users extends CI_Model {
             return false;
         }
     }
+    
+    /**
+    * funcion para el agregar estado
+    * @param String $datos
+    * @return true | false
+    */
+    public function agregarEstado($datos){
+        if(!$this->db->insert('states',$datos)){
+            return false;
+        }
+        return true;
+    }
+    /**
+    * funcion para el registro de usuario 
+    * @param String $datos
+    * @return true | false
+    */
+    public function registrarT($datos){
+        if(!$this->db->insert('types_identifications',$datos)){
+            return false;
+        }
+        return true;
+    }
+    /**
+    * funcion para el registro de usuario 
+    * @param String $datos
+    * @return true | false
+    */
+    public function registrarG($datos){
+        if(!$this->db->insert('ganders',$datos)){
+            return false;
+        }
+        return true;
+    }
 
 }
