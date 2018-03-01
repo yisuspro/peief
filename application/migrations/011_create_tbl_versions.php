@@ -27,9 +27,17 @@ class Migration_create_tbl_versions extends CI_Migration {
                 'type' => 'VARCHAR',
                 'constraint' => '45',
             ),
+            'VRSN_FK_plans' => array(                               //columna VRSN_name tipo VARCHAR, tamaño 45
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => TRUE,
+            ),
         ));
         $this->dbforge->add_key('VRSN_PK', TRUE);               //agregar atributo de llave primaria al campo VRSN_PK 
         $this->dbforge->create_table('versions');               //creacion de la tabla types_identifications con los atributos y columnas
+        $this->dbforge->add_column('versions',[
+            'CONSTRAINT VRSN_FK_plans FOREIGN KEY(VRSN_FK_plans) REFERENCES plans(PLAN_PK)',
+        ]); 
     }
     
     /**

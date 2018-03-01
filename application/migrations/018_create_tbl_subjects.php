@@ -36,17 +36,22 @@ class Migration_create_tbl_subjects extends CI_Migration {
                 'constraint' => 10,
                 'unsigned' => TRUE,
             ),
+            'SBJC_FK_users_teacher' => array(                                                  //columna SBJC_FK_learning_units tipo int, tamaño 10, auto icremental, solo positivos
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => TRUE,
+            ),
             
-            'SBJC_date_create' => array(                    //columna SBJC_address tipo VARCHAR, tamaño 45
+            'SBJC_date_create' => array(                                                        //columna SBJC_address tipo VARCHAR, tamaño 45
                 'type' => 'DATETIME',
             ),
-            'SBJC_date_update' => array(                  //columna SBJC_telephone tipo VARCHAR, tamaño 45
+            'SBJC_date_update' => array(                                                        //columna SBJC_telephone tipo VARCHAR, tamaño 45
                 'type' => 'DATETIME',
             ),
-            'SBJC_PK_create' => array(                    //columna SBJC_address tipo VARCHAR, tamaño 45
+            'SBJC_PK_create' => array(                                                          //columna SBJC_address tipo VARCHAR, tamaño 45
                 'type' => 'INT',
             ),
-            'SBJC_PK_update' => array(                  //columna SBJC_telephone tipo VARCHAR, tamaño 45
+            'SBJC_PK_update' => array(                                                          //columna SBJC_telephone tipo VARCHAR, tamaño 45
                 'type' => 'INT',
             ),
         ));
@@ -54,6 +59,9 @@ class Migration_create_tbl_subjects extends CI_Migration {
         $this->dbforge->create_table('subjects');                                               //creacion de la tabla subjects con los atributos y columnas
         $this->dbforge->add_column('subjects',[
             'CONSTRAINT SBJC_FK_learning_units FOREIGN KEY(SBJC_FK_learning_units) REFERENCES learning_units(LNUT_PK)',
+        ]);
+        $this->dbforge->add_column('subjects',[
+            'CONSTRAINT SBJC_FK_users_teacher FOREIGN KEY(SBJC_FK_users_teacher) REFERENCES users_learning_units(USLE_PK)',
         ]);
                                                                                            
     }
