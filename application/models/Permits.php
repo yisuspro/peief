@@ -19,7 +19,6 @@ class Permits extends CI_Model {
     * 
     */
     public function __construct(){
-        
     }
     
     /**
@@ -44,8 +43,6 @@ class Permits extends CI_Model {
         $permiso= $this->db->select('*')->from('permits');
         return $permiso->get();
     }
-    
-   
     
     /**
     * funcion para la eliminacion de un permiso de la base de datos

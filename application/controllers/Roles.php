@@ -197,7 +197,7 @@ class Roles extends CI_Controller
                 'USRL_FK_users'            =>  $usuario,      //crea el vector con los datos
                 'USRL_FK_roles'            =>  $rol,
             );
-            if ($this->Role->asignarRol($data)){       //envia y valida la insercion del nuevo permiso en el rol 
+            if ($this->Role->asignarRol($data)){              //envia y valida la insercion del nuevo permiso en el rol 
                 return true;
             }
             return false;  
