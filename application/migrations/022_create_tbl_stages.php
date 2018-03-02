@@ -51,7 +51,7 @@ class Migration_create_tbl_stages extends CI_Migration {
         ));
         $this->dbforge->add_key('STGS_PK', TRUE);       //agregar atributo de llave primaria al campo STGS_PK 
         $this->dbforge->create_table('stages');         //creacion de la tabla stages con los atributos y columnas
-        $this->dbforge->add_column('stages',[
+        $this->dbforge->add_column('stages',[           //creacion de relacion a la tabla projects
             'CONSTRAINT STGS_FK_projects FOREIGN KEY(STGS_FK_projects) REFERENCES projects(PRJC_PK)',
         ]);
         

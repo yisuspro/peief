@@ -16,36 +16,36 @@ class Migration_create_tbl_users_newspaper extends CI_Migration {
     * @return create_table()
     */
     public function up(){
-        $this->dbforge->add_field(array(                                                                   //creacion del vector que contiene los campos de la tabla
-            'USNP_PK' => array(                                                                            //columna USNP_PK tipo int, tamaño 10, auto icremental, solo positivos
+        $this->dbforge->add_field(array(                    //creacion del vector que contiene los campos de la tabla
+            'USNP_PK' => array(                             //columna USNP_PK tipo int, tamaño 10, auto icremental, solo positivos
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE,
             ),
-            'USNP_FK_users' => array(                                                                     //columna USNP_FK_users tipo int, tamaño 10, solo positivos
+            'USNP_FK_users' => array(                       //columna USNP_FK_users tipo int, tamaño 10, solo positivos
                 'type' => 'INT',
                 'unsigned' => TRUE,
             ),
-            'USNP_FK_categories' => array(                                                             //columna USNP_FK_learning_units tipo int, tamaño 10, solo positivos
+            'USNP_FK_categories' => array(                  //columna USNP_FK_categories tipo int, tamaño 10, solo positivos
                 'type' => 'INT',
                 'unsigned' => TRUE,
             ),
-            'USNP_FK_roles' => array(                                                                     //columna USNP_FK_roles tipo int, tamaño 10, solo positivos
+            'USNP_FK_roles' => array(                       //columna USNP_FK_roles tipo int, tamaño 10, solo positivos
                 'type' => 'INT',
                 'unsigned' => TRUE,
             ),
             
-            'USNP_date_create' => array(                    //columna USNP_address tipo VARCHAR, tamaño 45
+            'USNP_date_create' => array(                    //columna USNP_date_create tipo DATETIME
                 'type' => 'DATETIME',
             ),
-            'USNP_date_update' => array(                    //columna USNP_telephone tipo VARCHAR, tamaño 45
+            'USNP_date_update' => array(                    //columna USNP_date_update tipo DATETIME
                 'type' => 'DATETIME',
             ),
-            'USNP_PK_create' => array(                      //columna USNP_address tipo VARCHAR, tamaño 45
+            'USNP_PK_create' => array(                      //columna USNP_PK_create tipo INT
                 'type' => 'INT',
             ),
-            'USNP_PK_update' => array(                      //columna USNP_telephone tipo VARCHAR, tamaño 45
+            'USNP_PK_update' => array(                      //columna USNP_PK_update tipo INT
                 'type' => 'INT',
             ),
         ));
@@ -57,7 +57,7 @@ class Migration_create_tbl_users_newspaper extends CI_Migration {
         ]);                                                                                                 //creacion de relacion a la tabla users
         $this->dbforge->add_column('users_newspapers',[
             'CONSTRAINT USNP_FK_categories FOREIGN KEY(USNP_FK_categories) REFERENCES categories(CTGR_PK)',
-        ]);                                                                                                 //creacion de relacion a la tabla learning_units
+        ]);                                                                                                 //creacion de relacion a la tabla categories
         $this->dbforge->add_column('users_newspapers',[
             'CONSTRAINT USNP_FK_roles FOREIGN KEY(USNP_FK_roles) REFERENCES roles(ROLE_PK)',
         ]);                                                                                                 //creacion de relacion a la tabla roles

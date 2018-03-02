@@ -16,28 +16,28 @@ class Migration_create_tbl_versions extends CI_Migration {
     * @return create_table()
     */
     public function up(){
-        $this->dbforge->add_field(array(                        //creacion del vector que contiene los campos de la tabla    
-            'VRSN_PK' => array(                                 //columna VRSN_PK tipo int, tamaño 10, auto icremental, positivo
+        $this->dbforge->add_field(array(           //creacion del vector que contiene los campos de la tabla    
+            'VRSN_PK' => array(                    //columna VRSN_PK tipo int, tamaño 10, auto icremental, positivo
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ),
-            'VRSN_name' => array(                               //columna VRSN_name tipo VARCHAR, tamaño 45
+            'VRSN_name' => array(                  //columna VRSN_name tipo VARCHAR, tamaño 45
                 'type' => 'VARCHAR',
                 'constraint' => '45',
             ),
-            'VRSN_FK_plans' => array(                               //columna VRSN_name tipo VARCHAR, tamaño 45
+            'VRSN_FK_plans' => array(              //columna VRSN_FK_plans tipo INT, tamaño 10, valores poditivos
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
             ),
         ));
-        $this->dbforge->add_key('VRSN_PK', TRUE);               //agregar atributo de llave primaria al campo VRSN_PK 
-        $this->dbforge->create_table('versions');               //creacion de la tabla types_identifications con los atributos y columnas
+        $this->dbforge->add_key('VRSN_PK', TRUE);  //agregar atributo de llave primaria al campo VRSN_PK 
+        $this->dbforge->create_table('versions');  //creacion de la tabla types_identifications con los atributos y columnas
         $this->dbforge->add_column('versions',[
             'CONSTRAINT VRSN_FK_plans FOREIGN KEY(VRSN_FK_plans) REFERENCES plans(PLAN_PK)',
-        ]); 
+        ]);                                         //creacion de relacion a la tabla plans
     }
     
     /**
@@ -46,6 +46,6 @@ class Migration_create_tbl_versions extends CI_Migration {
     * @return drop_table()
     */
     public function down(){
-        $this->dbforge->drop_table('versions');                 //eliminacion de la tabla versions
+        $this->dbforge->drop_table('versions');    //eliminacion de la tabla versions
     }
 }

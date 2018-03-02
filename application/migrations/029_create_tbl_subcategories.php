@@ -16,32 +16,32 @@ class Migration_create_tbl_subcategories extends CI_Migration {
     * @return create_table()
     */
     public function up(){
-        $this->dbforge->add_field(array(                                                        //creacion del vector que contiene los campos de la tabla
-            'SBCG_PK' => array(                                                                 //columna SBCG_PK tipo int, tamaño 10, auto icremental, solo positivos
+        $this->dbforge->add_field(array(               //creacion del vector que contiene los campos de la tabla
+            'SBCG_PK' => array(                        //columna SBCG_PK tipo int, tamaño 10, auto icremental, solo positivos
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE,
             ),
-            'SBCG_name' => array(                                                         //columna SBCG_description tipo TEXT
+            'SBCG_name' => array(                      //columna SBCG_name tipo VARCHAR, tamaño 45
                 'type' => 'VARCHAR',
                 'constraint' => '45',
             ),
-            'SBCG_description' => array(                                                         //columna SBCG_description tipo TEXT
+            'SBCG_description' => array(               //columna SBCG_description tipo TEXT
                 'type' => 'TEXT',
             ),
-            'SBCG_FK_categories' => array(                                                  //columna SBCG_FK_learning_units tipo int, tamaño 10, auto icremental, solo positivos
+            'SBCG_FK_categories' => array(             //columna SBCG_FK_categories tipo int, tamaño 10, auto icremental, solo positivos
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
             ),
             
         ));
-        $this->dbforge->add_key('SBCG_PK', TRUE);                                               //agregar atributo de llave primaria al campo SBCG_PK 
-        $this->dbforge->create_table('subcategories');                                               //creacion de la tabla subcategories con los atributos y columnas
+        $this->dbforge->add_key('SBCG_PK', TRUE);      //agregar atributo de llave primaria al campo SBCG_PK 
+        $this->dbforge->create_table('subcategories'); //creacion de la tabla subcategories con los atributos y columnas
         $this->dbforge->add_column('subcategories',[
             'CONSTRAINT SBCG_FK_categories FOREIGN KEY(SBCG_FK_categories) REFERENCES categories(CTGR_PK)',
-        ]);
+        ]);                                             //creacion de relacion a la tabla categories
     }
     
     
@@ -52,6 +52,6 @@ class Migration_create_tbl_subcategories extends CI_Migration {
     */
     public function down()
     {
-        $this->dbforge->drop_table('subcategories');                                                  //eliminacion de la tabla subcategories
+        $this->dbforge->drop_table('subcategories');  //eliminacion de la tabla subcategories
     }
 }

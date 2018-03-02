@@ -48,7 +48,7 @@ class Migration_create_tbl_projects_learning extends CI_Migration {
      ));
      $this->dbforge->add_key('PRLN_PK', TRUE);           //agregar atributo de llave primaria al campo PRLN_PK    
      $this->dbforge->create_table('projects_learning');  //creacion de la tabla users_members_cicles con los atributos y columnas
-     $this->dbforge->add_column('projects_learning',[
+     $this->dbforge->add_column('projects_learning',[    //creacion de relacion a la tabla learning_units
          'CONSTRAINT PRLN_FK_learning_units FOREIGN KEY(PRLN_FK_learning_units) REFERENCES learning_units(LNUT_PK)',
      ]);
      $this->dbforge->add_column('projects_learning',[

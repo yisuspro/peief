@@ -59,7 +59,7 @@ class Migration_create_tbl_news extends CI_Migration {
             'NEWS_content' => array(                 //columna NEWS_content tipo TEXT
                 'type' => 'TEXT',
             ),
-            'NEWS_note' => array(                    //columna NEWS_note tipo VARCHAR, tamaño 45
+            'NEWS_note' => array(                    //columna NEWS_note tipo VARCHAR, tamaño 255
                 'type' => 'VARCHAR',
                 'constraint' => '255',
             ),

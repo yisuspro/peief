@@ -23,26 +23,28 @@ class Migration_create_tbl_subcategories_news extends CI_Migration {
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ),
-             'CGNW_FK_news' => array(                              //columna CGNW_FK_subjects tipo int, tamaño 10, auto icremental, solo positivos
+             'CGNW_FK_news' => array(                              //columna CGNW_FK_news tipo int, tamaño 10, auto icremental, solo positivos
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
             ),
             
-            'CGNW_FK_subcategories' => array(                              //columna CGNW_FK_subjects tipo int, tamaño 10, auto icremental, solo positivos
+            'CGNW_FK_subcategories' => array(                       //columna CGNW_FK_subcategories tipo int, tamaño 10, auto icremental, solo positivos
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
             ),
          ));
-        $this->dbforge->add_key('CGNW_PK', TRUE);                       //agregar atributo de llave primaria al campo CGNW_PK    
-        $this->dbforge->create_table('subcategories_news');                //creacion de la tabla users_members_cicles con los atributos y columnas
+        $this->dbforge->add_key('CGNW_PK', TRUE);                   //agregar atributo de llave primaria al campo CGNW_PK    
+        $this->dbforge->create_table('subcategories_news');         //creacion de la tabla users_members_cicles con los atributos y columnas
+       
+        
         $this->dbforge->add_column('subcategories_news',[
             'CONSTRAINT CGNW_FK_news FOREIGN KEY(CGNW_FK_news) REFERENCES news(NEWS_PK)',
-        ]);
+        ]);                                                         //creacion de relacion a la tabla news
         $this->dbforge->add_column('subcategories_news',[
             'CONSTRAINT CGNW_FK_subcategories FOREIGN KEY(CGNW_FK_subcategories) REFERENCES subcategories(SBCG_PK)',
-        ]);                                                             //creacion de relacion a la tabla users
+        ]);                                                         //creacion de relacion a la tabla subcategories                
     }
     
     /**
@@ -51,7 +53,7 @@ class Migration_create_tbl_subcategories_news extends CI_Migration {
     * @return drop_table()
     */
     public function down(){
-        $this->dbforge->drop_table('subcategories_news');                   //eliminacion de la tabla subcategories_news
+        $this->dbforge->drop_table('subcategories_news');           //eliminacion de la tabla subcategories_news
     }
 }
  

@@ -59,7 +59,7 @@ class Migration_create_tbl_projects extends CI_Migration {
         ));
         $this->dbforge->add_key('PRJC_PK', TRUE);   //agregar atributo de llave primaria al campo PRJC_PK 
         $this->dbforge->create_table('projects');   //creacion de la tabla projects con los atributos y columnas
-        $this->dbforge->add_column('projects',[
+        $this->dbforge->add_column('projects',[     //creacion de relacion a la tabla type_projects
             'CONSTRAINT PRJC_FK_type_proyects FOREIGN KEY(PRJC_FK_type_proyects) REFERENCES type_projects(TPPJ_PK)',
         ]);
         

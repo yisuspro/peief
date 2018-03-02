@@ -66,7 +66,7 @@ class Migration_create_tbl_activities extends CI_Migration {
         ));
         $this->dbforge->add_key('CTVT_PK', TRUE);  //agregar atributo de llave primaria al campo CTVT_PK 
         $this->dbforge->create_table('activities');//creacion de la tabla activities con los atributos y columnas
-        $this->dbforge->add_column('activities',[
+        $this->dbforge->add_column('activities',[  //creacion de relacion a la tabla stages
             'CONSTRAINT CTVT_FK_stages FOREIGN KEY(CTVT_FK_stages) REFERENCES stages(STGS_PK)',
         ]);
         

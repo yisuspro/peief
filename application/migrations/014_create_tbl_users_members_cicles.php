@@ -51,16 +51,16 @@ class Migration_create_tbl_users_members_cicles extends CI_Migration {
                 'unsigned' => TRUE,
                 
             ),
-            'UMCL_date_create' => array(                            //columna UMCL_address tipo VARCHAR, tamaño 45
+            'UMCL_date_create' => array(                            //columna UMCL_date_create tipo DATETIME
                 'type' => 'DATETIME',
             ),
-            'UMCL_date_update' => array(                            //columna UMCL_telephone tipo VARCHAR, tamaño 45
+            'UMCL_date_update' => array(                            //columna UMCL_date_update tipo DATETIME
                 'type' => 'DATETIME',
             ),
-            'UMCL_PK_create' => array(                              //columna UMCL_address tipo VARCHAR, tamaño 45
+            'UMCL_PK_create' => array(                              //columna UMCL_PK_create tipo INT
                 'type' => 'INT',
             ),
-            'UMCL_PK_update' => array(                              //columna UMCL_telephone tipo VARCHAR, tamaño 45
+            'UMCL_PK_update' => array(                              //columna UMCL_PK_update tipo INT
                 'type' => 'INT',
             ),
         ));
@@ -68,19 +68,19 @@ class Migration_create_tbl_users_members_cicles extends CI_Migration {
         $this->dbforge->create_table('users_members_cicles');       //creacion de la tabla users_members_cicles con los atributos y columnas
         $this->dbforge->add_column('users_members_cicles',[
             'CONSTRAINT UMCL_FK_users FOREIGN KEY(UMCL_FK_users) REFERENCES users(USER_PK)',
-        ]);
+        ]);                                                         //creacion de relacion a la tabla users
         $this->dbforge->add_column('users_members_cicles',[
             'CONSTRAINT UMCL_FK_cicles FOREIGN KEY(UMCL_FK_cicles) REFERENCES cicles(CCLS_PK)',
-        ]); 
+        ]);                                                         //creacion de relacion a la tabla cicles
         $this->dbforge->add_column('users_members_cicles',[
             'CONSTRAINT UMCL_FK_roles FOREIGN KEY(UMCL_FK_roles) REFERENCES roles(ROLE_PK)',
-        ]);
+        ]);                                                         //creacion de relacion a la tabla roles
         $this->dbforge->add_column('users_members_cicles',[
             'CONSTRAINT UMCL_FK_versions FOREIGN KEY(UMCL_FK_versions) REFERENCES versions(VRSN_PK)',
-        ]);
+        ]);                                                         //creacion de relacion a la tabla versions
         $this->dbforge->add_column('users_members_cicles',[
             'CONSTRAINT UMCL_FK_groups FOREIGN KEY(UMCL_FK_groups) REFERENCES groups(GRUP_PK)',
-        ]);
+        ]);                                                         //creacion de relacion a la tabla groups
     }
     
     /**
