@@ -45,15 +45,7 @@ class Permits extends CI_Model {
         return $permiso->get();
     }
     
-    /**
-    * funcion para la consulta de todos los permisos de un rol a la base de datos.
-    * 
-    * @return get() 
-    */
-    public function listarPermisoRol($id){
-        $permiso= $this->db->select('*')->from('roles_permits')->join('permits','roles_permits.RLPR_FK_permits = permits.PRMS_PK')->where('RLPR_FK_roles',$id);
-        return $permiso->get();
-    }
+   
     
     /**
     * funcion para la eliminacion de un permiso de la base de datos
