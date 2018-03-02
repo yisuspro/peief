@@ -48,15 +48,7 @@ class Role extends CI_Model {
     * 
     * @return get() 
     */
-    public function listarRolUsuario($id){
-        $rol= $this->db->select('*')->from('users_roles')->join('roles','users_roles.USRL_FK_roles = roles.ROLE_PK')->where('USRL_FK_users',$id);
-        return $rol->get();
-    }
-    /**
-    * funcion para la eliminacion de un rol de la base de datos
-    * @param int $datos
-    * @return true | false
-    */
+    
     public function eliminar($datos){
         if(!$this->db->delete('roles', array('ROLE_PK' => $datos))){
             return FALSE;
@@ -117,8 +109,9 @@ class Role extends CI_Model {
     * @param int $datos
     * @return true | false
     */
-    public function eliminarRolUsuario($datos){
-        if(!$this->db->delete('users_roles', array('USRL_PK' => $datos))){
+    public function eliminarRolUsuario($usuario,$role){
+        $where='USRL_FK_users ='.$usuario.' AND USRL_FK_roles='.$role;
+        if(!$this->db->delete('users_roles', $where)){
             return FALSE;
         }
         return true;

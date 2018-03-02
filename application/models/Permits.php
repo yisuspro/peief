@@ -72,8 +72,9 @@ class Permits extends CI_Model {
     * @param int $datos
     * @return true | false
     */
-    public function eliminarPermisoRol($datos){
-        if(!$this->db->delete('roles_permits', array('RLPR_PK' => $datos))){
+    public function eliminarPermisoRol($rol,$permiso){
+        $where='RLPR_FK_roles ='.$rol.' AND RLPR_FK_permits='.$permiso;
+        if(!$this->db->delete('roles_permits',$where)){
             return FALSE;
         }
         return true;

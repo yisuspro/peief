@@ -19,6 +19,7 @@ class Roles extends CI_Controller
     function __construct() {
         parent::__construct ();
         $this->load->model('Role');
+        $this->load->model('Permits');
         $this->load->model('Logueo');
         $this->load->helper('login_rules');
         $this->load->helper('url');
@@ -49,7 +50,7 @@ class Roles extends CI_Controller
                 $r->ROLE_name,
                 $r->ROLE_shortname,
                 $r->ROLE_description,
-                '<input type="button" class="btn btn-warning edit" title="Editar rol" id="'.$r->ROLE_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar rol" id="'.$r->ROLE_PK.'" value="eliminar" ><input type="button" class="btn btn-info asignar" title="asignar permisos" id="'.$r->ROLE_PK.'" value="permisos" >',
+                '<input type="button" class="btn btn-warning edit" title="Editar rol" id="'.$r->ROLE_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar rol" id="'.$r->ROLE_PK.'" value="eliminar" ><input type="button" class="btn btn-info asignar" title="asignar permisos" id="'.$r->ROLE_PK.'" value="permisos">',
             );
         }
         $output = array(                                    //creacion del vector de salida
@@ -139,6 +140,7 @@ class Roles extends CI_Controller
     */
     public function asignarPermiso($PK){
         $data['id'] =$PK;
+        $data['tabla']=$this->Permits->listar();
         $this->load->view('private/view_ajax/asignacion_permisos_ajax',$data);
     }
     
@@ -262,8 +264,8 @@ class Roles extends CI_Controller
     * @param int $pk
     * @return json_encode() |set_status_header()
     */
-    public function eliminarRolUsuario($pk){
-        if($res = $this->Role->eliminarRolUsuario($pk)){                               //realiza la verificacion y eliminacion del rol
+    public function eliminarRolUsuario($pk,$role){
+        if($res = $this->Role->eliminarRolUsuario($pk,$role)){                               //realiza la verificacion y eliminacion del rol
             echo json_encode(array('msg'=> 'permiso eliminado exitosamente' )); //si el rol fue eliminado correctamenre envia el mensaje de confirmacion
         }else{                                                                  //si no fue posible eliminarlo
             echo json_encode($res);                                             //envio de la respueta

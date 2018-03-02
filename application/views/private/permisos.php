@@ -125,8 +125,8 @@
                                 <tbody>
                                 </tbody>
                             </table>
+                            
                         </div>
-                    </div>
                 </div>
                 <!-- ___________________________________________________fin espacio de trabajo____________________________________________________________________ -->
             </div>
@@ -137,6 +137,7 @@
 <!--fin del contenido de lapagina-->
 <!--contenido pies de pagina-->
 <?php require_once 'footers/foot_1.php';?>
+    
 <?php require_once 'footers/foot_3.php';?>
 <!-- fin contenido pies de pagina-->
 <!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
@@ -181,6 +182,7 @@
                     className: 'btn btn-circle btn-icon-only btn-default tooltips t-csv',
                     text: '<i class="fa fa-file-text-o"></i>',
                 },
+                      
 
             ],
             pageLength: 10,

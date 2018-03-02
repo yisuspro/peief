@@ -12,6 +12,10 @@
         $ci = &get_instance();
         $ci->load->model("Logueo");
         $id=$this->session->userdata('id');
+        $ca = &get_instance();
+        $ca->load->model("Permits");
+        $ca = &get_instance();
+        $ca->load->model("Role");
         ?>
         <meta charset="utf-8" />
         <title>

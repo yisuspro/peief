@@ -20,6 +20,7 @@ class Usuarios extends CI_Controller
         parent::__construct ();
         $this->load->model('Users');
         $this->load->model('Logueo');
+        $this->load->model('Role');
         $this->load->helper('login_rules');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -280,6 +281,7 @@ class Usuarios extends CI_Controller
     */
     public function AsignarRol($doc){
         $data['id'] =$doc;
+        $data['tabla']=$this->Role->listar();
         $this->load->view('private/view_ajax/asignacion_roles_ajax',$data);
     }
     

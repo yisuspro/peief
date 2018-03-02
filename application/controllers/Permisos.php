@@ -41,7 +41,8 @@ class Permisos extends CI_Controller{
     * @return view ()
     */
     public function asignacionPermisos(){
-        $this->load->view('private/view_ajax/asignacion_permisos_ajax');
+       
+        $this->load->view('private/view_ajax/asignacion_permisos_ajax',$dato);
     }
     
     /**
@@ -59,7 +60,7 @@ class Permisos extends CI_Controller{
                 $r->PRMS_name,
                 $r->PRMS_shortname,
                 $r->PRMS_description,
-                '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar permiso" id="'.$r->PRMS_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar permiso" id="'.$r->PRMS_PK.'" value="eliminar" >',
+                '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar permiso" id="'.$r->PRMS_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar permiso" id="'.$r->PRMS_PK.'" value="eliminar" > ',
             );
         }
         $output = array(                                    //creacion del vector de salida
@@ -92,8 +93,8 @@ class Permisos extends CI_Controller{
     *
     * @return json_encode() |set_status_header()
     */
-    public function eliminarPermisosRol($pk){
-        if($res = $this->Permits->eliminarPermisoRol($pk)){                               //realiza la verificacion y eliminacion del rol
+    public function eliminarPermisosRol($rol,$permiso){
+        if($res = $this->Permits->eliminarPermisoRol($rol,$permiso)){                               //realiza la verificacion y eliminacion del rol
             echo json_encode(array('msg'=> 'permiso eliminado exitosamente' )); //si el rol fue eliminado correctamenre envia el mensaje de confirmacion
         }else{                                                                  //si no fue posible eliminarlo
             echo json_encode($res);                                             //envio de la respueta
@@ -242,7 +243,7 @@ class Permisos extends CI_Controller{
                 $r->PRMS_name,
                 $r->PRMS_shortname,
                 $r->PRMS_description,
-                '<input type="button" class="btn btn-success asignar" title="Asignar rol" id="'.$r->PRMS_PK.'" value="asignar" >',
+                '<input type="button" class="btn btn-success asignar" title="Asignar rol" id="'.$r->PRMS_PK.'" value="asignar"><input type="checkbox" class="make-switch" checked data-on-color="success" data-off-color="warning">',
             );
         }
         $output = array(                                    //creacion del vector de salida

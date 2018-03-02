@@ -135,7 +135,7 @@ class Seeders extends CI_Controller{
         $this->Permits->agregarPermiso($permit);
         $permit= array(
             'PRMS_PK'           =>2,
-            'PRMS_name'         =>'unidades de aprendizaje ',
+            'PRMS_name'         =>'ver las unidades de aprendizaje ',
             'PRMS_shortname'    =>'v_learning_u',
             'PRMS_description'  =>'--',
         );

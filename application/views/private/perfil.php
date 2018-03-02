@@ -224,7 +224,7 @@
 
     <!--fin del contenido de lapagina-->
     <!--contenido pies de pagina-->
-    <?php require_once 'footers/foot_1.php';?>
+<?php require_once 'footers/foot_1.php';?>
     <!-- fin contenido pies de pagina-->
 <?php require_once 'footers/foot_3.php';?>
     <!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
