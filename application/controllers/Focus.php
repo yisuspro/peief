@@ -31,7 +31,13 @@ class Focus extends CI_Controller{
     * @return view ()
     */
     public function index(){
-        $this->load->view('private/focus');
+        $data['title']='Enfoques';
+        $this->load->view('private/heads/head_1',$data);
+        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/menus');
+        $this->load->view('private/focus', $data);    
+        $this->load->view('private/footers/foot_1');
+        $this->load->view('private/footers/foot_2');
     }
     
     /**
@@ -55,7 +61,7 @@ class Focus extends CI_Controller{
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $dato                                 //envia todos los datos de la tabla
+            "data" => $data->num_rows()>0?$dato:$data                           //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;    
@@ -121,6 +127,7 @@ class Focus extends CI_Controller{
         }
         $this->load->view('private/view_ajax/editar_focus_ajax',$dato);     //envio de la vista y los datos para la edicion de los planes
     }
+    
     /**
     * funcion para la modificacion de los datos del enfoque pedagogico
     * @param int $doc

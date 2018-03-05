@@ -1,14 +1,3 @@
-<!--titulo de la pagina-->
-<?php require_once 'heads/head_1.php'; ?> Unidades de aprendizaje
-<?php require_once 'heads/head_2.php'; ?>
-<!--titulo de la pagina fin-->
-<!--librerias extras-->
-<!--librerias extras fin-->
-<!--cabeza de pagina-->
-<?php require_once 'heads/head_3.php'; ?>
-<!--fin de cabeza-->
-<!--menu lateral-->
-<?php require_once 'heads/menus.php'; ?>
 <!--menu lateral fin-->
 <!--contenido pagina-->
 <div class="page-content-wrapper">
@@ -41,7 +30,7 @@
                                         <div class="form-wizard">
                                             <div class="form-group"><label>Nombre unidad</label>
                                                 <div class="input-group" id="LNUT_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                                    <input type="text" id="LNUT_name" name="LNUT_name" class="form-control" placeholder="Nombre" >
+                                                    <input type="text" id="LNUT_name" name="LNUT_name" class="form-control" placeholder="Nombre">
                                                 </div>
                                                 <div class="alert alert-danger invalid-feedback" id="LNUT_name_alerta" role="alert" style="display:none">
                                                     <div class="invalid-feedback">
@@ -123,19 +112,15 @@
                             </table>
                         </div>
                     </div>
-                </div>  
+                </div>
                 <!-- ___________________________________________________fin espacio de trabajo____________________________________________________________________ -->
             </div>
         </div>
     </div>
     <!-- END CONTENT BODY -->
 </div>
-<!--fin del contenido de lapagina-->
-<!--contenido pies de pagina-->
-<?php require_once 'footers/foot_1.php';?>
 <?php require_once 'footers/foot_3.php';?>
-<!-- fin contenido pies de pagina-->
-<!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
+
 <script>
     $(document).ready(function() {
         var dt;
@@ -146,16 +131,40 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?= base_url('index.php/Learning_units/listarUnidades'); ?>",
+                url: "<?= base_url(); ?>Learning_units/listarUnidades",
                 type: 'GET'
             },
 
             "scrollX": true,
             dom: 'Bfrtip',
+            language: {
+                "sProcessing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> <span class="sr-only">Procesando...</span>',
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
             buttons: [{
                     extend: 'print',
                     className: 'btn btn-circle btn-icon-only btn-default tooltips t-print',
-                    text: '<i class="fa fa-print"></i>'
+                    text: '<i class="fa fa-print" ></i>'
                 },
                 {
                     extend: 'copy',
@@ -203,27 +212,27 @@
                 alert('No se ha eliminado el usuario')
             }
         });
-        
+
         dt.on('click', '.edit', function(e) {
             e.preventDefault();
             var tr = this.id;
-            var url = 'Learning_units/editarUnidades/'+tr;
+            var url = 'Learning_units/editarUnidades/' + tr;
             $(".contentAjax").load(url);
         });
         dt.on('click', '.asignar', function(e) {
             e.preventDefault();
             var tr = this.id;
-            var url = 'Learning_units/asignarUsuarios/'+tr;
+            var url = 'Learning_units/asignarUsuarios/' + tr;
             $(".contentAjax").load(url);
         });
-        
+
         $("#archivo3").on('click', function(e) {
             e.preventDefault();
             $('#agregar').removeClass('fade');
             $('#agregar').addClass('fade-in');
             document.getElementById('agregar').style.display = 'inherit';
         });
-        
+
         $(".close").on('click', function(e) {
             e.preventDefault();
             $("#frm_agregar_unidad")[0].reset();
@@ -231,8 +240,8 @@
             $('#agregar').addClass('fade');
             document.getElementById('agregar').style.display = 'none';
         });
-        
-        
+
+
         $("#cerrar").on('click', function(e) {
             e.preventDefault();
             $("#frm_agregar_unidad")[0].reset();
@@ -240,13 +249,8 @@
             $('#agregar').addClass('fade');
             document.getElementById('agregar').style.display = 'none';
         });
-});
+    });
+
 </script>
 
 <script src="<?= base_url('assets/js/learning_units/agregar_learning_units.js')?>"></script>
-
-<!--fin scrips-->
-
-<!--scrips pie de pagina-->
-<?php require_once 'footers/foot_2.php';?>
-<!--fin scrips pie de pagina-->

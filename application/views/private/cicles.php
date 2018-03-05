@@ -1,7 +1,3 @@
-<?php require_once 'heads/head_1.php'; ?> Cursos/Ciclos
-<?php require_once 'heads/head_2.php'; ?>
-<?php require_once 'heads/head_3.php'; ?>
-<?php require_once 'heads/menus.php'; ?>
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
@@ -128,7 +124,7 @@
                 [5, 10, 25, 50, "Todo"],
             ],
             "ajax": {
-                url: "<?= base_url('index.php/Cicles/listarCicles'); ?>",
+                url: "<?= base_url(); ?>Cicles/listarCicles",
                 type: 'GET'
             },
             "scrollX": true,

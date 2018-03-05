@@ -1,16 +1,3 @@
-<!--titulo de la pagina-->
-<?php require_once 'heads/head_1.php'; ?> Perfil
-<?php require_once 'heads/head_2.php'; ?>
-<!--titulo de la pagina fin-->
-<!--librerias extras-->
-
-<!--librerias extras fin-->
-<!--cabeza de pagina-->
-<?php require_once 'heads/head_3.php'; ?>
-<!--fin de cabeza-->
-
-<!--menu lateral-->
-<?php require_once 'heads/menus.php'; ?>
 <!--menu lateral fin-->
 <!--contenido pagina-->
 <div class="page-content-wrapper">
@@ -219,21 +206,3 @@
         </div>
         <!-- END CONTENT BODY -->
     </div>
-
-
-
-    <!--fin del contenido de lapagina-->
-    <!--contenido pies de pagina-->
-<?php require_once 'footers/foot_1.php';?>
-    <!-- fin contenido pies de pagina-->
-<?php require_once 'footers/foot_3.php';?>
-    <!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
-
-
-
-
-    <!--fin scrips-->
-
-    <!--scrips pie de pagina-->
-    <?php require_once 'footers/foot_2.php';?>
-    <!--fin scrips pie de pagina-->

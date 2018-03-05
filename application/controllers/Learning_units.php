@@ -37,7 +37,14 @@ class Learning_units extends CI_Controller{
     public function index(){
         $focus= $this->Focu->listar();
         $data['focus']=$focus;
-        $this->load->view('private/learning_units',$data);
+        $data['title']='Unidades de aprendizaje';
+        $this->load->view('private/heads/head_1',$data);
+        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/menus');
+        $this->load->view('private/Learning_units', $data);    
+        $this->load->view('private/footers/foot_1');
+        $this->load->view('private/footers/foot_2');
+        
     }
 
     /**
@@ -49,7 +56,7 @@ class Learning_units extends CI_Controller{
         $draw = intval($this->input->get("draw"));          //trae las varibles draw, start, length para la creacion de la tabla
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
-        $data =$this->Learning_unit->listar();              //utiliza el metodo listar() del modelo learning_units() para traer los datos de todos las unidades
+        $data =$this->Learning_unit->listar();                                          //utiliza el metodo listar() del modelo learning_units() para traer los datos de todos las unidades
         foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
             $dato [] = array(
                 $r->LNUT_name,
@@ -62,7 +69,7 @@ class Learning_units extends CI_Controller{
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $dato,                                 //envia todos los datos de la tabla
+            "data" => $data->num_rows()>0?$dato:$data,                                 //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;                                               //salida del proceso
@@ -211,7 +218,7 @@ class Learning_units extends CI_Controller{
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $dato,                                 //envia todos los datos de la tabla
+            "data" => $data->num_rows()>0?$dato:$data,                                 //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;                                               //salida del proceso

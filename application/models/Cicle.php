@@ -89,7 +89,7 @@ class Cicle extends CI_Model {
     * @return true | false
     */
     public function listarVersionCicle($id){
-        $version= $this->db->select('*')->from('versions_plans')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->where('VRPL_FK_plans',$id);
+        $version= $this->db->select('*')->from('versions')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->where('VRPL_FK_plans',$id);
         return $version->get();
     }
     

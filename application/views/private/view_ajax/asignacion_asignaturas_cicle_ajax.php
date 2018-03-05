@@ -74,7 +74,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: '<?= base_url('index.php/Cicles/listarMateriasCicle/'.$id); ?>',
+                url: '<?= base_url('Cicles/listarMateriasCicle/'.$id); ?>',
                 type: 'GET'
             },
             "scrollX": true,
@@ -146,7 +146,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?= base_url('index.php/Cicles/listarMaterias'); ?>",
+                url: "<?= base_url('Cicles/listarMaterias'); ?>",
                 type: 'GET'
             },
             "scrollX": true,

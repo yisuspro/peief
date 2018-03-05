@@ -28,6 +28,7 @@ class login extends CI_Controller
     * @return view ()
     */
     public function index(){
+        $this->load->view('public/head');
         $this->load->view('public/login');
     }
     

@@ -18,14 +18,8 @@ class Cicles extends CI_Controller{
     */
     function __construct() {
         parent::__construct ();
-        $this->load->model('Cicle');
-        $this->load->model('Plan');
-        $this->load->model('Role');
-        $this->load->model('users');
-        $this->load->model('Logueo');
-        $this->load->helper('login_rules');
-        $this->load->helper('url');
-        $this->load->helper('form');
+        $this->load->model(['Cicle','Plan','Role','users','Logueo']);
+        $this->load->helper(['login_rules','url','form']);
     }
     
     /**
@@ -36,7 +30,13 @@ class Cicles extends CI_Controller{
     public function index(){
         $versiones = $this->Plan->listarVersionsPlans();
         $data['versiones']=$versiones;
-        $this->load->view('private/Cicles',$data);
+        $data['title']='PEIEF | Ciclos';
+        $this->load->view('private/heads/head_1',$data);
+        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/menus');
+        $this->load->view('private/Cicles', $data);    
+        $this->load->view('private/footers/foot_1');
+        $this->load->view('private/footers/foot_2');
     }
     
     /**
@@ -45,8 +45,8 @@ class Cicles extends CI_Controller{
     * @return json_encode ()
     */
     public function listarCicles(){
-        $draw = intval($this->input->get("draw"));             //trae las varibles draw, start, length para la creacion de la tabla
-        $start = intval($this->input->get("start"));
+        $draw   = intval($this->input->get("draw"));             //trae las varibles draw, start, length para la creacion de la tabla
+        $start  = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
         $data =$this->Cicle->listar();                       //utiliza el metodo listar() del modelo plan() para traer los datos de todos los planes 
         foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones

@@ -1,4 +1,3 @@
-<?php require_once 'head.php'; ?>
 <style>
     .align {
         -webkit-box-align: center;
@@ -253,6 +252,6 @@
 <br><br> <br><br> <br><br> <br><br> <br><br> <br><br>
 
    
-
-<script src="<?= base_url('./assets/js/login.js')?>"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="<?= base_url()?>assets/js/login.js"></script>
 <?php require_once 'foot.php';?>

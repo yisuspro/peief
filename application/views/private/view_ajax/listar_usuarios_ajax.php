@@ -204,7 +204,7 @@
             ],
             "ajax": {
                 async: false,
-                url: "<?php echo base_url('index.php/Usuarios/listarTabla'); ?>",
+                url: "<?php echo base_url('Usuarios/listarTabla'); ?>",
                 type: 'GET'
             },
 

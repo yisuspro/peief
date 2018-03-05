@@ -220,7 +220,7 @@
                 [5, 10, 25, 50, "Todo"],
             ],
             "ajax": {
-                url: "<?= base_url('index.php/Cicles/listarMiembrosCicles/'); ?><?php echo $CCLS_PK; ?>",
+                url: "<?= base_url('Cicles/listarMiembrosCicles/'); ?><?php echo $CCLS_PK; ?>",
                 type: 'GET'
             },
             "scrollX": true,

@@ -43,6 +43,8 @@ class Subject extends CI_Model {
     public function listar(){
         $permiso= $this->db->select('*')->from('subjects')->join('learning_units','subjects.SBJC_FK_learning_units = learning_units.LNUT_PK');
         return $permiso->get();
+
+    
     }
     
     /**

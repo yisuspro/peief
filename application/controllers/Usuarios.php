@@ -27,14 +27,7 @@ class Usuarios extends CI_Controller
         date_default_timezone_set('UTC');
     }
     
-    /**
-    * funcion para mostrar la  vista principal el cual es perfil.
-    *
-    * @return view ()
-    */
-    public function index(){
-        $this->load->view('public/registro');
-    }
+    
     
     /**
     * funcion para registrar un nuevo usuario, comprueba si los datos se encuentran llenos y si  el usuario a ingresar ya existe.
@@ -114,6 +107,7 @@ class Usuarios extends CI_Controller
     public function perfil(){
         if($this->session->userdata('logueado')){                                               //verifica si el usuario esta logueado
                 $data = array();                                                                //creacion de vector con los datos de inicio de sesion
+                $data['title'] ='Perfil';
                 $data['nombre'] = $this->session->userdata('nombre');
                 $data['id'] =$this->session->userdata('id');
                 $data['apellido']= $this ->session->userdata('apellido');
@@ -124,9 +118,15 @@ class Usuarios extends CI_Controller
                 $data['state']= $this ->session->userdata('state');
                 $data['type_identification']= $this ->session->userdata('type_identification');
                 $data['gander']= $this ->session->userdata('gander');
-                $this->load->view('private/perfil', $data);                                     //envio de vista perfil con los datos de la persona logueada
+                $this->load->view('private/heads/head_1',$data);
+                $this->load->view('private/heads/head_2');
+                $this->load->view('private/heads/menus');
+                $this->load->view('private/perfil', $data);    
+                $this->load->view('private/footers/foot_1');
+                $this->load->view('private/footers/foot_3');
+                $this->load->view('private/footers/foot_2');                            //envio de vista perfil con los datos de la persona logueada
             }else{
-                redirect('index.php/login');                                                    // si no se encuentra logueado redirecciona al login
+                redirect('login');                                                    // si no se encuentra logueado redirecciona al login
             }
     }
     
@@ -136,7 +136,13 @@ class Usuarios extends CI_Controller
     * @return  view()
     */
     public function listarUsuarios(){
-        $this->load->view('private/listar_usuarios');
+        $data['title']='Listar Usuarios';
+        $this->load->view('private/heads/head_1',$data);
+        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/menus');
+        $this->load->view('private/listar_usuarios', $data);    
+        $this->load->view('private/footers/foot_1');
+        $this->load->view('private/footers/foot_2');
     }
     /**
     * funcion para retonar la vista ajax principal donde se listan los usuarios.

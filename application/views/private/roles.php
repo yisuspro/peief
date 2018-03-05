@@ -1,14 +1,4 @@
-<!--titulo de la pagina-->
-<?php require_once 'heads/head_1.php'; ?> roles usuarios
-<?php require_once 'heads/head_2.php'; ?>
-<!--titulo de la pagina fin-->
-<!--librerias extras-->
-<!--librerias extras fin-->
-<!--cabeza de pagina-->
-<?php require_once 'heads/head_3.php'; ?>
-<!--fin de cabeza-->
-<!--menu lateral-->
-<?php require_once 'heads/menus.php'; ?>
+
 <!--menu lateral fin-->
 <!--contenido pagina-->
 <div class="page-content-wrapper">
@@ -140,9 +130,7 @@
     </div>
     <!-- END CONTENT BODY -->
 </div>
-<!--fin del contenido de lapagina-->
-<!--contenido pies de pagina-->
-<?php require_once 'footers/foot_1.php';?>
+
 <?php require_once 'footers/foot_3.php';?>
 <!-- fin contenido pies de pagina-->
 <!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
@@ -156,7 +144,7 @@
                 [5, 10, 25, 50, "Todo"],
             ],
             "ajax": {
-                url: "<?php echo base_url('index.php/Roles/listarRoles'); ?>",
+                url: "<?php echo base_url('Roles/listarRoles'); ?>",
                 type: 'GET'
             },
             "scrollX": true,
@@ -251,7 +239,4 @@
 
 </script>
 <script src="<?= base_url('assets/js/roles/agregar_roles.js')?>"></script>
-<!--fin scrips-->
-<!--scrips pie de pagina-->
-<?php require_once 'footers/foot_2.php';?>
-<!--fin scrips pie de pagina-->
+

@@ -1,7 +1,4 @@
-<?php require_once 'heads/head_1.php'; ?> Enfoques pedagogicos
-<?php require_once 'heads/head_2.php'; ?>
-<?php require_once 'heads/head_3.php'; ?>
-<?php require_once 'heads/menus.php'; ?>
+
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
@@ -107,12 +104,8 @@
     </div>
     <!-- END CONTENT BODY -->
 </div>
-<!--fin del contenido de lapagina-->
-<!--contenido pies de pagina-->
-<?php require_once 'footers/foot_1.php';?>
 <?php require_once 'footers/foot_3.php';?>
-<!-- fin contenido pies de pagina-->
-<!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
+
 <script>
     $(document).ready(function() {
         var dt;
@@ -123,7 +116,7 @@
                 [5, 10, 25, 50, "Todo"],
             ],
             "ajax": {
-                url: "<?= base_url('index.php/Focus/listarFocus'); ?>",
+                url: "<?= base_url(); ?>Focus/listarFocus",
                 type: 'GET'
             },
             "scrollX": true,
@@ -218,7 +211,3 @@
 
 </script>
 <script src="<?= base_url('assets/js/focus/agregar_focus.js')?>"></script>
-<!--fin scrips-->
-<!--scrips pie de pagina-->
-<?php require_once 'footers/foot_2.php';?>
-<!--fin scrips pie de pagina-->

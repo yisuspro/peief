@@ -34,7 +34,13 @@ class Versions extends CI_Controller{
     * @return view ()
     */
     public function index(){
-        $this->load->view('private/versions');
+        $data['title']='Versiones';
+        $this->load->view('private/heads/head_1',$data);
+        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/menus');
+        $this->load->view('private/versions', $data);    
+        $this->load->view('private/footers/foot_1');
+        $this->load->view('private/footers/foot_2');
     }
     
     /**
@@ -57,7 +63,7 @@ class Versions extends CI_Controller{
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantas versiones son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $dato                                 //envia todos los datos de la tabla
+            "data" => $data->num_rows()>0?$dato:$data,                                 //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;    

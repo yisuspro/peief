@@ -112,7 +112,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?php echo base_url('index.php/Learning_units/listarUsuarios/'.$id); ?>",
+                url: "<?php echo base_url('Learning_units/listarUsuarios/'.$id); ?>",
                 type: 'GET'
             },
             "scrollX": true,
@@ -152,7 +152,7 @@
             eliminar = confirm("Seguro desea quitar este usuario?  " + tr);
             if (eliminar) {
                 $.ajax({
-                    url: '<?= base_url('index.php/Learning_units/eliminarUsuario/') ?>' + tr,
+                    url: '<?= base_url('Learning_units/eliminarUsuario/') ?>' + tr,
                     type: 'POST',
                     data: tr,
                     success: function(data, xhr) {

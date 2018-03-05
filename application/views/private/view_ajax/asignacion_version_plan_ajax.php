@@ -74,7 +74,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: '<?= base_url('index.php/Plans/listarVersionsPlans/'.$id); ?>',
+                url: '<?= base_url('Plans/listarVersionsPlans/'.$id); ?>',
                 type: 'GET'
             },
             "scrollX": true,
@@ -146,7 +146,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?= base_url('index.php/Plans/listarVersions'); ?>",
+                url: "<?= base_url('Plans/listarVersions'); ?>",
                 type: 'GET'
             },
             "scrollX": true,

@@ -183,7 +183,7 @@ left: 21px !important;
                 $(this).toggleClass("switchOn");
                 var tr = this.id;
                 $.ajax({
-                    url: '<?= base_url('index.php/Roles/asignarRolUsuario/') ?>' + <?php echo $id;?> + '/' + tr,
+                    url: '<?= base_url('Roles/asignarRolUsuario/') ?>' + <?php echo $id;?> + '/' + tr,
                     type: 'POST',
                     data: tr,
                     success: function(data, xhr) {
@@ -207,7 +207,7 @@ left: 21px !important;
                 $(this).toggleClass("switchOn");
                 
                 $.ajax({
-                    url: '<?= base_url('index.php/Roles/eliminarRolUsuario/') ?>'+<?php echo $id;?>+'/'+tr,
+                    url: '<?= base_url('Roles/eliminarRolUsuario/') ?>'+<?php echo $id;?>+'/'+tr,
                     type: 'POST',
                     data: tr,
                     success: function(data, xhr) {

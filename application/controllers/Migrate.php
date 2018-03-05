@@ -6,9 +6,9 @@
 * 
 */
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Migrate extends CI_Controller
-{
-     /**
+class Migrate extends CI_Controller{
+    
+    /**
     * funcion para ejecutar la migracion de los usuarios.
     *
     * @return show_error() | migration()
