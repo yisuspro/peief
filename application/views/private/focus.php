@@ -148,17 +148,24 @@
                 },
 
             ],
+             columns: [{data:'FOCS_name'},
+                       {data:'FOCS_description'},
+                       {mRender: function (data, type, row) {
+                           return '<input type="button" class="btn btn-warning edit" title="Editar Enfoque" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar Enfoque"  value="eliminar" >';
+                       }
+                       }],
             pageLength: 10,
         });
 
         dt.on('click', '.remove', function(e) {
-            var tr = this.id;
-            eliminar = confirm("Seguro desea eliminar el rol" + tr);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            eliminar = confirm("Seguro desea eliminar el enfoque " + O.FOCS_name);
             if (eliminar) {
                 $.ajax({
-                    url: 'Focus/eliminarFocus/' + tr,
+                    url: 'Focus/eliminarFocus/' + O.FOCS_PK,
                     type: 'POST',
-                    data: tr,
+                    data: O.FOCS_PK,
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -176,14 +183,16 @@
         });
         dt.on('click', '.edit', function(e) {
             e.preventDefault();
-            var tr = this.id;
-            var url = 'Focus/editarFocus/' + tr;
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            var url = 'Focus/editarFocus/' + O.FOCS_PK;
             $(".contentAjax").load(url);
         });
         dt.on('click', '.asignar', function(e) {
             e.preventDefault();
-            var tr = this.id;
-            var url = 'Cicles/asignarMateria/' + tr;
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            var url = 'Cicles/asignarMateria/' + O.FOCS_PK;
             $(".contentAjax").load(url);
         });
 

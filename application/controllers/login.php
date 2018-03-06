@@ -55,8 +55,6 @@ class login extends CI_Controller
             if(!$res = $this->Logueo->login($email,$pass)){ // si el usuario y contrseña no existen o conciden 
                 echo json_encode(array('msg'=> 'Verifique sus credenciales' ));// envio de  mensaje de  error
                 $this->output->set_status_header(402);      //envio del codigo de error
-                var_dump($res);                             //envio de respuesta vector de los datos encontrados
-                exit;                                       //slida del proceso
             }else{                                          //si el email existe y conside las contraseña
                 
                 $usuario_data = array(                      //creacion de vector con todos  los datos del usuarios
@@ -75,7 +73,6 @@ class login extends CI_Controller
             );
             $this->session->set_userdata($usuario_data);    //realiza el inicio de sesion del usuario
             }
-            var_dump($res);                                 //envio del vector de respuesrta 
         }
     }
     

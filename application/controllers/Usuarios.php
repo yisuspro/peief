@@ -27,7 +27,7 @@ class Usuarios extends CI_Controller
     /**
     * funcion para registrar un nuevo usuario, comprueba si los datos se encuentran llenos y si  el usuario a ingresar ya existe.
     *
-    * @return json_encode() | var_dump() |set_status_header()
+    * @return json_encode() |set_status_header()
     */
     public function registrar(){
         $this->form_validation->set_error_delimiters('','');                                //quita los delimitadores de los errores

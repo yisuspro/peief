@@ -82,7 +82,7 @@
                         <div class="portlet-body">
                             <div class="col-md-12">
                                 <div class="actions">
-                                    <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar una unidad de aprendiz"><i class="fa fa-plus"></i> Agregar</a>
+                                    <a id="create" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar una unidad de aprendiz"><i class="fa fa-plus"></i> Agregar</a>
                                 </div>
                             </div>
                             <br>
@@ -188,17 +188,25 @@
                 },
 
             ],
+            columns: [{data:'LNUT_name'},
+                      {data:'LNUT_description'},
+                      {data:'FOCS_name'},
+                      {mRender: function (data, type, row) {
+                    return '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar unidad" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar unidad"  value="eliminar" ><input type="button" class="btn btn-info fa fa-remove asignar" title="Asignar miembros"  value="asignar" >';
+                }
+                }],
             pageLength: 10,
         });
 
         dt.on('click', '.remove', function(e) {
-            var tr = this.id;
-            eliminar = confirm("Seguro desea eliminar la unidad " + tr);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            eliminar = confirm("Seguro desea eliminar la unidad " + O.LNUT_name);
             if (eliminar) {
                 $.ajax({
-                    url: 'Learning_units/eliminarUnidades/' + tr,
+                    url: 'Learning_units/eliminarUnidades/' + O.LNUT_PK,
                     type: 'POST',
-                    data: tr,
+                    data: O.LNUT_PK,
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -215,18 +223,20 @@
 
         dt.on('click', '.edit', function(e) {
             e.preventDefault();
-            var tr = this.id;
-            var url = 'Learning_units/editarUnidades/' + tr;
+           $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            var url = 'Learning_units/editarUnidades/' + O.LNUT_PK;
             $(".contentAjax").load(url);
         });
         dt.on('click', '.asignar', function(e) {
             e.preventDefault();
-            var tr = this.id;
-            var url = 'Learning_units/asignarUsuarios/' + tr;
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            var url = 'Learning_units/asignarUsuarios/' + O.LNUT_PK;
             $(".contentAjax").load(url);
         });
 
-        $("#archivo3").on('click', function(e) {
+        $("#create").on('click', function(e) {
             e.preventDefault();
             $('#agregar').removeClass('fade');
             $('#agregar').addClass('fade-in');

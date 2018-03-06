@@ -93,18 +93,9 @@ class Subjects extends CI_Controller{
     *@return  view()
     */
     public function editarAsignatura($doc){
-        $data=$this->Subject->datosAsignatura($doc);          //verifica por medio del metodo datosUnidad() del modelo Learning_unit() si la unidad existe y trae todos los datos pertinentes al usuario       
-        foreach($data->result() as $r) {                      //ciclop para  convertir los datos en un arreglo
-            $dato = array();                                  //creacion del vector que contendra los datos de la unidad
-            $dato['SBJC_PK'] = $r->SBJC_PK;
-            $dato['SBJC_name'] = $r->SBJC_name;
-            $dato['SBJC_FK_learning_units']= $r->SBJC_FK_learning_units;
-            $dato['SBJC_description']= $r->SBJC_description;
-            $dato['LNUT_name']= $r->LNUT_name;
-            
-        }
-        $dato['unidades']  = $this->Learning_unit->listar(); //trae los datos de enfoques para agregar a la  unidad
-        $this->load->view('private/view_ajax/editar_asignatura_ajax',$dato);//envio de la vista y los datos para la edicion de los usuarios
+        $data=$this->Subject->datosAsignatura($doc)->result_array()[0];          //verifica por medio del metodo datosUnidad() del modelo Learning_unit() si la unidad existe y trae todos los datos pertinentes al usuario       
+        $data['unidades']  = $this->Learning_unit->listar(); //trae los datos de enfoques para agregar a la  unidad
+        $this->load->view('private/view_ajax/editar_asignatura_ajax',$data);//envio de la vista y los datos para la edicion de los usuarios
     }
     
     /**

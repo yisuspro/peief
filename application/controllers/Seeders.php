@@ -19,16 +19,7 @@ class Seeders extends CI_Controller{
     */
     function __construct() {
         parent::__construct ();
-        $this->load->model('Permits');
-        $this->load->model('Logueo');
-        $this->load->model('Cicle');
-        $this->load->model('Focu');
-        $this->load->model('Learning_unit');
-        $this->load->model('Plan');
-        $this->load->model('Role');
-        $this->load->model('Subject');
-        $this->load->model('Users');
-        $this->load->model('version');
+        $this->load->model('Permits','Logueo','Cicle','Focu','Learning_unit','Plan','Role','Subject','Users','version');
     }
     
     /**

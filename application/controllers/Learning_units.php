@@ -50,19 +50,11 @@ class Learning_units extends CI_Controller{
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
         $data =$this->Learning_unit->listar();                                          //utiliza el metodo listar() del modelo learning_units() para traer los datos de todos las unidades
-        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
-            $dato [] = array(
-                $r->LNUT_name,
-                $r->LNUT_description,
-                $r->FOCS_name,
-                '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar unidad" id="'.$r->LNUT_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar unidad" id="'.$r->LNUT_PK.'" value="eliminar" ><input type="button" class="btn btn-info fa fa-remove asignar" title="Asignar miembros" id="'.$r->LNUT_PK.'" value="asignar" >',
-            );
-        }
         $output = array(                                    //creacion del vector de salida
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $data->num_rows()>0?$dato:$data,                                 //envia todos los datos de la tabla
+            "data" => $data->result_array()                                 //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;                                               //salida del proceso
@@ -111,15 +103,13 @@ class Learning_units extends CI_Controller{
             echo json_encode($errors);                                              //envio del vector de errores
             $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
         }else{                                                                      //si las reglas fueron cumplidas
-            $name           = $this->input->post('LNUT_name');                      //obtencion de todos los datos del formulario                    
-            $focus          = $this->input->post('LNUT_FK_focus');
-            $description    = $this->input->post('LNUT_description');
+            //obtencion de todos los datos del formulario                    
             $data= array(                                                           //creacion del vector de los nuevos datos de la unidada
-                'LNUT_name'                     =>  $name,
-                'LNUT_FK_focus'                 =>  $focus,
-                'LNUT_description'              =>  $description,
-                'LNUT_date_update'=>date("Y-m-d H:i:s"),
-                'LNUT_PK_update'=>$this->session->userdata('id'),
+                'LNUT_name'         =>  $this->input->post('LNUT_name'),
+                'LNUT_FK_focus'     =>  $this->input->post('LNUT_FK_focus'),
+                'LNUT_description'  =>  $this->input->post('LNUT_description'),
+                'LNUT_date_update'  =>  date("Y-m-d H:i:s"),
+                'LNUT_PK_update'    =>  $this->session->userdata('id'),
                 
             );
             if(!$this->Learning_unit->modificarUnidad($doc,$data)){                 //utilizacion del metodo modificarUnidad() del modelo learning_unit() para la modificacion de la unidad  enviando el id y los datos pertinentes
@@ -146,13 +136,11 @@ class Learning_units extends CI_Controller{
             echo json_encode($errors);                                              //envio del vector de errores
             $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
         }else{                                                                      //si las reglas fueron cumplidas
-            $name           = $this->input->post('LNUT_name');                      //obtencion de todos los datos del formulario                    
-            $focus          = $this->input->post('LNUT_FK_focus');
-            $description    = $this->input->post('LNUT_description');
+             //obtencion de todos los datos del formulario                    
             $data= array(                                                           //creacion del vector de los nuevos datos de la unidad
-                'LNUT_name'       =>  $name,
-                'LNUT_FK_focus'   =>  $focus,
-                'LNUT_description'=>  $description,
+                'LNUT_name'       =>  $this->input->post('LNUT_name'),
+                'LNUT_FK_focus'   =>  $this->input->post('LNUT_FK_focus'),
+                'LNUT_description'=>  $this->input->post('LNUT_description'),
                 'LNUT_date_create'=>  date("Y-m-d H:i:s"),
                 'LNUT_PK_create'  =>  $this->session->userdata('id'),
                 'LNUT_date_update'=>  date("Y-m-d H:i:s"),
@@ -230,24 +218,21 @@ class Learning_units extends CI_Controller{
         $unit       = $this->input->post('USLE_FK_learning_units');            //obtencion de todos los datos del formulario
         $doc        = $this->input->post('USLE_FK_users');                     //obtencion de todos los datos del formulario
         $role       = $this->input->post('USLE_FK_roles');                     //obtencion de todos los datos del formulario
-        if($user = $this->Users->verificarUsuarioDoc($doc)){
-            foreach ($user->result() as $r){
-                $hola=$r->USER_PK;
-            }
-            if($this->Learning_unit->verificarUsuario($unit,$hola)){            //verifica si el miembro ya existe en el curso
-                echo json_encode($this->Learning_unit->verificarUsuario($unit,$hola));
+        if($user = $this->Users->verificarUsuarioDoc($doc)->result_array()[0]){
+            if($this->Learning_unit->verificarUsuario($unit,$user["USER_PK"])){            //verifica si el miembro ya existe en el curso
+                echo json_encode($this->Learning_unit->verificarUsuario($unit,$user["USER_PK"]));
                 $this->output->set_status_header(403);                          //envio de  estatus de error;
                 exit;
             }
         }
         $data   = array(                                                    //creacion de arreglo para la insercion de datos
-            'USLE_FK_users'         =>  $hola,
-            'USLE_FK_learning_units'        =>  $unit,
-            'USLE_FK_roles'         =>  $role,
-            'USLE_date_create'      =>  date("Y-m-d H:i:s"),
-            'USLE_date_update'      =>  date("Y-m-d H:i:s"),
-            'USLE_PK_create'        =>  $this->session->userdata('id'),
-            'USLE_PK_update'        =>  $this->session->userdata('id'),
+            'USLE_FK_users'             =>  $user["USER_PK"],
+            'USLE_FK_learning_units'    =>  $unit,
+            'USLE_FK_roles'             =>  $role,
+            'USLE_date_create'          =>  date("Y-m-d H:i:s"),
+            'USLE_date_update'          =>  date("Y-m-d H:i:s"),
+            'USLE_PK_create'            =>  $this->session->userdata('id'),
+            'USLE_PK_update'            =>  $this->session->userdata('id'),
         );
         
         if(!$this->Learning_unit->agregarUsuario($data)){                      //utilizacion del metodo agregarMiembroCicle() del modelo Cicle() para la agregacion de un nuevos miembros al curso
