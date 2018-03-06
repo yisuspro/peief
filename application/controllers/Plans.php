@@ -75,9 +75,9 @@ class Plans extends CI_Controller
             echo json_encode($errors);                          //envio del vector de errores
             $this->output->set_status_header(402);              //envio del estatus del error en este caso 402
         }else{                                                  //si las reglas fueron cumplidas
-            $name = $this->input->post('PLAN_name');            //obtencion de todos los datos del formulario
+            //obtencion de todos los datos del formulario
             $data= array(                                       //creacion del vector de los nuevos datos del plan
-                'PLAN_name' =>  $name,
+                'PLAN_name' =>  $this->input->post('PLAN_name'),
             );
             if(!$this->Plan->agregarPlan($data)){               //utilizacion del metodo agregarPlan() del modelo Plan() para la agregacion de un nuevo plan los datos pertinentes
                 echo "error";                                   // en caso de  fallar envia un mensaje de
@@ -106,7 +106,7 @@ class Plans extends CI_Controller
     * @return view () | $datos
     */
     public function editarPlan($pk){
-         $data=$this->Plan->datosPlan($pk)->result_array()[0];                             //verifica por medio del metodo datosPlan() del modelo Plan() si el usuario existe ytrae todos los datos pertinentes al usuario 
+        $data=$this->Plan->datosPlan($pk)->result_array()[0];          //verifica por medio del metodo datosPlan() del modelo Plan() si el usuario existe ytrae todos los datos pertinentes al usuario 
         $this->load->view('private/view_ajax/editar_plan_ajax',$data);  //envio de la vista y los datos para la edicion de los planes
     }
     /**
@@ -125,9 +125,9 @@ class Plans extends CI_Controller
             echo json_encode($errors);                                   //envio del vector de errores
             $this->output->set_status_header(402);                       //envio del estatus del error en este caso 402
         }else{                                                           //si las reglas fueron cumplidas
-            $name = $this->input->post('PLAN_name');                     //obtencion de todos los datos del formulario
+                               //obtencion de todos los datos del formulario
             $data = array(                                               //creacion del vector de los nuevos datos del plan
-                'PLAN_name' =>  $name,
+                'PLAN_name' =>  $this->input->post('PLAN_name'),
             );
             if(!$this->Plan->modificarPlan($doc,$data)){                 //utilizacion del metodo modificarPlan() del modelo Plan() para la modificacion del plan  enviando el id y los datos pertinentes
                 echo "error";                                            //en caso de  fallar envia un mensaje de error

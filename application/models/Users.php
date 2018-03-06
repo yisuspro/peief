@@ -27,12 +27,11 @@ class Users extends CI_Model {
     * @return row() | false
     */
     public function verificarUsuario($doc){
-        $rep=$this->db->select('USER_PK')->get_where('users',array('USER_PK' => $doc), 1);
-        if (!$rep->result()){
-            return FALSE;
-        }
-        $consulta =$rep;
-        return $consulta->row();
+        $this->db->where('USER_PK',$doc);
+        $query=$this->db->get('users');
+        
+        if( $query->num_rows()==1) return $query->row();
+        else   return false;
     }
     
     /**

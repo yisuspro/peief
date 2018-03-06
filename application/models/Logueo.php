@@ -45,4 +45,8 @@ class Logueo extends CI_Model {
         }
         
     }
+    
+
+    
+    
 }

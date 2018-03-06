@@ -45,7 +45,6 @@ class Permisos extends CI_Controller{
     * @return view ()
     */
     public function asignacionPermisos(){
-       
         $this->load->view('private/view_ajax/asignacion_permisos_ajax');
     }
     
@@ -120,23 +119,21 @@ class Permisos extends CI_Controller{
         $this->form_validation->set_rules($rules);                                  //ejecuta las reglas del fromulario 
         if($this->form_validation->run() === FALSE){                                //si se incumple algunade las regla
             $errors = array(                                                        //creacion del vector de los errores
-                'PRMS_name'       => form_error('PRMS_name'),
+                'PRMS_name'         => form_error('PRMS_name'),
                 'PRMS_shortname'    => form_error('PRMS_shortname'),
-                'PRMS_description'=> form_error('PRMS_description'),
+                'PRMS_description'  => form_error('PRMS_description'),
                 
             );
             echo json_encode($errors);                                              //envio del vector de errores
             $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
         }else{                                                                      //si las reglas fueron cumplidas
-            $name           = $this->input->post('PRMS_name');                      //obtencion de todos los datos del formulario                    
-            $shortname      = $this->input->post('PRMS_shortname');
-            $description    = $this->input->post('PRMS_description');
+            //obtencion de todos los datos del formulario                    
             $data= array(                                                           //creacion del vector de los nuevos datos del rol
-                'PRMS_name'                     =>  $name,
-                'PRMS_shortname'                =>  $shortname,
-                'PRMS_description'              =>  $description,
-                'PRMS_date_update'=>date("Y-m-d H:i:s"),
-                'PRMS_PK_update'=>$this->session->userdata('id'),
+                'PRMS_name'         =>  $this->input->post('PRMS_name'),
+                'PRMS_shortname'    =>  $$this->input->post('PRMS_shortname'),
+                'PRMS_description'  =>  $this->input->post('PRMS_description'),
+                'PRMS_date_update'  =>  date("Y-m-d H:i:s"),
+                'PRMS_PK_update'    =>  $this->session->userdata('id'),
                 
             );
             if(!$this->Permits->modificarPermisos($doc,$data)){                      //utilizacion del metodo modificarRol() del modelo role() para la modificacion del rol  enviando el id y los datos pertinentes
@@ -168,17 +165,15 @@ class Permisos extends CI_Controller{
             echo json_encode($errors);                                              //envio del vector de errores
             $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
         }else{                                                                      //si las reglas fueron cumplidas
-            $name           = $this->input->post('PRMS_name');                      //obtencion de todos los datos del formulario                    
-            $shortname      = $this->input->post('PRMS_shortname');
-            $description    = $this->input->post('PRMS_description');
+            //obtencion de todos los datos del formulario                    
             $data= array(                                                           //creacion del vector de los nuevos datos del role
-                'PRMS_name'                     =>  $name,
-                'PRMS_shortname'                =>  $shortname,
-                'PRMS_description'              =>  $description,
-                'PRMS_date_create'=>date("Y-m-d H:i:s"),
-                'PRMS_date_update'=>date("Y-m-d H:i:s"),
-                'PRMS_PK_create'=>$this->session->userdata('id'),
-                'PRMS_PK_update'=>$this->session->userdata('id'),
+                'PRMS_name'         =>  $this->input->post('PRMS_name'),
+                'PRMS_shortname'    =>  $this->input->post('PRMS_shortname'),
+                'PRMS_description'  =>  $this->input->post('PRMS_description'),
+                'PRMS_date_create'  =>  date("Y-m-d H:i:s"),
+                'PRMS_date_update'  =>  date("Y-m-d H:i:s"),
+                'PRMS_PK_create'    =>  $this->session->userdata('id'),
+                'PRMS_PK_update'    =>  $this->session->userdata('id'),
                 
             );
             if(!$this->Permits->agregarPermiso($data)){                                    //utilizacion del metodo modificarRol() del modelo Role() para la modificacion del usuario  enviando el id y los datos pertinentes

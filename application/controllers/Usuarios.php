@@ -35,24 +35,21 @@ class Usuarios extends CI_Controller
         $this->form_validation->set_rules($rules);                                          //valida las reglas del formulario
         if($this->form_validation->run() === FALSE){                                        //si las reglas son incumplidas
             $errors = array(                                                                //creacion del vector de errores    
-                'USER_identification'=> form_error('USER_identification'),
-                'USER_names'    => form_error('USER_names'),
-                'USER_lastnames'=> form_error('USER_lastnames'),
-                'USER_email'    => form_error('USER_email'),
-                'USER_address'  => form_error('USER_address'),
-                'USER_telephone'=> form_error('USER_telephone'),
-                'USER_password' => form_error('USER_password'),
+                'USER_identification'   => form_error('USER_identification'),
+                'USER_names'            => form_error('USER_names'),
+                'USER_lastnames'        => form_error('USER_lastnames'),
+                'USER_email'            => form_error('USER_email'),
+                'USER_address'          => form_error('USER_address'),
+                'USER_telephone'        => form_error('USER_telephone'),
+                'USER_password'         => form_error('USER_password'),
             );
             echo json_encode($errors);                                                      //envio de los errores 
             $this->output->set_status_header(402);                                          //envio del codigo de error   en este caso 402
-        }else{                                                                              //si  las reglas no son incumplidas
-                                            
-            $doc =$this->input->post('USER_PK');                                            //obtencion del documento del usuario
-            if($res = $this->Users->verificarUsuario($doc)){                                //comprueba si el usuario existe en la base de datos
+        }else{                                                                              //si  las reglas no son incumplidas               
+            $doc =$this->input->post('USER_identification');                                            //obtencion del documento del usuario
+            if($this->Users->verificarUsuario($doc)){                                   //comprueba si el usuario existe en la base de datos
                     echo json_encode(array('msg'=> 'Usuario existente' ));                  //si existe envia el emnsaje de usuario existente
                     $this->output->set_status_header(401);                                  //envio de estatus de error en este caso 401
-                    var_dump($res);                                                         //envio de la respuesta 
-                    exit;                                                                   //salida del proceso
             }else{                                                                          // si el usuario no existe
                     // obtencion de todos los datos del formulario
                     $data= array(
@@ -75,12 +72,10 @@ class Usuarios extends CI_Controller
                     );
                 
                     if(!$this->Users->registrar($data)){                                    //registro del usuarios en caso de erro envia mensaje de error si no confirma la accion de gardar
-                        echo "error";
+                        echo json_encode(array('msg'=> 'usuario guardado' ));
                     }
                     echo json_encode(array('msg'=> 'usuario guardado' ));
             }
-            
-            var_dump($res);
         }
     }
     
@@ -181,7 +176,7 @@ class Usuarios extends CI_Controller
     *@return  view()
     */
     public function editarUsuario($doc){
-        $data=$this->Users->datosUsuario($doc)->result_array()[0];                                         //verifica por medio del metodo datosUsiarios() del modelo users() si el usuario existe ytae todos los datos pertinentes al usuario 
+        $data=$this->Users->datosUsuario($doc)->result_array()[0];                       //verifica por medio del metodo datosUsiarios() del modelo users() si el usuario existe ytae todos los datos pertinentes al usuario 
         $this->load->view('private/view_ajax/editar_usuario_ajax',$data);               //envio de la vista y los datos para la edicion de los usuarios
     }
     

@@ -104,7 +104,6 @@
                                                                 <option value="2">T.I.</option>
                                                                 <option value="3">Registro</option>
                                                                 <option value="4">pasaporte</option>
-                                                                <option value="5">Option 5</option>
                                                             </select>
                                                             </div>
                                                             <br>
@@ -333,7 +332,20 @@
         });
         
 
-        
+        $("#frm_agregar_usuario").submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr("action"),
+                type: $(this).attr("method"),
+				data: $(this).serialize(),
+                contentType: false,
+                processData: false,
+                cache: false,
+                success:function(data){
+                }
+            });
+ 
+        });
         
         
         $(".close").on('click', function(e) {

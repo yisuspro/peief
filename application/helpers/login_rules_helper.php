@@ -42,12 +42,15 @@ function getRulesLogin(){
 *@return array ()
 *
 */
+
+
+
 function getRulesAddUsers(){
     return array(
         array(
             'field' =>'USER_identification',
             'label' =>'USER_identification',
-            'rules' =>'required',                              //campo requerido 
+            'rules' =>'required',         //campo requerido 
             'errors'=> array(       
                 'required' => 'numero de documento necesario', //mensajes de error         
             ),

@@ -128,7 +128,6 @@ class Roles extends CI_Controller
     public function asignarPermiso($PK){
         $data['id'] =$PK;
         $data['tabla']=$this->Permits->listar();
-        
         $this->load->view('private/view_ajax/asignacion_permisos_ajax',$data);
     }
     
@@ -143,9 +142,9 @@ class Roles extends CI_Controller
         $this->form_validation->set_rules($rules);                                  //ejecuta las reglas del fromulario 
         if($this->form_validation->run() === FALSE){                                //si se incumple algunade las regla
             $errors = array(                                                        //creacion del vector de los errores
-                'ROLE_name'       => form_error('ROLE_name'),
+                'ROLE_name'         => form_error('ROLE_name'),
                 'ROLE_shortname'    => form_error('ROLE_shortname'),
-                'ROLE_description'=> form_error('ROLE_description'),
+                'ROLE_description'  => form_error('ROLE_description'),
                 
             );
             echo json_encode($errors);                                              //envio del vector de errores
@@ -180,8 +179,8 @@ class Roles extends CI_Controller
             $this->output->set_status_header(402);            //envia el error en caso de existir
         }else{
             $data= array(
-                'USRL_FK_users'            =>  $usuario,      //crea el vector con los datos
-                'USRL_FK_roles'            =>  $rol,
+                'USRL_FK_users'     =>  $usuario,      //crea el vector con los datos
+                'USRL_FK_roles'     =>  $rol,
             );
             if ($this->Role->asignarRol($data)){              //envia y valida la insercion del nuevo permiso en el rol 
                 return true;
