@@ -19,11 +19,8 @@ class Permisos extends CI_Controller{
     */
     function __construct() {
         parent::__construct ();
-        $this->load->model('Permits');
-        $this->load->model('Logueo');
-        $this->load->helper('login_rules');
-        $this->load->helper('url');
-        $this->load->helper('form');
+        $this->load->model(['Permits','Logueo']);
+        $this->load->helper(['login_rules','url','form']);        
     }
     
     /**
@@ -33,10 +30,11 @@ class Permisos extends CI_Controller{
     */
     public function index(){
         $data['title'] ='Permisos';
+        
         $this->load->view('private/heads/head_1',$data);
         $this->load->view('private/heads/head_2');
         $this->load->view('private/heads/menus');
-        $this->load->view('private/permisos', $data);    
+        $this->load->view('private/permisos',$data);    
         $this->load->view('private/footers/foot_1');
         $this->load->view('private/footers/foot_2');     
     }       
@@ -48,7 +46,7 @@ class Permisos extends CI_Controller{
     */
     public function asignacionPermisos(){
        
-        $this->load->view('private/view_ajax/asignacion_permisos_ajax',$dato);
+        $this->load->view('private/view_ajax/asignacion_permisos_ajax');
     }
     
     /**
@@ -66,7 +64,7 @@ class Permisos extends CI_Controller{
                 $r->PRMS_name,
                 $r->PRMS_shortname,
                 $r->PRMS_description,
-                '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar permiso" id="'.$r->PRMS_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar permiso" id="'.$r->PRMS_PK.'" value="eliminar" > ',
+                $r->PRMS_PK
             );
         }
         $output = array(                                    //creacion del vector de salida

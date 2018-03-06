@@ -1,6 +1,3 @@
-
-<!--menu lateral fin-->
-<!--contenido pagina-->
 <div class="page-content-wrapper">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
@@ -13,8 +10,7 @@
         <!-- END PAGE HEADER-->
         <div class="row">
             <div class="contentAjax">
-                <!--_________________________________________________espacio de trabajo______________________________________________________________________________________________________-->
-                
+                <!-- WORK SPACE -->
                 <div class="col-md-12">
                     <div class="portlet light portlet-fit  calendar">
                         <div class="portlet-title">
@@ -23,7 +19,38 @@
                                 <span class="caption-subject font-green sbold uppercase">ROLES</span>
                             </div>
                         </div>
-                        <!-- Modal -->
+                        <div class="col-md-12">
+                            <div class="actions">
+                                <a id="create" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un rol"><i class="fa fa-plus"></i> Agregar</a>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="portlet-body">
+                            <table id="sample_1" class="table table-striped table-bordered table-hover dt-responsive" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Rol</th>
+                                        <th>Nombre corto</th>
+                                        <th>Descripcion</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Rol</th>
+                                        <th>Nombre corto</th>
+                                        <th>Descripcion</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- MODAL ADD ROL-->
                         <div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-hidden="true" style="display:none">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
@@ -64,12 +91,10 @@
                                                             <?= form_error ('ROLE_shortname') ?>
                                                         </div>
                                                     </div>
-                                                    
-                                                    
 
                                                     <label>Descripcion</label>
                                                     <div class="input-group" id="ROLE_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <input type="text" id="ROLE_description" name="ROLE_description" class="form-control" placeholder="Dscripcion">
+                                                        <input type="text" id="ROLE_description" name="ROLE_description" class="form-control" placeholder="Descripcion">
                                                     </div>
                                                     <div class="alert alert-danger invalid-feedback" id="ROLE_description_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
@@ -91,38 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End Modal -->
-                        <div class="col-md-12">
-                            <div class="actions">
-                                <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un rol"><i class="fa fa-plus"></i> Agregar</a>
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="portlet-body">
-                            <table id="sample_1" class="table table-striped table-bordered table-hover dt-responsive" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Rol</th>
-                                        <th>Nombre corto</th>
-                                        <th>Descripcion</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Rol</th>
-                                        <th>Nombre corto</th>
-                                        <th>Descripcion</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                        <!-- END MODAL -->
                 </div>
                 <!-- ________________________________________________________________fin espacio de trabajo_______________________________________________________ -->
             </div>
@@ -144,7 +138,7 @@
                 [5, 10, 25, 50, "Todo"],
             ],
             "ajax": {
-                url: "<?php echo base_url('Roles/listarRoles'); ?>",
+                url: "<?php echo base_url(); ?>Roles/listarRoles",
                 type: 'GET'
             },
             "scrollX": true,
@@ -176,17 +170,23 @@
                 },
 
             ],
+            columns: [{},{},{},
+                {mRender: function (data, type, row) {
+                    return '<input type="button" class="btn btn-warning edit" title="Editar rol"  value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar rol" value="eliminar" ><input type="button" class="btn btn-info asignar" title="asignar permisos"  value="permisos">';
+                }
+                }],
             pageLength: 10,
         });
 
         dt.on('click', '.remove', function(e) {
-            var tr = this.id;
-            eliminar = confirm("Seguro desea eliminar el rol" + tr);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            eliminar = confirm("Seguro desea eliminar el rol " + O[0]);
             if (eliminar) {
                 $.ajax({
-                    url: 'Roles/eliminarRoles/' + tr,
+                    url: 'Roles/eliminarRoles/' + O[3],
                     type: 'POST',
-                    data: tr,
+                    data: O[3],
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -202,20 +202,36 @@
             }
 
         });
+        
         dt.on('click', '.edit', function(e) {
-            e.preventDefault();
-            var tr = this.id;
-            var url = 'Roles/editarRol/' + tr;
-            $(".contentAjax").load(url);
-        });
-        dt.on('click', '.asignar', function(e) {
-            e.preventDefault();
-            var tr = this.id;
-            var url = 'Roles/asignarPermiso/' + tr;
-            $(".contentAjax").load(url);
-        });
+                e.preventDefault();
+                $tr = $(this).closest('tr');
+                var O = dt.DataTable().row($tr).data();
+				$.ajax({
+					type: "GET",
+                    url: '',
+                    dataType: "html",
+                }).done(function (data) {
+					route = 'Roles/editarRol/'+O[3];
+					$(".contentAjax").load(route);
+                });
+            });
+        
+        dt.on('click', '.asignar', function (e) {
+                e.preventDefault();
+                $tr = $(this).closest('tr');
+                var O = dt.DataTable().row($tr).data();
+                $.ajax({
+                    type: "GET",
+                    url: '',
+                    dataType: "html",
+                }).done(function (data) {
+                    route = 'Roles/asignarPermiso/'+O[3];
+					$(".contentAjax").load(route);
+                });
+            });
 
-        $("#archivo3").on('click', function(e) {
+        $("#create").on('click', function(e) {
             e.preventDefault();
             $('#agregar').removeClass('fade');
             $('#agregar').addClass('fade-in');

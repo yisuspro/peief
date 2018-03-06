@@ -11,9 +11,52 @@
         <!-- END PAGE HEADER-->
         <div class="row">
             <div class="contentAjax">
-                <!-- _________________________________________________________________espacio de trabajo ______________________________________________________________________________________ -->
+                <!-- WORK SPACE-->
                 <div class="col-md-12">
-                    <!-- Modal -->
+                    
+                    <div class="portlet light portlet-fit  calendar">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-language font-green"></i>
+                                <span class="caption-subject font-green sbold uppercase">PERMISOS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="portlet-body">
+                            <div class="col-md-12">
+                            <div class="actions">
+                                <a id="create" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un permiso"><i class="fa fa-plus"></i> Agregar</a>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                            <table id="sample_1" class="table table-striped table-bordered table-hover dt-responsive" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Permiso</th>
+                                        <th>Nombre corto</th>
+                                        <th>Descripcion</th>
+                                        <th>Acciones</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Permiso</th>
+                                        <th>Nombre corto</th>
+                                        <th>Descripcion</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                </div>
+                    <!-- MODAL ADD PERMMISION -->
                         <div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-hidden="true" style="display:none">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
@@ -50,7 +93,7 @@
                                                     
                                                     <label>Descripcion</label>
                                                     <div class="input-group" id="PRMS_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                                        <input type="text" id="PRMS_description" name="PRMS_description" class="form-control" placeholder="Dscripcion">
+                                                        <input type="text" id="PRMS_description" name="PRMS_description" class="form-control" placeholder="Descripcion">
                                                     </div>
                                                     <div class="alert alert-danger invalid-feedback" id="PRMS_description_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
@@ -74,50 +117,9 @@
                             </div>
                         </div>
                     <!-- End Modal -->
-                    <div class="portlet light portlet-fit  calendar">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="fa fa-language font-green"></i>
-                                <span class="caption-subject font-green sbold uppercase">PERMISOS</span>
-                            </div>
-                        </div>
-                        
-                        <div class="portlet-body">
-                            <div class="col-md-12">
-                            <div class="actions">
-                                <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un permiso"><i class="fa fa-plus"></i> Agregar</a>
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                            <table id="sample_1" class="table table-striped table-bordered table-hover dt-responsive" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Permiso</th>
-                                        <th>Nombre corto</th>
-                                        <th>Descripcion</th>
-                                        <th>Acciones</th>
-
-
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Permiso</th>
-                                        <th>Nombre corto</th>
-                                        <th>Descripcion</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            
-                        </div>
-                </div>
-                <!-- ___________________________________________________fin espacio de trabajo____________________________________________________________________ -->
             </div>
+                
+                <!--END WORK SPACE-->
         </div>
     </div>
     <!-- END CONTENT BODY -->
@@ -164,20 +166,26 @@
                     className: 'btn btn-circle btn-icon-only btn-default tooltips t-csv',
                     text: '<i class="fa fa-file-text-o"></i>',
                 },
-                      
+                    
 
             ],
+            columns: [{},{},{},
+                {mRender: function (data, type, row) {
+                    return '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar permiso"  value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar permiso"  value="eliminar" >';
+                }
+                }],  
             pageLength: 10,
         });
 
         dt.on('click', '.remove', function(e) {
-            var tr = this.id;
-            eliminar = confirm("Seguro desea eliminar el usuario " + tr);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            eliminar = confirm("Seguro desea eliminar el usuario " + O[0]);
             if (eliminar) {
                 $.ajax({
-                    url: 'Permisos/eliminarPermisos/' + tr,
+                    url: 'Permisos/eliminarPermisos/' + O[3],
                     type: 'POST',
-                    data: tr,
+                    data: O[3],
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -188,18 +196,25 @@
                     },
                 });
             } else {
-                alert('No se ha eliminado el usuario')
+                alert('No se ha eliminado el permiso')
             }
         });
         
-        dt.on('click', '.edit', function(e) {
-            e.preventDefault();
-            var tr = this.id;
-            var url = 'Permisos/editarPermisos/'+tr;
-            $(".contentAjax").load(url);
-        });
+         dt.on('click', '.edit', function(e) {
+                e.preventDefault();
+                $tr = $(this).closest('tr');
+                var O = dt.DataTable().row($tr).data();
+				$.ajax({
+					type: "GET",
+                    url: '',
+                    dataType: "html",
+                }).done(function (data) {
+					route = 'Permisos/editarPermisos/'+O[3];
+					$(".contentAjax").load(route);
+                });
+            });
         
-        $("#archivo3").on('click', function(e) {
+        $("#create").on('click', function(e) {
             e.preventDefault();
             $('#agregar').removeClass('fade');
             $('#agregar').addClass('fade-in');

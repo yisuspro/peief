@@ -18,12 +18,8 @@ class Roles extends CI_Controller
     */
     function __construct() {
         parent::__construct ();
-        $this->load->model('Role');
-        $this->load->model('Permits');
-        $this->load->model('Logueo');
-        $this->load->helper('login_rules');
-        $this->load->helper('url');
-        $this->load->helper('form');
+        $this->load->model(['Role','Permits','Logueo']);
+        $this->load->helper(['login_rules','url','form']);
     }
     
     /**
@@ -32,7 +28,9 @@ class Roles extends CI_Controller
     * @return view ()
     */
     public function index(){
+        
         $data['title']='Roles';
+        
         $this->load->view('private/heads/head_1',$data);
         $this->load->view('private/heads/head_2');
         $this->load->view('private/heads/menus');
@@ -56,14 +54,14 @@ class Roles extends CI_Controller
                 $r->ROLE_name,
                 $r->ROLE_shortname,
                 $r->ROLE_description,
-                '<input type="button" class="btn btn-warning edit" title="Editar rol" id="'.$r->ROLE_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar rol" id="'.$r->ROLE_PK.'" value="eliminar" ><input type="button" class="btn btn-info asignar" title="asignar permisos" id="'.$r->ROLE_PK.'" value="permisos">',
+                $r->ROLE_PK
             );
         }
         $output = array(                                    //creacion del vector de salida
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $dato                               //envia todos los datos de la tabla
+            "data" => $data->num_rows()>0?$dato:$data       //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;                                               //salida del proceso
@@ -90,14 +88,14 @@ class Roles extends CI_Controller
     *@return  view()
     */
     public function editarRol($doc){
-        $data=$this->Role->datosRol($doc);                                         //verifica por medio del metodo datosUsiarios() del modelo users() si el usuario existe ytae todos los datos pertinentes al usuario 
-        foreach($data->result() as $r) {                                           //ciclop para  convertir los datos en un arreglo
-            $dato = array();                                                       //creacion del vector que contendra los datos del usuario
-            $dato['ROLE_PK'] = $r->ROLE_PK;
-            $dato['ROLE_name'] = $r->ROLE_name;
-            $dato['ROLE_shortname']= $r->ROLE_shortname;
-            $dato['ROLE_description']= $r->ROLE_description;
-            
+        $data=$this->Role->datosRol($doc);                      //verifica por medio del metodo datosUsiarios() del modelo users() si el usuario existe ytae todos los datos pertinentes al usuario 
+        foreach($data->result() as $r) {                        //ciclo para  convertir los datos en un arreglo
+            $dato = array(                                      //creacion del vector que contendra los datos del usuario
+                'ROLE_PK'           =>  $r->ROLE_PK,  
+                'ROLE_name'         =>  $r->ROLE_name,  
+                'ROLE_shortname'    =>  $r->ROLE_shortname,  
+                'ROLE_description'  =>  $r->ROLE_description  
+            );                                                       
         }
         $this->load->view('private/view_ajax/editar_rol_ajax',$dato);               //envio de la vista y los datos para la edicion de los usuarios
     }
@@ -121,15 +119,13 @@ class Roles extends CI_Controller
             echo json_encode($errors);                                              //envio del vector de errores
             $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
         }else{                                                                      //si las reglas fueron cumplidas
-            $name           = $this->input->post('ROLE_name');                      //obtencion de todos los datos del formulario                    
-            $shortname      = $this->input->post('ROLE_shortname');
-            $description    = $this->input->post('ROLE_description');
+            //obtencion de todos los datos del formulario                    
             $data= array(                                                           //creacion del vector de los nuevos datos del rol
-                'ROLE_name'                     =>  $name,
-                'ROLE_shortname'                =>  $shortname,
-                'ROLE_description'              =>  $description,
-                'ROLE_date_update'=>date("Y-m-d H:i:s"),
-                'ROLE_PK_update'=>$this->session->userdata('id'),
+                'ROLE_name'         =>  $this->input->post('ROLE_name'),
+                'ROLE_shortname'    =>  $this->input->post('ROLE_shortname'),
+                'ROLE_description'  =>  $this->input->post('ROLE_description'),
+                'ROLE_date_update'  =>  date("Y-m-d H:i:s"),
+                'ROLE_PK_update'    =>  $this->session->userdata('id')
                 
             );
             if(!$this->Role->modificarRol($doc,$data)){                             //utilizacion del metodo modificarRol() del modelo role() para la modificacion del rol  enviando el id y los datos pertinentes
@@ -147,6 +143,7 @@ class Roles extends CI_Controller
     public function asignarPermiso($PK){
         $data['id'] =$PK;
         $data['tabla']=$this->Permits->listar();
+        
         $this->load->view('private/view_ajax/asignacion_permisos_ajax',$data);
     }
     
@@ -169,17 +166,15 @@ class Roles extends CI_Controller
             echo json_encode($errors);                                              //envio del vector de errores
             $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
         }else{                                                                      //si las reglas fueron cumplidas
-            $name           = $this->input->post('ROLE_name');                      //obtencion de todos los datos del formulario                    
-            $shortname      = $this->input->post('ROLE_shortname');
-            $description    = $this->input->post('ROLE_description');
+            //obtencion de todos los datos del formulario                    
             $data= array(                                                           //creacion del vector de los nuevos datos del role
-                'ROLE_name'                     =>  $name,
-                'ROLE_shortname'                =>  $shortname,
-                'ROLE_description'              =>  $description,
-                'ROLE_date_create'=>date("Y-m-d H:i:s"),
-                'ROLE_date_update'=>date("Y-m-d H:i:s"),
-                'ROLE_PK_create'=>$this->session->userdata('id'),
-                'ROLE_PK_update'=>$this->session->userdata('id'),
+                'ROLE_name'         =>  $this->input->post('ROLE_name'),
+                'ROLE_shortname'    =>  $this->input->post('ROLE_shortname'),
+                'ROLE_description'  =>  $this->input->post('ROLE_description'),
+                'ROLE_date_create'  =>  date("Y-m-d H:i:s"),
+                'ROLE_date_update'  =>  date("Y-m-d H:i:s"),
+                'ROLE_PK_create'    =>  $this->session->userdata('id'),
+                'ROLE_PK_update'    =>  $this->session->userdata('id'),
                 
             );
             if(!$this->Role->agregarRol($data)){                                    //utilizacion del metodo modificarRol() del modelo Role() para la modificacion del usuario  enviando el id y los datos pertinentes
