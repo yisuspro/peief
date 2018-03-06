@@ -70,7 +70,7 @@ class login extends CI_Controller
                     'telephone'     => $res->USER_telephone,
                     'state'         => $res->STTS_state,
                     'type_identification'=> $res->TPDI_type_identification,
-                    'gander'        => $res->GNDR_gander,
+                    'gender'        => $res->GNDR_gander,
                     'logueado'      => TRUE,                //hace verdadero el inicio de sesion del usuarios en el vector de datos
             );
             $this->session->set_userdata($usuario_data);    //realiza el inicio de sesion del usuario

@@ -126,7 +126,7 @@
                                                 <div class="list-item-content">
                                                     GENERO
                                                     <p>
-                                                        <?php echo $gander; ?>
+                                                        <?php echo $gender; ?>
                                                     </p>
                                                 </div>
                                             </li>

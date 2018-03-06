@@ -21,6 +21,48 @@
                         </div>
                         <div class="portlet-body">
                             <div class="col-md-12">
+                                <div class="actions">
+                                    <a id="create" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un usuario"><i class="fa fa-plus"></i> Agregar</a>
+                                </div>
+                            </div>
+                            <br><br><br>
+                            <table id="sample_1" class="table table-striped table-bordered table-hover dt-responsive" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Documento</th>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>correo</th>
+                                        <th>Telefono</th>
+                                        <th>Direccion</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Documento</th>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Correos</th>
+                                        <th>Telefono</th>
+                                        <th>Direccion</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+
+
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!--Modal Agregar Usuario -->
+                        <div class="col-md-12">
                                 <!-- Modal -->
                                 <div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-hidden="true" style="display:none">
                                     <div class="modal-dialog">
@@ -32,7 +74,7 @@
                                             </div>
                                             <div class="form-group" id="alerta" style="display:none">
                                                 <div class="alert alert-danger" role="alert">
-                                                    El usuario ya existe porfavr comprobar los datos
+                                                    El usuario ya existe porfavor comprobar los datos
                                                 </div>
                                             </div>
                                             <div class="modal-body">
@@ -158,46 +200,9 @@
                                 </div>
                                 <!-- End Modal -->
                             </div>
-                            <div class="col-md-12">
-                                <div class="actions">
-                                    <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un usuario"><i class="fa fa-plus"></i> Agregar</a>
-                                </div>
-                            </div>
-                            <br><br><br>
-                            <table id="sample_1" class="table table-striped table-bordered table-hover dt-responsive" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Documento</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>correo</th>
-                                        <th>Telefono</th>
-                                        <th>Direccion</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-
-
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Documento</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Correos</th>
-                                        <th>Telefono</th>
-                                        <th>Direccion</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-
-
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                        </div>
+                        
+                    
+                        
                     </div>
                 </div>
                 <!-- fin espacio de trabajo_______________________________________________________________________________________________________________________ -->
@@ -217,7 +222,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?php echo base_url('Usuarios/listarTabla'); ?>",
+                url: "<?php echo base_url(); ?>Usuarios/listarTabla",
                 type: 'GET'
             },
 
@@ -250,23 +255,29 @@
                 },
 
             ],
+            columns: [{},{},{},{},{},{},{},
+                {mRender: function (data, type, row) {
+                    return '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar un usuario"  value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar un usuario" value="eliminar" ><input type="button" class="btn btn-info fa fa-remove asignar" title="Asignar un rol"  value="asignar" >';
+                }
+                }],
             pageLength: 10,
         });
 
         dt.on('click', '.remove', function(e) {
-            var tr = this.id;
-            eliminar = confirm("Seguro desea eliminar el usuario " + tr);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            eliminar = confirm("Seguro desea eliminar el usuario " + O[1] +"  "+O[2]);
             if (eliminar) {
                 $.ajax({
-                    url: 'eliminarUsuario/' + tr,
+                    url: 'eliminarUsuario/' + O[7],
                     type: 'POST',
-                    data: tr,
+                    data: O[7],
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
                     },
                     error: function(xhr) {
-                        alert('ocurrio algo inesperado por lo cual no se pudo eliminar el usuario')
+                        alert('Ocurrio algo inesperado por lo cual no se pudo eliminar el usuario')
                         $("#sample_1").DataTable().ajax.reload();
                     },
 
@@ -275,27 +286,50 @@
                 alert('No se ha eliminado el usuario')
             }
 
-        });
-        dt.on('click', '.edit', function(e) {
-            e.preventDefault();
-            var tr = this.id;
-            var url = 'editarUsuario/'+tr;
-            $(".contentAjax").load(url);
-        });
+        });        
         
-        dt.on('click', '.asignar', function(e) {
-            e.preventDefault();
-            var tr = this.id;
-            var url = 'asignarRol/'+tr;
-            $(".contentAjax").load(url);
-        });
+        dt.on('click', '.edit', function(e) {
+                e.preventDefault();
+                $tr = $(this).closest('tr');
+                var O = dt.DataTable().row($tr).data();
+				$.ajax({
+					type: "GET",
+                    url: '',
+                    dataType: "html",
+                }).done(function (data) {
+					route = 'editarUsuario/'+O[7];
+					$(".contentAjax").load(route);
+                });
+            });
+        
+        
+        
+        
+        dt.on('click', '.asignar', function (e) {
+                e.preventDefault();
+                $tr = $(this).closest('tr');
+                var O = dt.DataTable().row($tr).data();
+                $.ajax({
+                    type: "GET",
+                    url: '',
+                    dataType: "html",
+                }).done(function (data) {
+                    route = 'asignarRol/'+O[7];
+					$(".contentAjax").load(route);
+                });
+            });
 
-        $("#archivo3").on('click', function(e) {
+        $("#create").on('click', function(e) {
             e.preventDefault();
             $('#agregar').removeClass('fade');
             $('#agregar').addClass('fade-in');
             document.getElementById('agregar').style.display = 'inherit';
         });
+        
+
+        
+        
+        
         $(".close").on('click', function(e) {
             e.preventDefault();
             $("#frm_agregar_usuario")[0].reset();

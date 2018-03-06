@@ -30,9 +30,8 @@
 
                                 <div class="col-lg-6">
                                     <label> Tipo de Documento</label>
-                                    <select class="form-control" name="USER_FK_type_identification" id="USER_FK_type_identification">
+                                    <select class="form-control" name="USER_FK_type_identification" id="USER_FK_type_identification" value="<?php echo $USER_FK_type_identification; ?>">
                                     <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                    <option value="<?php echo $USER_FK_type_identification; ?>"><?php echo $TPDI_type_identification; ?></option>
                                     <option value="1">C.C.</option>
                                     <option value="2">T.I.</option>
                                     <option value="3">Registro</option>
@@ -109,8 +108,8 @@
 
                                 <label> Genero</label>
                                 <div class="input-group" name="USER_FK_gander" id="USER_FK_gender"><span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
-                                    <select class="form-control" id="USER_FK_gander" name="USER_FK_gander">
-                                                                <option value="<?php echo $USER_FK_gander; ?>"><?php echo $GNDR_gander; ?></option>
+                                    <select class="form-control" id="USER_FK_gander" name="USER_FK_gander" value="<?php echo $USER_FK_gander; ?>">
+                                                 
                                                                 <option value="1">Masculino</option>
                                                                 <option value="2">Femenino</option>
                                                                 <option value="3">Otro</option>
@@ -118,8 +117,7 @@
                                 </div>
                                 <label> Estado</label>
                                 <div class="input-group" name="USER_FK_state" id="USER_FK_state"><span class="input-group-addon"><i class="fa fa-check"></i></span>
-                                    <select class="form-control" id="USER_FK_state" name="USER_FK_state">
-                                    <option value="<?php echo $USER_FK_state; ?>"><?php echo $STTS_state; ?></option>
+                                    <select class="form-control" id="USER_FK_state" name="USER_FK_state" value="<?php echo $USER_FK_state; ?>">
                                     <option value="1">Activo</option>
                                     <option value="2">Inactivo</option>
                                 </select>
@@ -148,8 +146,9 @@
         $("#frm_editar_usuario").submit(function(event) {
             event.preventDefault();
             var tr = $('#USER_PK_hidden').val();
-            eliminar = confirm("Seguro desea actualizar el usuario " + tr);
-            if (eliminar) {
+            var nombre = $('INPUT[name="USER_names"]').val()+"  "+ $('INPUT[name="USER_lastnames"]').val();
+            Modificar = confirm("Seguro desea actualizar el usuario " + nombre);
+            if (Modificar) {
                 $.ajax({
                     async: false,
                     url: 'modificarUsuario/' + tr,
