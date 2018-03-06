@@ -19,12 +19,12 @@
                                         <?php echo form_error ('LNUT_PK') ?>
                                     </div>
                                 </div>
-                                <input type="hidden" id="LNUT_PK_hidden" value="<?php echo $LNUT_PK; ?>">
+                                <input type="hidden" id="LNUT_PK_hidden" value="<?= $data['LNUT_PK']; ?>">
 
 
                                 <label>Nombre unidad</label>
                                 <div class="input-group" id="LNUT_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" id="LNUT_name" name="LNUT_name" class="form-control" placeholder="Nombre" value="<?php echo $LNUT_name; ?>">
+                                    <input type="text" id="LNUT_name" name="LNUT_name" class="form-control" placeholder="Nombre" value="<?= $data['LNUT_name']; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="LNUT_name_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -33,7 +33,7 @@
                                 </div>
                                 <label>Descripcion</label>
                                 <div class="input-group" id="LNUT_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                    <textarea type="text" id="LNUT_description" name="LNUT_description" class="form-control" placeholder="Direccion" ><?php echo $LNUT_description; ?></textarea>
+                                    <textarea type="text" id="LNUT_description" name="LNUT_description" class="form-control" placeholder="Direccion" ><?php echo $data['LNUT_description']; ?></textarea>
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="LNUT_description_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -43,9 +43,8 @@
                             </div>
                             
                             <label> Tipo de enfoque pedagogico</label>
-                            <select class="form-control" name="LNUT_FK_focus" id="LNUT_FK_focus">
+                            <select class="form-control" name="LNUT_FK_focus" id="LNUT_FK_focus" value="<?=$data['LNUT_FK_focus']?>">
                                 <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                <option value="<?php echo $LNUT_FK_focus;?>"><?php echo $FOCS_name; ?></option>
                                 <?php foreach($focus->result_array() as $r) { ?>
                                 <option value="<?php echo $r['FOCS_PK'];?>"><?php echo $r['FOCS_name']; ?></option>
                                 <?php }?>

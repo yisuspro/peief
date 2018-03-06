@@ -41,7 +41,7 @@ class Version extends CI_Model {
     * @return get() 
     */
     public function listar(){
-        $rol= $this->db->select('*')->from('versions');
+        $rol= $this->db->select('*')->from('versions')->join('plans', 'plans.PLAN_PK = versions.VRSN_FK_plans');
         return $rol->get();
     }
     

@@ -33,8 +33,7 @@ class Subjects extends CI_Controller{
     * @return view ()
     */
     public function index(){
-        $unidades= $this->Learning_unit->listar();
-        $data['unidades']=$unidades;
+        $data['unidades']=$this->Learning_unit->listar();
         $data['title']='Asignaturas';
         $this->load->view('private/heads/head_1',$data);
         $this->load->view('private/heads/head_2');
@@ -94,8 +93,7 @@ class Subjects extends CI_Controller{
     *@return  view()
     */
     public function editarAsignatura($doc){
-        $data=$this->Subject->datosAsignatura($doc);          //verifica por medio del metodo datosUnidad() del modelo Learning_unit() si la unidad existe y trae todos los datos pertinentes al usuario 
-        $unidades=$this->Learning_unit->listar();                         //trae los datos de enfoques para agregar a la  unidad
+        $data=$this->Subject->datosAsignatura($doc);          //verifica por medio del metodo datosUnidad() del modelo Learning_unit() si la unidad existe y trae todos los datos pertinentes al usuario       
         foreach($data->result() as $r) {                      //ciclop para  convertir los datos en un arreglo
             $dato = array();                                  //creacion del vector que contendra los datos de la unidad
             $dato['SBJC_PK'] = $r->SBJC_PK;
@@ -105,7 +103,7 @@ class Subjects extends CI_Controller{
             $dato['LNUT_name']= $r->LNUT_name;
             
         }
-        $dato['unidades']  = $unidades;
+        $dato['unidades']  = $this->Learning_unit->listar(); //trae los datos de enfoques para agregar a la  unidad
         $this->load->view('private/view_ajax/editar_asignatura_ajax',$dato);//envio de la vista y los datos para la edicion de los usuarios
     }
     

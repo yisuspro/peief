@@ -14,19 +14,25 @@
                     <?= form_open('','id="frm_editar_version"');?>
                         <div class="form-wizard">
                             <div class="form-group">
-                                
-                                <input type="hidden" id="VRSN_PK_hidden" value="<?php echo $VRSN_PK; ?>">
+                                <input type="hidden" id="VRSN_PK_hidden" value="<?= $data['VRSN_PK'] ?>">
                                 <label>Nombre</label>
                                 <div class="input-group" id="VRSN_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" id="VRSN_name" name="VRSN_name" class="form-control" placeholder="Nombre" value="<?php echo $VRSN_name; ?>">
+                                    <input type="text" id="VRSN_name" name="VRSN_name" class="form-control" placeholder="Nombre" value="<?= $data['VRSN_name']; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="VRSN_name_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('VRSN_name') ?>
+                                        <?= form_error('VRSN_name') ?>
                                     </div>
                                 </div>
                             
                             </div>
+                            <label> Planes</label>
+                            <select class="form-control" name="VRSN_FK_plans" id="VRSN_FK_plans" value="<?= $data['VRSN_FK_plans']; ?>">
+                                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                <?php foreach($planes->result_array() as $r) { ?>
+                                <option value="<?php echo $r['PLAN_PK'];?>"><?php echo $r['PLAN_name']; ?></option>
+                                <?php }?>
+                            </select>
                             <div class="form-actions">
                                 <div class="row">
                                     <div class="modal-footer">

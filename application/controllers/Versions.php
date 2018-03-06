@@ -19,13 +19,8 @@ class Versions extends CI_Controller{
     */
     function __construct() {
         parent::__construct ();
-        
-        $this->load->model('Version');
-        $this->load->model('Logueo');
-        
-        $this->load->helper('login_rules');
-        $this->load->helper('url');
-        $this->load->helper('form');
+        $this->load->model(['Plan','Version','Logueo']);
+        $this->load->helper(['login_rules','url','form']);
     }
     
     /**
@@ -34,10 +29,15 @@ class Versions extends CI_Controller{
     * @return view ()
     */
     public function index(){
+        
+        $data['planes']=$this->Plan->listar();
+        
         $data['title']='Versiones';
+        
         $this->load->view('private/heads/head_1',$data);
         $this->load->view('private/heads/head_2');
         $this->load->view('private/heads/menus');
+        
         $this->load->view('private/versions', $data);    
         $this->load->view('private/footers/foot_1');
         $this->load->view('private/footers/foot_2');
@@ -53,17 +53,11 @@ class Versions extends CI_Controller{
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
         $data =$this->Version->listar();                    //utiliza el metodo listar() del modelo Version() para traer los datos de todos las versiones
-        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
-            $dato[] = array(
-                $r->VRSN_name,
-                '<input type="button" class="btn btn-warning edit" title="Editar Version" id="'.$r->VRSN_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar Version" id="'.$r->VRSN_PK.'" value="eliminar" >',
-            );
-        }
         $output = array(                                    //creacion del vector de salida
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantas versiones son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $data->num_rows()>0?$dato:$data,                                 //envia todos los datos de la tabla
+            "data" => $data->result_array(),                                 //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;    
@@ -85,9 +79,10 @@ class Versions extends CI_Controller{
             echo json_encode($errors);                          //envio del vector de errores
             $this->output->set_status_header(402);              //envio del estatus del error en este caso 402
         }else{                                                  //si las reglas fueron cumplidas
-            $name = $this->input->post('VRSN_name');            //obtencion de todos los datos del formulario
+            //obtencion de todos los datos del formulario
             $data= array(                                       //creacion del vector de los nuevos datos de la vesion
-                'VRSN_name' => $name,
+                'VRSN_name' => $this->input->post('VRSN_name'),
+                'VRSN_FK_plans' => $this->input->post('VRSN_FK_plans'),
             );
             if(!$this->Version->agregarVersion($data)){         //utilizacion del metodo agregarVersion() del modelo Version() para la agregacion de versiones a la base de datos
                 echo "error";                                   // en caso de  fallar envia un mensaje de error
@@ -115,15 +110,13 @@ class Versions extends CI_Controller{
     * @param int $pk
     * @return view () |String $datos
     */
-    public function editarVersion($pk){
-         $data=$this->Version->datosVersion($pk);                          //verifica por medio del metodo datosVersion() del modelo Version() si el usuario existe, tae todos los datos pertinentes a la version
-        foreach($data->result() as $r) {                                   //ciclop para  convertir los datos en un arreglo
-            $dato = array();                                               //creacion del vector que contendra los datos del usuario
-            $dato['VRSN_PK'] = $r->VRSN_PK;
-            $dato['VRSN_name'] = $r->VRSN_name;
-        }
-        $this->load->view('private/view_ajax/editar_version_ajax',$dato);  //envio de la vista y los datos para la edicion de los usuarios
+    
+    public function editarVersion($pk){                                        
+        $dato['data']=  $this->Version->datosVersion($pk)->result_array()[0];   
+        $dato['planes']  = $this->Plan->listar();//trae los datos de enfoques para agregar a la  unidad
+        $this->load->view('private/view_ajax/editar_version_ajax',$dato);//envio de la vista y los datos para la edicion de los usuarios
     }
+    
     
     /**
     * funcion para la modificacion de los datos de versiones existentes
@@ -137,13 +130,14 @@ class Versions extends CI_Controller{
         if($this->form_validation->run() === FALSE){           //si se incumple algunade las regla
             $errors = array(                                   //creacion del vector de los errores
                 'VRSN_name' => form_error('VRSN_name'),
+                'VRSN_FK_plans' => form_error('VRSN_FK_plans'),
             );
             echo json_encode($errors);                         //envio del vector de errores
             $this->output->set_status_header(402);             //envio del estatus del error en este caso 402
         }else{                                                 //si las reglas fueron cumplidas
-            $name = $this->input->post('VRSN_name');           //obtencion de todos los datos del formulario
             $data = array(                                     //creacion del vector de los nuevos datos de la version
-                'VRSN_name' =>  $name,
+                'VRSN_name' =>  $this->input->post('VRSN_name'),
+                'VRSN_FK_plans' =>  $this->input->post('VRSN_FK_plans')
             );
             if(!$this->Version->modificarVersion($doc,$data)){ //utilizacion del metodo modificarVersion() del modelo Version() para la modificacion de la version enviando el id y los datos pertinentes
                 echo "error";                                  // en caso de  fallar envia un mensaje de error

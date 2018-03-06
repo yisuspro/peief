@@ -45,6 +45,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
+                                                <label> Planes</label>
+                                            <select class="form-control" name="VRSN_FK_plans" id="VRSN_FK_plans">
+                                                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                                <?php foreach($planes->result_array() as $r) { ?>
+                                                <option value="<?php echo $r['PLAN_PK'];?>"><?php echo $r['PLAN_name']; ?></option>
+                                                <?php }?>
+                                            </select>
+                                                
                                                 <div class="form-actions">
                                                     <div class="row">
                                                         <div class="modal-footer">
@@ -62,7 +71,7 @@
                         <!-- End Modal -->
                         <div class="col-md-12">
                             <div class="actions">
-                                <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar Version"><i class="fa fa-plus"></i> Agregar</a>
+                                <a id="create" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar Version"><i class="fa fa-plus"></i> Agregar</a>
                             </div>
                         </div>
                         <br>
@@ -73,12 +82,14 @@
                                 <thead>
                                     <tr>
                                         <th>Version</th>
+                                        <th>Plan asignado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Version</th>
+                                        <th>Plan Asignado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>
@@ -105,7 +116,7 @@
                 [5, 10, 25, 50, "Todo"],
             ],
             "ajax": {
-                url: "<?php echo base_url('Versions/listarVersions'); ?>",
+                url: "<?php echo base_url(); ?>Versions/listarVersions",
                 type: 'GET'
             },
             "scrollX": true,
@@ -137,17 +148,24 @@
                 },
 
             ],
+            columns: [{data:'VRSN_name'},
+                      {data:'PLAN_name'},
+                {mRender: function (data, type, row) {
+                    return '<input type="button" class="btn btn-warning edit" title="Editar Version" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar Version"  value="eliminar" >';
+                }
+                }],
             pageLength: 10,
         });
 
         dt.on('click', '.remove', function(e) {
-            var tr = this.id;
-            eliminar = confirm("Seguro desea eliminar el rol" + tr);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            eliminar = confirm("Seguro desea eliminar el rol" + O.name);
             if (eliminar) {
                 $.ajax({
-                    url: 'Versions/eliminarVersions/' + tr,
+                    url: 'Versions/eliminarVersions/' + O.VRSN_PK,
                     type: 'POST',
-                    data: tr,
+                    data: O.VRSN_PK,
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -163,20 +181,23 @@
             }
 
         });
+        
         dt.on('click', '.edit', function(e) {
             e.preventDefault();
-            var tr = this.id;
-            var url = 'Versions/editarVersion/' + tr;
-            $(".contentAjax").load(url);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            $.ajax({
+                type: "GET",
+                url: '',
+                dataType: "html",
+            }).done(function (data) {
+                route = 'Versions/editarVersion/'+O.VRSN_PK;
+                $(".contentAjax").load(route);
+            });
         });
-        dt.on('click', '.asignar', function(e) {
-            e.preventDefault();
-            var tr = this.id;
-            var url = 'Roles/asignarPermiso/' + tr;
-            $(".contentAjax").load(url);
-        });
+        
 
-        $("#archivo3").on('click', function(e) {
+        $("#create").on('click', function(e) {
             e.preventDefault();
             $('#agregar').removeClass('fade');
             $('#agregar').addClass('fade-in');

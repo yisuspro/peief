@@ -19,14 +19,8 @@ class Learning_units extends CI_Controller{
     */
     function __construct() {
         parent::__construct ();
-        $this->load->model('Learning_unit');
-        $this->load->model('Logueo');
-        $this->load->model('Focu');
-        $this->load->model('Users');
-        $this->load->model('Role');
-        $this->load->helper('login_rules');
-        $this->load->helper('url');
-        $this->load->helper('form');
+        $this->load->model(['Learning_unit','Logueo','Focu','Users','Role']);
+        $this->load->helper(['login_rules','url','form']);
     }
     
     /**
@@ -35,8 +29,7 @@ class Learning_units extends CI_Controller{
     * @return view ()
     */
     public function index(){
-        $focus= $this->Focu->listar();
-        $data['focus']=$focus;
+        $data['focus']=$this->Focu->listar();
         $data['title']='Unidades de aprendizaje';
         $this->load->view('private/heads/head_1',$data);
         $this->load->view('private/heads/head_2');
@@ -95,20 +88,9 @@ class Learning_units extends CI_Controller{
     *@param  int $doc
     *@return  view()
     */
-    public function editarUnidades($doc){
-        $data=$this->Learning_unit->datosUnidad($doc);                              //verifica por medio del metodo datosUnidad() del modelo Learning_unit() si la unidad existe y trae todos los datos pertinentes al usuario 
-        $focus=$this->Focu->listar();                                               //trae los datos de enfoques para agregar a la  unidad
-        foreach($data->result() as $r) {                                            //ciclop para  convertir los datos en un arreglo
-            $dato = array();                                                        //creacion del vector que contendra los datos de la unidad
-            $dato['LNUT_PK'] = $r->LNUT_PK;
-            $dato['LNUT_name'] = $r->LNUT_name;
-            $dato['LNUT_FK_focus']= $r->LNUT_FK_focus;
-            $dato['LNUT_description']= $r->LNUT_description;
-            $dato['FOCS_name']= $r->FOCS_name;
-            $dato['FOCS_PK']= $r->FOCS_PK;
-            
-        }
-        $dato['focus']  = $focus;
+    public function editarUnidades($doc){                                        
+        $dato['data']=$this->Learning_unit->datosUnidad($doc)->result_array()[0];   //verifica por medio del metodo datosUnidad() del modelo Learning_unit() si la unidad existe y trae todos los datos pertinentes al usuario   
+        $dato['focus']  = $this->Focu->listar();//trae los datos de enfoques para agregar a la  unidad
         $this->load->view('private/view_ajax/editar_unidad_pedagogica_ajax',$dato);//envio de la vista y los datos para la edicion de los usuarios
     }
     

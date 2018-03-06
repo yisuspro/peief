@@ -75,7 +75,7 @@
                         <!-- End Modal -->
                         <div class="col-md-12">
                             <div class="actions">
-                                <a id="archivo3" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un plan"><i class="fa fa-plus"></i> Agregar</a>
+                                <a id="create" href="javascript:;" class="btn btn-simple btn-success btn-icon create" title="Agregar un plan"><i class="fa fa-plus"></i> Agregar</a>
                             </div>
                         </div>
                         <br>
@@ -148,19 +148,24 @@
                     className: 'btn btn-circle btn-icon-only btn-default tooltips t-csv',
                     text: '<i class="fa fa-file-text-o"></i>',
                 },
-
             ],
+            columns: [{data:'PLAN_name'},
+                {mRender: function (data, type, row) {
+                    return '<input type="button" class="btn btn-warning edit" title="Editar Plan"  value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar Plan"  value="eliminar" >';
+                }
+                }],
             pageLength: 10,
         });
 
         dt.on('click', '.remove', function(e) {
-            var tr = this.id;
-            eliminar = confirm("Seguro desea eliminar el rol" + tr);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            eliminar = confirm("Seguro desea eliminar el plan " + O.PLAN_name);
             if (eliminar) {
                 $.ajax({
-                    url: 'Plans/eliminarPlans/' + tr,
+                    url: 'Plans/eliminarPlans/' + O.PLAN_PK,
                     type: 'POST',
-                    data: tr,
+                    data: O.PLAN_PK,
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -172,24 +177,28 @@
 
                 });
             } else {
-                alert('No se ha eliminado el usuario')
+                alert('No se ha eliminado el Plan')
             }
 
         });
+
         dt.on('click', '.edit', function(e) {
             e.preventDefault();
-            var tr = this.id;
-            var url = 'Plans/editarPlan/' + tr;
-            $(".contentAjax").load(url);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            $.ajax({
+                type: "GET",
+                url: '',
+                dataType: "html",
+            }).done(function (data) {
+                route = 'Plans/editarPlan/'+O.PLAN_PK;
+                $(".contentAjax").load(route);
+            });
         });
-        dt.on('click', '.asignar', function(e) {
-            e.preventDefault();
-            var tr = this.id;
-            var url = 'Plans/asignarVersionPlan/' + tr;
-            $(".contentAjax").load(url);
-        });
+        
+    
 
-        $("#archivo3").on('click', function(e) {
+        $("#create").on('click', function(e) {
             e.preventDefault();
             $('#agregar').removeClass('fade');
             $('#agregar').addClass('fade-in');
