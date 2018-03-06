@@ -189,7 +189,7 @@ left: 21px !important;
                 $(this).toggleClass("switchOn");
                 var tr = this.id;
                 $.ajax({
-                    url: 'Permisos/asignarPermisoRol/' + <?php echo $id;?> + '/' + tr,
+                    url: 'Roles/asignarPermisoRol/' + <?php echo $id;?> + '/' + tr,
                     type: 'POST',
                     data: tr,
                     success: function(data, xhr) {

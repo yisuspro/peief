@@ -49,19 +49,12 @@ class Roles extends CI_Controller
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
         $data =$this->Role->listar();                       //utiliza el metodo listar() del modelo role() para traer los datos de todos los usuarios 
-        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
-            $dato[] = array(
-                $r->ROLE_name,
-                $r->ROLE_shortname,
-                $r->ROLE_description,
-                $r->ROLE_PK
-            );
-        }
+
         $output = array(                                    //creacion del vector de salida
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $data->num_rows()>0?$dato:$data       //envia todos los datos de la tabla
+            "data" => $data->result_array()       //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;                                               //salida del proceso
@@ -88,16 +81,8 @@ class Roles extends CI_Controller
     *@return  view()
     */
     public function editarRol($doc){
-        $data=$this->Role->datosRol($doc);                      //verifica por medio del metodo datosUsiarios() del modelo users() si el usuario existe ytae todos los datos pertinentes al usuario 
-        foreach($data->result() as $r) {                        //ciclo para  convertir los datos en un arreglo
-            $dato = array(                                      //creacion del vector que contendra los datos del usuario
-                'ROLE_PK'           =>  $r->ROLE_PK,  
-                'ROLE_name'         =>  $r->ROLE_name,  
-                'ROLE_shortname'    =>  $r->ROLE_shortname,  
-                'ROLE_description'  =>  $r->ROLE_description  
-            );                                                       
-        }
-        $this->load->view('private/view_ajax/editar_rol_ajax',$dato);               //envio de la vista y los datos para la edicion de los usuarios
+        $data=$this->Role->datosRol($doc)->result_array()[0];                      //verifica por medio del metodo datosUsiarios() del modelo users() si el usuario existe ytae todos los datos pertinentes al usuario 
+        $this->load->view('private/view_ajax/editar_rol_ajax',$data);               //envio de la vista y los datos para la edicion de los usuarios
     }
     
     /**
@@ -218,6 +203,27 @@ class Roles extends CI_Controller
             $this->output->set_status_header(403);                              //envio del status de error en este caso 403
         }
         
+    }
+    
+    
+        /**
+    * funcion para asignar los permisos a los roles.
+    * @param int $rol, $permiso
+    * @return true | false
+    */
+    public function asignarPermisoRol($rol,$permiso){
+        if ($this->Permits->consultarPermisoRol($rol,$permiso)){//verifica si el permiso ya fue asignado
+            $this->output->set_status_header(402);              //envia el error en caso de existir
+        }else{
+            $data= array(
+                'RLPR_FK_roles'                 =>  $rol,      //crea el vector con los datos
+                'RLPR_FK_permits'               =>  $permiso,
+            );
+            if ($this->Permits->asignarPermiso($data)){         //envia y valida la insercion del nuevo permiso en el rol 
+                return true;
+            }
+            return false;  
+        }
     }
     
 }

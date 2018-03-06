@@ -151,23 +151,11 @@ class Usuarios extends CI_Controller
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
         $data =$this->Users->listar();                      //utiliza el metodo listar() del modelo users() para traer los datos de todos los usuarios 
-        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
-            $dato[] = array(                                //creacion de la matriz que lleva todos los datos
-                $r->USER_identification,
-                $r->USER_names,
-                $r->USER_lastnames,
-                $r->USER_email,
-                $r->USER_telephone,
-                $r->USER_address,
-                $r->STTS_state,
-                $r->USER_PK
-            );
-        }
         $output = array(                                    //creacion del vector de salida
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $data->num_rows()>0?$dato:$data       //envia todos los datos de la tabla
+            "data" => $data->result_array()       //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;                                               //salida del proceso
@@ -193,26 +181,8 @@ class Usuarios extends CI_Controller
     *@return  view()
     */
     public function editarUsuario($doc){
-        $data=$this->Users->datosUsuario($doc);                                         //verifica por medio del metodo datosUsiarios() del modelo users() si el usuario existe ytae todos los datos pertinentes al usuario 
-        foreach($data->result() as $r) {                                                //ciclop para  convertir los datos en un arreglo
-            $dato = array(                      //creacion del vector que contendra los datos del usuario
-                'USER_PK'                       =>  $r->USER_PK,
-                'USER_identification'           =>  $r->USER_identification,
-                'USER_names'                    =>  $r->USER_names,
-                'USER_lastnames' => $r->USER_lastnames, 
-                'USER_email' => $r->USER_email, 
-                'USER_password' => $r->USER_password, 
-                'USER_address' => $r->USER_address, 
-                'USER_telephone' => $r->USER_telephone, 
-                'USER_FK_state' => $r->USER_FK_state, 
-                'USER_FK_type_identification' => $r->USER_FK_type_identification, 
-                'USER_FK_gander' => $r->USER_FK_gander, 
-                'STTS_state' => $r->STTS_state, 
-                'TPDI_type_identification' => $r->TPDI_type_identification, 
-                'GNDR_gander' => $r->GNDR_gander,
-            );    
-        }
-        $this->load->view('private/view_ajax/editar_usuario_ajax',$dato);               //envio de la vista y los datos para la edicion de los usuarios
+        $data=$this->Users->datosUsuario($doc)->result_array()[0];                                         //verifica por medio del metodo datosUsiarios() del modelo users() si el usuario existe ytae todos los datos pertinentes al usuario 
+        $this->load->view('private/view_ajax/editar_usuario_ajax',$data);               //envio de la vista y los datos para la edicion de los usuarios
     }
     
     /**

@@ -255,7 +255,13 @@
                 },
 
             ],
-            columns: [{},{},{},{},{},{},{},
+            columns: [{data:'USER_identification'},
+                     {data:'USER_names'},
+                     {data:'USER_lastnames'},
+                     {data:'USER_email'},
+                     {data:'USER_telephone'},
+                     {data:'USER_address'},
+                     {data:'STTS_state'},
                 {mRender: function (data, type, row) {
                     return '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar un usuario"  value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar un usuario" value="eliminar" ><input type="button" class="btn btn-info fa fa-remove asignar" title="Asignar un rol"  value="asignar" >';
                 }
@@ -266,12 +272,12 @@
         dt.on('click', '.remove', function(e) {
             $tr = $(this).closest('tr');
             var O = dt.DataTable().row($tr).data();
-            eliminar = confirm("Seguro desea eliminar el usuario " + O[1] +"  "+O[2]);
+            eliminar = confirm("Seguro desea eliminar el usuario " + O.USER_names +"  "+O.USER_lastnames);
             if (eliminar) {
                 $.ajax({
-                    url: 'eliminarUsuario/' + O[7],
+                    url: 'eliminarUsuario/' + O.USER_PK,
                     type: 'POST',
-                    data: O[7],
+                    data: O.USER_PK,
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -297,7 +303,7 @@
                     url: '',
                     dataType: "html",
                 }).done(function (data) {
-					route = 'editarUsuario/'+O[7];
+					route = 'editarUsuario/'+O.USER_PK;
 					$(".contentAjax").load(route);
                 });
             });
@@ -314,7 +320,7 @@
                     url: '',
                     dataType: "html",
                 }).done(function (data) {
-                    route = 'asignarRol/'+O[7];
+                    route = 'asignarRol/'+O.USER_PK;
 					$(".contentAjax").load(route);
                 });
             });

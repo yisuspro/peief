@@ -106,14 +106,8 @@ class Plans extends CI_Controller
     * @return view () | $datos
     */
     public function editarPlan($pk){
-         $data=$this->Plan->datosPlan($pk);                             //verifica por medio del metodo datosPlan() del modelo Plan() si el usuario existe ytrae todos los datos pertinentes al usuario 
-        foreach($data->result() as $r) {                                //ciclo para  convertir los datos en un arreglo
-            $dato = array(                                              //creacion del vector que contendra los datos del plan
-                'PLAN_PK'=>$r->PLAN_PK,
-                'PLAN_name'=>$r->PLAN_name
-            );                                            
-        }
-        $this->load->view('private/view_ajax/editar_plan_ajax',$dato);  //envio de la vista y los datos para la edicion de los planes
+         $data=$this->Plan->datosPlan($pk)->result_array()[0];                             //verifica por medio del metodo datosPlan() del modelo Plan() si el usuario existe ytrae todos los datos pertinentes al usuario 
+        $this->load->view('private/view_ajax/editar_plan_ajax',$data);  //envio de la vista y los datos para la edicion de los planes
     }
     /**
     * funcion para la modificacion de los datos del plan

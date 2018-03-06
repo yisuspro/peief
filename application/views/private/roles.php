@@ -170,7 +170,9 @@
                 },
 
             ],
-            columns: [{},{},{},
+            columns: [{data:'ROLE_name'},
+                      {data:'ROLE_shortname'},
+                      {data:'ROLE_description'},
                 {mRender: function (data, type, row) {
                     return '<input type="button" class="btn btn-warning edit" title="Editar rol"  value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar rol" value="eliminar" ><input type="button" class="btn btn-info asignar" title="asignar permisos"  value="permisos">';
                 }
@@ -181,12 +183,12 @@
         dt.on('click', '.remove', function(e) {
             $tr = $(this).closest('tr');
             var O = dt.DataTable().row($tr).data();
-            eliminar = confirm("Seguro desea eliminar el rol " + O[0]);
+            eliminar = confirm("Seguro desea eliminar el rol " + O.ROLE_name);
             if (eliminar) {
                 $.ajax({
-                    url: 'Roles/eliminarRoles/' + O[3],
+                    url: 'Roles/eliminarRoles/' + O.ROLE_PK,
                     type: 'POST',
-                    data: O[3],
+                    data: O.ROLE_PK,
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -212,7 +214,7 @@
                     url: '',
                     dataType: "html",
                 }).done(function (data) {
-					route = 'Roles/editarRol/'+O[3];
+					route = 'Roles/editarRol/'+O.ROLE_PK;
 					$(".contentAjax").load(route);
                 });
             });
@@ -226,7 +228,7 @@
                     url: '',
                     dataType: "html",
                 }).done(function (data) {
-                    route = 'Roles/asignarPermiso/'+O[3];
+                    route = 'Roles/asignarPermiso/'+O.ROLE_PK;
 					$(".contentAjax").load(route);
                 });
             });

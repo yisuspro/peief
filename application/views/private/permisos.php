@@ -169,7 +169,9 @@
                     
 
             ],
-            columns: [{},{},{},
+            columns: [{data:'PRMS_name'},
+                      {data:'PRMS_shortname'},
+                      {data:'PRMS_description'},
                 {mRender: function (data, type, row) {
                     return '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar permiso"  value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar permiso"  value="eliminar" >';
                 }
@@ -180,12 +182,12 @@
         dt.on('click', '.remove', function(e) {
             $tr = $(this).closest('tr');
             var O = dt.DataTable().row($tr).data();
-            eliminar = confirm("Seguro desea eliminar el usuario " + O[0]);
+            eliminar = confirm("Seguro desea eliminar el permiso " + O.PRMS_name);
             if (eliminar) {
                 $.ajax({
-                    url: 'Permisos/eliminarPermisos/' + O[3],
+                    url: 'Permisos/eliminarPermisos/' + O.PRMS_PK,
                     type: 'POST',
-                    data: O[3],
+                    data: O.PRMS_PK,
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -209,7 +211,7 @@
                     url: '',
                     dataType: "html",
                 }).done(function (data) {
-					route = 'Permisos/editarPermisos/'+O[3];
+					route = 'Permisos/editarPermisos/'+O.PRMS_PK;
 					$(".contentAjax").load(route);
                 });
             });
