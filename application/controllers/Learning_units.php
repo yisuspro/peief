@@ -177,18 +177,11 @@ class Learning_units extends CI_Controller{
          $length = intval($this->input->get("length"));
          $data =$this->Learning_unit->listarUsuarios($id);       //utiliza el metodo listar() del modelo learning_units() para traer los datos de todos las unidades
         
-         foreach($data->result() as $r) {                        //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
-            $dato [] = array(
-                $r->USER_names,
-                $r->ROLE_name,
-                '<input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar usuario" id="'.$r->USLE_PK.'" value="eliminar" >',
-            );
-        }
         $output = array(                                    //creacion del vector de salida
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $data->num_rows()>0?$dato:$data,                                 //envia todos los datos de la tabla
+            "data" => $data->result_array(),                                 //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;                                               //salida del proceso

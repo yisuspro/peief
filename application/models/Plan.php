@@ -98,7 +98,9 @@ class Plan extends CI_Model {
     * @return true | false
     */
     public function listarVersionPlan($id){
-        $version= $this->db->select('*')->from('versions_plans')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->where('VRPL_FK_plans',$id);
+        $version= $this->db->select('*')->from('versions_plans')
+            ->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')
+            ->where('VRPL_FK_plans',$id);
         return $version->get();
     }
     

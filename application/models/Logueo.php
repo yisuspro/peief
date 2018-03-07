@@ -27,7 +27,11 @@ class Logueo extends CI_Model {
     * @return row() | false
     */
     public function login($email,$password){
-        $rep=$this->db->select('*')->join('states','users.USER_FK_state = states.STTS_PK')->join('ganders','users.USER_FK_gander = ganders.GNDR_PK')->join('types_identifications','users.USER_FK_type_identification = types_identifications.TPDI_PK')->get_where('users',array('USER_email' => $email,'USER_password'=> $password), 1);
+        $rep=$this->db->select('*')
+            ->join('states','users.USER_FK_state = states.STTS_PK')
+            ->join('ganders','users.USER_FK_gander = ganders.GNDR_PK')
+            ->join('types_identifications','users.USER_FK_type_identification = types_identifications.TPDI_PK')
+            ->get_where('users',array('USER_email' => $email,'USER_password'=> $password), 1);
         if (!$rep->result()){
             return FALSE;
         }
@@ -36,7 +40,8 @@ class Logueo extends CI_Model {
     }
     public function permisosUsuario($id,$permiso){
         $where="USRL_FK_roles = ROLE_PK AND PRMS_PK=RLPR_FK_permits AND RLPR_FK_roles=ROLE_PK AND USRL_FK_users=USER_PK";
-        $this->db->select('PRMS_shortname')->from('users,roles,permits,users_roles,roles_permits')->where($where);
+        $this->db->select('PRMS_shortname')
+            ->from('users,roles,permits,users_roles,roles_permits')->where($where);
         $this->db->where('USER_PK',$id);
         if($res=$this->db->where('PRMS_shortname',$permiso)->get()->result()){
             return true;

@@ -27,7 +27,9 @@ class Role extends CI_Model {
     * @return get() | false
     */
     public function datosRol($datos){
-        if(!$rol= $this->db->select('*')->from('roles')->where('ROLE_PK',$datos)){
+        if(!$rol= $this->db->select('*')
+           ->from('roles')
+           ->where('ROLE_PK',$datos)){
             return false;
         }else{
             return $rol->get();

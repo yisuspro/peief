@@ -47,6 +47,27 @@ class Subject extends CI_Model {
     
     }
     
+    
+    
+        /**
+    * funcion para traer todos los usuarios registrados 
+    * 
+    * @return get()
+    */
+    public function listarDocentes(){
+        $usuarios = $this->db->select('CONCAT(users.USER_names," ",users.USER_lastnames) AS Nombre, users_learning_units.USLE_FK_learning_units,USLE_PK')
+            ->from('users_learning_units')
+            ->join('learning_units','learning_units.LNUT_PK = users_learning_units.USLE_FK_learning_units')
+            ->join('roles','roles.ROLE_PK = users_learning_units.USLE_FK_roles')
+            ->join('users','users.USER_PK = users_learning_units.USLE_FK_users')
+            ->where('ROLE_shortname',"DOC")
+            ->or_where('ROLE_shortname',"Super_Admin"); 
+        
+        return $usuarios->get();
+    }
+    
+    
+    
     /**
     * funcion para la eliminacion de un permiso de la base de datos
     * @param int $datos
@@ -72,6 +93,11 @@ class Subject extends CI_Model {
             return false;
         }
     }
+    
+    
+    
+    
+    
     
     /**
     * funcion para agregar nuevos datos de permisos en la base de datos

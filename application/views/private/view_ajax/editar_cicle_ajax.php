@@ -66,7 +66,7 @@
                                     <input type="hidden" name='CICLE_PK' id="CICLE_PK" value="<?php echo $CCLS_PK; ?>">
                                     <div class="alert alert-danger invalid-feedback" id="alerta" role="alert" style="display:none">
                                         <div class="invalid-feedback">
-                                            el usuario no existe o ya se encutra en el grupo
+                                            el usuario no existe o ya se encuentra en el grupo
                                         </div>
                                     </div>
                                     <label>Numero de Docuemnto</label>

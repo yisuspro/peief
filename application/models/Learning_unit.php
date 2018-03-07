@@ -99,7 +99,12 @@ class Learning_unit extends CI_Model {
     * @return true | false
     */
     public function listarUsuarios($id){
-        $permiso= $this->db->select('*')->from('users_learning_units')->join('users','users_learning_units.USLE_FK_users = users.USER_PK')->join('roles','users_learning_units.USLE_FK_roles = roles.ROLE_PK')->join('learning_units','users_learning_units.USLE_FK_learning_units = learning_units.LNUT_PK')->where('USLE_FK_learning_units',$id);
+        $permiso= $this->db->select('*')
+            ->from('users_learning_units')
+            ->join('users','users_learning_units.USLE_FK_users = users.USER_PK')
+            ->join('roles','users_learning_units.USLE_FK_roles = roles.ROLE_PK')
+            ->join('learning_units','users_learning_units.USLE_FK_learning_units = learning_units.LNUT_PK')
+            ->where('USLE_FK_learning_units',$id);
         return $permiso->get();
     }
     

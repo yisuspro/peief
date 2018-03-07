@@ -68,6 +68,8 @@ class Users extends CI_Model {
         return $usuarios->get();
     }
     
+    
+
     /**
     * funcion para la eliminacion de un usuario 
     * @param int $datos

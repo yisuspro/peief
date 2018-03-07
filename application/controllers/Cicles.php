@@ -82,11 +82,10 @@ class Cicles extends CI_Controller{
             echo json_encode($errors);                          //envio del vector de errores
             $this->output->set_status_header(402);              //envio del estatus del error en este caso 402
         }else{                                                  //si las reglas fueron cumplidas
-            $name = $this->input->post('CCLS_name');            //obtencion de todos los datos del formulario
-            $versions = $this->input->post('CCLS_FK_versions_plans');            
+            //obtencion de todos los datos del formulario
             $data= array(                                       //creacion del vector de los nuevos datos del plan
-                'CCLS_name'             =>  $name,
-                'CCLS_FK_versions_plans'=>  $versions,
+                'CCLS_name'             =>  $this->input->post('CCLS_name'),
+                'CCLS_FK_versions_plans'=>  $this->input->post('CCLS_FK_versions_plans'),
                 'CCLS_date_create'      =>  date("Y-m-d H:i:s"),
                 'CCLS_date_update'      =>  date("Y-m-d H:i:s"),
                 'CCLS_PK_create'        =>  $this->session->userdata('id'),
@@ -150,11 +149,10 @@ class Cicles extends CI_Controller{
             echo json_encode($errors);                                   //envio del vector de errores
             $this->output->set_status_header(402);                       //envio del estatus del error en este caso 402
         }else{                                                           //si las reglas fueron cumplidas
-            $name = $this->input->post('CCLS_name');                     //obtencion de todos los datos del formulario
-            $versions = $this->input->post('CCLS_FK_versions_plans');                    
+            //obtencion de todos los datos del formulario   
             $data = array(                                               //creacion del vector de los nuevos datos del plan
-                'CCLS_name'             =>  $name,
-                'CCLS_FK_versions_plans'=>  $versions,
+                'CCLS_name'             =>  $this->input->post('CCLS_name'),
+                'CCLS_FK_versions_plans'=>  $this->input->post('CCLS_FK_versions_plans'),
                 'CCLS_date_update'      =>  date("Y-m-d H:i:s"),
                 'CCLS_PK_update'        =>  $this->session->userdata('id'),
             );

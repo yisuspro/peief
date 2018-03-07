@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <div class="alert alert-danger invalid-feedback" id="alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        el usuario no existe o ya se encutra en el grupo
+                                        el usuario no existe o ya se encuentra en el grupo
                                     </div>
                                 </div>
                                 <input type="hidden" name="USLE_FK_learning_units" id="USLE_FK_learning_units" value="<?php echo $id ;?>">
@@ -112,7 +112,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?php echo base_url('Learning_units/listarUsuarios/'.$id); ?>",
+                url: "<?= base_url('Learning_units/listarUsuarios/'.$id); ?>",
                 type: 'GET'
             },
             "scrollX": true,
@@ -144,17 +144,25 @@
                 },
 
             ],
+            
+            columns: [{data:'USER_names'},
+                     {data:'ROLE_name'},
+                {mRender: function (data, type, row) {
+                    return '<input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar usuario" value="eliminar" >';
+                }
+                }],
             pageLength: 10,
         });
 
         dt.on('click', '.remove', function(e) {
-            var tr = this.id;
-            eliminar = confirm("Seguro desea quitar este usuario?  " + tr);
+            $tr = $(this).closest('tr');
+            var O = dt.DataTable().row($tr).data();
+            eliminar = confirm("Seguro desea quitar este usuario?  " + O.USER_names);
             if (eliminar) {
                 $.ajax({
-                    url: '<?= base_url('Learning_units/eliminarUsuario/') ?>' + tr,
+                    url: '<?= base_url() ?>Learning_units/eliminarUsuario/' + O.USLE_PK,
                     type: 'POST',
-                    data: tr,
+                    data: O.USLE_PK,
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';

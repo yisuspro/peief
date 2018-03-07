@@ -19,12 +19,8 @@ class Subjects extends CI_Controller{
     */
     function __construct() {
         parent::__construct ();
-        $this->load->model('Learning_unit');
-        $this->load->model('Logueo');
-        $this->load->model('Subject');
-        $this->load->helper('login_rules');
-        $this->load->helper('url');
-        $this->load->helper('form');
+        $this->load->model(['Learning_unit','Logueo','Subject']);
+        $this->load->helper(['login_rules','url','form']);
     }
     
     /**
@@ -34,6 +30,7 @@ class Subjects extends CI_Controller{
     */
     public function index(){
         $data['unidades']=$this->Learning_unit->listar();
+        $data['docentes']=$this->Subject->listarDocentes();
         $data['title']='Asignaturas';
         $this->load->view('private/heads/head_1',$data);
         $this->load->view('private/heads/head_2');
@@ -53,19 +50,11 @@ class Subjects extends CI_Controller{
         $start  = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
         $data=$this->Subject->listar();
-        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
-            $dato [] = array(
-                $r->SBJC_name,
-                $r->SBJC_description,
-                $r->LNUT_name,
-                '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar unidad" id="'.$r->SBJC_PK.'" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar unidad" id="'.$r->SBJC_PK.'" value="eliminar" >',
-            );
-        }
         $output = array(                                    //creacion del vector de salida
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $data->num_rows()>0?$dato:$data,                                 //envia todos los datos de la tabla
+            "data" => $data->result_array(),                                 //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;                   
@@ -115,13 +104,12 @@ class Subjects extends CI_Controller{
             echo json_encode($errors);                                              //envio del vector de errores
             $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
         }else{                                                                      //si las reglas fueron cumplidas
-            $name           = $this->input->post('SBJC_name');                      //obtencion de todos los datos del formulario                    
-            $focus          = $this->input->post('SBJC_FK_learning_units');
-            $description    = $this->input->post('SBJC_description');
+            //obtencion de todos los datos del formulario                    
             $data= array(                                                           //creacion del vector de los nuevos datos de la unidada
-                'SBJC_name'                     =>  $name,
-                'SBJC_FK_learning_units'        =>  $focus,
-                'SBJC_description'              =>  $description,
+                'SBJC_name'                     =>  $this->input->post('SBJC_name'),
+                'SBJC_FK_learning_units'        =>  $this->input->post('SBJC_FK_learning_units'),
+                'SBJC_FK_users_teacher'        =>  $this->input->post('SBJC_FK_users_teacher'),
+                'SBJC_description'              =>  $this->input->post('SBJC_description'),
                 'SBJC_date_update'=>date("Y-m-d H:i:s"),
                 'SBJC_PK_update'=>$this->session->userdata('id'),
                 
@@ -150,17 +138,16 @@ class Subjects extends CI_Controller{
             echo json_encode($errors);                                              //envio del vector de errores
             $this->output->set_status_header(402);                                  //envio del estatus del error en este caso 402
         }else{                                                                      //si las reglas fueron cumplidas
-            $name           = $this->input->post('SBJC_name');                      //obtencion de todos los datos del formulario                    
-            $focus          = $this->input->post('SBJC_FK_learning_units');
-            $description    = $this->input->post('SBJC_description');
+            //obtencion de todos los datos del formulario                    
             $data= array(                                                           //creacion del vector de los nuevos datos de la unidad
-                'SBJC_name'       =>  $name,
-                'SBJC_FK_learning_units'=>  $focus,
-                'SBJC_description'=>  $description,
-                'SBJC_date_create'=>date("Y-m-d H:i:s"),
-                'SBJC_PK_create'  =>$this->session->userdata('id'),
-                'SBJC_date_update'=>date("Y-m-d H:i:s"),
-                'SBJC_PK_update'  =>$this->session->userdata('id'),
+                'SBJC_name'             =>  $this->input->post('SBJC_name'),
+                'SBJC_description'      =>  $this->input->post('SBJC_description'),
+                'SBJC_FK_learning_units'=>  $this->input->post('SBJC_FK_learning_units'),
+                'SBJC_FK_users_teacher'=>  $this->input->post('SBJC_FK_users_teacher'),
+                'SBJC_date_create'      =>  date("Y-m-d H:i:s"),
+                'SBJC_PK_create'        =>  $this->session->userdata('id'),
+                'SBJC_date_update'      =>  date("Y-m-d H:i:s"),
+                'SBJC_PK_update'        =>  $this->session->userdata('id'),
                 
             );
             if(!$this->Subject->agregarAsignatura($data)){                         //utilizacion del metodo modificarUnidad() del modelo Learning_unit() para la modificacion de la unidad enviando el id y los datos pertinentes
