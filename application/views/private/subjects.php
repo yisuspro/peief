@@ -64,9 +64,6 @@
                                             <select class="form-control" name="SBJC_FK_users_teacher" id="SBJC_FK_users_teacher">
                                                 <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                                 <option value="">Seleccione una Docente...</option>
-                                                <?php foreach($docentes->result_array() as $r) { ?>
-                                                <option value="<?= $r['USLE_PK'];?>"><?= $r['Nombre']; ?></option>
-                                                <?php }?>
                                             </select>
                                             </div>
                                             <div class="form-actions">
@@ -139,54 +136,39 @@
 <!-- fin contenido pies de pagina-->
 <!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
 <script>
-    $(document).ready(function() {
-                
-        listadocentes=<?= json_encode($docentes->result_array(), JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS) ?>;
-            console.log(listadocentes);
+    $(document).ready(function() {    
         
-        
-        var listaPueblos = {
-      cantabria: ["Laredo", "Gama", "Solares", "Castillo", "Santander"],
-      asturias: ["Langreo", "Villaviciosa", "Oviedo", "Gijon", "Covadonga"],
-      galicia: ["Tui", "Cambados", "Redondella", "Porriño", "Ogrove"],
-      andalucia: ["Dos Hermanas", "Écija", "Algeciras", "Marbella", "Sevilla"],
-      extremadura: ["Caceres", "Badajoz", "Plasencia", "Zafra", "Merida"]
-    }
-         console.log(listaPueblos);
-        function addOptions(domElement, array) {
-            var selector = document.getElementsByName(domElement)[0];
-            for (data in array) {
-                var opcion = document.createElement("option");
-                opcion.text = array[data];
-                // Añadimos un value a los option para hacer mas facil escoger los pueblos
-                opcion.value = array[data].toLowerCase()
-                selector.add(opcion);
-            }
-        }
-        
-        $('#SBJC_FK_learning_units').onchange = function(){
-        
+        document.getElementById('SBJC_FK_learning_units').onchange = function(){
             
+            listadocentes=<?= json_encode($docentes->result_array(), JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS) ?>;        
+            var lista=[];
             
-            /*var unidad = document.getElementByName('SBJC_FK_learning_units');
-            var docentes = document.getElementByName('SBJC_FK_users_teacher');
-            var unidadSeleccionada = Unidad.value;
+            listadocentes.forEach(function(element) {
+                if(!lista[element.USLE_FK_learning_units]){
+                    lista.push(element.USLE_FK_learning_units);
+                    lista[element.USLE_FK_learning_units]=Array({"Nombre":element.Nombre,"PK":element.USLE_PK});
+                }else{
+                    var newdata ={'Nombre': element.Nombre,'PK' :element.USLE_PK};
+                    lista[element.USLE_FK_learning_units].push(newdata);
+                }
+            });
+            
+            var unidad = document.getElementById('SBJC_FK_learning_units');
+            var docentes = document.getElementById('SBJC_FK_users_teacher');
+            var unidadSeleccionada = unidad.value;
             
             docentes.innerHTML = '<option value="">Seleccione un Docente...</option>';
             
             if(unidadSeleccionada !== ''){
-                // Se seleccionan los pueblos y se ordenan
-                unidadSeleccionada = listadocentes[unidadSeleccionada];
-                unidadSeleccionada.sort();
+                unidadSeleccionada = lista[unidadSeleccionada];
     
-                // Insertamos los pueblos
                 unidadSeleccionada.forEach(function(docente){
                     let opcion = document.createElement('option');
-                    opcion.value = docente;
-                    opcion.text = docente;
+                    opcion.value = docente.PK;
+                    opcion.text = docente.Nombre;
                     docentes.add(opcion);
                 });
-            }*/
+            }
                 
         };
             
@@ -236,7 +218,7 @@
             columns: [{data:'SBJC_name'},
                       {data:'SBJC_description'},
                       {data:'LNUT_name'},
-                      {data:'LNUT_name'},
+                      {data:'Docente'},
                       {mRender: function (data, type, row) {
                           return '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar unidad" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar unidad" value="eliminar" >';
                 }

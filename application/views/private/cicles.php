@@ -43,10 +43,10 @@
                                                         </div>
                                                     </div>
                                                     <label> Tipo de version y plan</label>
-                                                    <select class="form-control" name="CCLS_FK_versions_plans" id="CCLS_FK_versions_plans">
+                                                    <select class="form-control" name="CCLS_FK_plans" id="CCLS_FK_plans">
                                                         <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                                         <?php foreach($versiones->result_array() as $r) { ?>
-                                                        <option value="<?php echo $r['VRPL_PK'];?>"><?php echo $r['VRSN_name'].'/'.$r['PLAN_name']; ?></option>
+                                                        <option value="<?php echo $r['PLAN_PK'];?>"><?= $r['PLAN_name']; ?></option>
                                                         <?php }?>
                                                     </select>
 
@@ -156,17 +156,28 @@
                 },
 
             ],
+            
+             columns: [{data:'CCLS_name'},
+                      {data:'PLAN_name'},
+                {mRender: function (data, type, row) {
+                    return '<input type="button" class="btn btn-warning edit" title="Editar Curso" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar Curso" value="eliminar" ><input type="button" class="btn btn-success asignar" title="Agregar asignaturas"  value="asignaturas" >';
+                }
+                }],  
+            
+    
+            
             pageLength: 10,
         });
 
         dt.on('click', '.remove', function(e) {
-            var tr = this.id;
-            eliminar = confirm("Seguro desea eliminar el rol" + tr);
+            $tr = $(this).closest('tr');             
+            var O = dt.DataTable().row($tr).data();
+            eliminar = confirm("Seguro desea eliminar el ciclo" + O.CCLS_name);
             if (eliminar) {
                 $.ajax({
-                    url: 'Cicles/eliminarCicles/' + tr,
+                    url: 'Cicles/eliminarCicles/' + O.CCLS_PK,
                     type: 'POST',
-                    data: tr,
+                    data: O.CCLS_PK,
                     success: function(data, xhr) {
                         $("#sample_1").DataTable().ajax.reload();
                         document.getElementById('alerta_principal').style.display = 'inherit';
@@ -184,14 +195,16 @@
         });
         dt.on('click', '.edit', function(e) {
             e.preventDefault();
-            var tr = this.id;
-            var url = 'Cicles/editarCicle/' + tr;
+            $tr = $(this).closest('tr');             
+            var O = dt.DataTable().row($tr).data();
+            var url = 'Cicles/editarCicle/' + O.CCLS_PK;
             $(".contentAjax").load(url);
         });
         dt.on('click', '.asignar', function(e) {
             e.preventDefault();
-            var tr = this.id;
-            var url = 'Cicles/asignarMateria/' + tr;
+            $tr = $(this).closest('tr');             
+            var O = dt.DataTable().row($tr).data();
+            var url = 'Cicles/asignarMateria/' + O.CCLS_PK;
             $(".contentAjax").load(url);
         });
 

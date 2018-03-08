@@ -28,7 +28,9 @@ class Cicle extends CI_Model {
     * @return get() | false
     */
     public function datosCicle($datos){
-        if(!$rol= $this->db->select('*')->from('cicles')->join('versions_plans','cicles.CCLS_FK_versions_plans = versions_plans.VRPL_PK')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->join('plans','versions_plans.VRPL_FK_plans = plans.PLAN_PK')->where('CCLS_PK',$datos)){
+        if(!$rol= $this->db->select('*')->from('cicles')
+           ->join('plans','cicles.CCLS_FK_plans = plans.PLAN_PK')
+           ->where('CCLS_PK',$datos)){
             return false;
         }else{
             return $rol->get();
@@ -41,7 +43,10 @@ class Cicle extends CI_Model {
     * @return get() 
     */
     public function listar(){
-        $rol= $this->db->select('*')->from('cicles')->join('versions_plans','cicles.CCLS_FK_versions_plans = versions_plans.VRPL_PK')->join('versions','versions_plans.VRPL_FK_versions = versions.VRSN_PK')->join('plans','versions_plans.VRPL_FK_plans = plans.PLAN_PK');
+        $rol= $this->db->select('*')
+            ->from('cicles')
+            ->join('plans','cicles.CCLS_FK_plans = plans.PLAN_PK');
+           //->join('versions','plans.PLAN_PK = versions.VRSN_FK_plans')
         return $rol->get();
     }
     

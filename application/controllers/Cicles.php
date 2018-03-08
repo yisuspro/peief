@@ -28,8 +28,9 @@ class Cicles extends CI_Controller{
     * @return view ()
     */
     public function index(){
-        $versiones = $this->Plan->listarVersionsPlans();
-        $data['versiones']=$versiones;
+        
+        
+        $data['versiones']=$this->Plan->listarVersionsPlans();
         $data['title']='PEIEF | Ciclos';
         $this->load->view('private/heads/head_1',$data);
         $this->load->view('private/heads/head_2');
@@ -49,18 +50,11 @@ class Cicles extends CI_Controller{
         $start  = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
         $data =$this->Cicle->listar();                       //utiliza el metodo listar() del modelo plan() para traer los datos de todos los planes 
-        foreach($data->result() as $r) {                    //ciclo para la creacion de las filas y columnas de la tabla de datos incluye los botones de acciones
-            $dato[] = array(
-                $r->CCLS_name,
-                $r->VRSN_name.'/'.$r->PLAN_name,
-                '<input type="button" class="btn btn-warning edit" title="Editar Curso" id="'.$r->CCLS_PK.'" value="editar" ><input type="button" class="btn btn-danger remove" title="Eliminar Curso" id="'.$r->CCLS_PK.'" value="eliminar" ><input type="button" class="btn btn-success asignar" title="Agregar asignaturas" id="'.$r->CCLS_PK.'" value="asignaturas" >',
-            );
-        }
         $output = array(                                    //creacion del vector de salida
             "draw" => $draw,                                //envio la variable de dibujo de la tabla                    
             "recordsTotal" =>$data->num_rows(),             //envia el numero de filas  para saber cuantos usuarios son en total
             "recordsFiltered" => $data->num_rows(),         //envio el numero de filas para el calculo de la paginacion de la tabla
-            "data" => $dato                                 //envia todos los datos de la tabla
+            "data" => $data->result_array()                                 //envia todos los datos de la tabla
         );
         echo json_encode($output);                          //envio del vector de salida con los parametros correspondientes
         exit;    
@@ -85,7 +79,7 @@ class Cicles extends CI_Controller{
             //obtencion de todos los datos del formulario
             $data= array(                                       //creacion del vector de los nuevos datos del plan
                 'CCLS_name'             =>  $this->input->post('CCLS_name'),
-                'CCLS_FK_versions_plans'=>  $this->input->post('CCLS_FK_versions_plans'),
+                'CCLS_FK_plans'         =>  $this->input->post('CCLS_FK_plans'),
                 'CCLS_date_create'      =>  date("Y-m-d H:i:s"),
                 'CCLS_date_update'      =>  date("Y-m-d H:i:s"),
                 'CCLS_PK_create'        =>  $this->session->userdata('id'),
@@ -118,20 +112,12 @@ class Cicles extends CI_Controller{
     * @return view () | $datos
     */
     public function editarCicle($pk){
-        $data=$this->Cicle->datosCicle($pk);                             //verifica por medio del metodo datosPlan() del modelo Plan() si el usuario existe ytrae todos los datos pertinentes al usuario 
-        foreach($data->result() as $r) {                                //ciclo para  convertir los datos en un arreglo
-            $dato = array();                                            //creacion del vector que contendra los datos del plan
-            $dato['CCLS_PK']    = $r->CCLS_PK;
-            $dato['CCLS_name']  = $r->CCLS_name;
-            $dato['CCLS_FK_versions_plans']= $r->CCLS_FK_versions_plans;
-            $dato['VRSN_name']  = $r->VRSN_name;
-            $dato['PLAN_name']  = $r->PLAN_name;
-        }
+        $data=$this->Cicle->datosCicle($pk)->result_array()[0];         //verifica por medio del metodo datosPlan() del modelo Plan() si el usuario existe ytrae todos los datos pertinentes al usuario 
         $roles = $this->Role->listar();
         $versiones = $this->Plan->listarVersionsPlans();
-        $dato['versiones']=$versiones;
-        $dato['roles']=$roles;
-        $this->load->view('private/view_ajax/editar_cicle_ajax',$dato);  //envio de la vista y los datos para la edicion de los planes
+        $data['versiones']=$versiones;
+        $data['roles']=$roles;
+        $this->load->view('private/view_ajax/editar_cicle_ajax',$data);  //envio de la vista y los datos para la edicion de los planes
     }
     /**
     * funcion para la modificacion de los datos del plan
@@ -152,7 +138,7 @@ class Cicles extends CI_Controller{
             //obtencion de todos los datos del formulario   
             $data = array(                                               //creacion del vector de los nuevos datos del plan
                 'CCLS_name'             =>  $this->input->post('CCLS_name'),
-                'CCLS_FK_versions_plans'=>  $this->input->post('CCLS_FK_versions_plans'),
+                'CCLS_FK_plans'=>  $this->input->post('CCLS_FK_plans'),
                 'CCLS_date_update'      =>  date("Y-m-d H:i:s"),
                 'CCLS_PK_update'        =>  $this->session->userdata('id'),
             );

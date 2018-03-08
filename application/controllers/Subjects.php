@@ -83,6 +83,7 @@ class Subjects extends CI_Controller{
     */
     public function editarAsignatura($doc){
         $data=$this->Subject->datosAsignatura($doc)->result_array()[0];          //verifica por medio del metodo datosUnidad() del modelo Learning_unit() si la unidad existe y trae todos los datos pertinentes al usuario       
+        $data['docentes']=$this->Subject->listarDocentes();
         $data['unidades']  = $this->Learning_unit->listar(); //trae los datos de enfoques para agregar a la  unidad
         $this->load->view('private/view_ajax/editar_asignatura_ajax',$data);//envio de la vista y los datos para la edicion de los usuarios
     }

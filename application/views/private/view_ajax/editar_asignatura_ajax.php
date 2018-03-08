@@ -34,14 +34,26 @@
                                 </div>
                             </div>
 
-                            <label> Tipo de enfoque pedagogico</label>
-                            <select class="form-control" name="SBJC_FK_learning_units" id="SBJC_FK_learning_units">
-                                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                <option value="<?php echo $SBJC_FK_learning_units;?>"><?php echo $LNUT_name; ?></option>
-                                <?php foreach($unidades->result_array() as $r) { ?>
-                                <option value="<?php echo $r['LNUT_PK'];?>"><?php echo $r['LNUT_name']; ?></option>
-                                <?php }?>
-                            </select>
+                               <div class="form-group">
+                                            <label> Unidad de aprendizaje</label>
+                                            <select class="form-control" name="SBJC_FK_learning_units" id="SBJC_FK_learning_units">
+                                                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                                <option value="">Seleccione una unidad...</option>
+                                                <?php foreach($unidades->result_array() as $r) { ?>
+                                                <option value="<?php echo $r['LNUT_PK'];?>"><?php echo $r['LNUT_name']; ?></option>
+                                                <?php }?>
+                                            </select>
+                                            </div>
+                                            
+                                            
+                                            
+                                            <div class="form-group">
+                                                <label> Docentes</label>
+                                            <select class="form-control" name="SBJC_FK_users_teacher" id="SBJC_FK_users_teacher">
+                                                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
+                                                <option value="">Seleccione una Docente...</option>
+                                            </select>
+                                            </div>
 
                             <div class="form-actions">
                                 <div class="row">
@@ -63,6 +75,44 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function() {
+        
+        document.getElementById('SBJC_FK_learning_units').onchange = function(){
+            
+            listadocentes=<?= json_encode($docentes->result_array(), JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS) ?>;        
+            var lista=[];
+            
+            listadocentes.forEach(function(element) {
+                if(!lista[element.USLE_FK_learning_units]){
+                    lista.push(element.USLE_FK_learning_units);
+                    lista[element.USLE_FK_learning_units]=Array({"Nombre":element.Nombre,"PK":element.USLE_PK});
+                }else{
+                    var newdata ={'Nombre': element.Nombre,'PK' :element.USLE_PK};
+                    lista[element.USLE_FK_learning_units].push(newdata);
+                }
+            });
+            
+            var unidad = document.getElementById('SBJC_FK_learning_units');
+            var docentes = document.getElementById('SBJC_FK_users_teacher');
+            var unidadSeleccionada = unidad.value;
+            
+            docentes.innerHTML = '<option value="">Seleccione un Docente...</option>';
+            
+            if(unidadSeleccionada !== ''){
+                unidadSeleccionada = lista[unidadSeleccionada];
+    
+                unidadSeleccionada.forEach(function(docente){
+                    let opcion = document.createElement('option');
+                    opcion.value = docente.PK;
+                    opcion.text = docente.Nombre;
+                    docentes.add(opcion);
+                });
+            }
+                
+        };
+        
+        
+        
+        
         $("#frm_editar_asignatura").submit(function(event) {
             event.preventDefault();
             var tr = $('#SBJC_PK_hidden').val();
