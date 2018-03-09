@@ -29,7 +29,7 @@ class Seeders extends CI_Controller{
     */
     public function index(){
         
-        $state= array( 
+       $state= array( 
             'STTS_PK'   =>  1,
             'STTS_state'=> 'Activo',
             
@@ -238,10 +238,72 @@ class Seeders extends CI_Controller{
             'RLPR_FK_permits'   =>10,
         );
         $this->Permits->asignarPermiso($permit);
-   $role= array(
+        $role= array(
             'USRL_FK_users'    =>1,
             'USRL_FK_roles'    =>1,
         );
         $this->Role->asignarRol($role);
+        
+        
+        $focu= array(
+            'FOCS_name'             =>  "Ninguno",
+            'FOCS_description'      =>  "SIN ENFOQUE",
+        );  
+        $this->Focu->agregarFocus($focu);
+        $focu= array(
+            'FOCS_name'             =>  "EXPERIMENTAL",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        $focu= array(
+            'FOCS_name'             =>  "IDENTIDAD NACIONAL",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        $focu= array(
+            'FOCS_name'             =>  "CRÍTICO",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        $focu= array(
+            'FOCS_name'             =>  "VIVENCIAL",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        $focu= array(
+            'FOCS_name'             =>  "CONSTRUCCION DE PENSAMIENTO",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        $focu= array(
+            'FOCS_name'             =>  "COMUNICATIVO",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        
+        $focu= array(
+            'FOCS_name'             =>  "PRÁCTICA",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        $focu= array(
+            'FOCS_name'             =>  "INVESTIGATIVO",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        $focu= array(
+            'FOCS_name'             =>  "GESTIÓN",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        
+        $focu= array(
+            'FOCS_name'             =>  "CLASE INVERTIDA",
+            'FOCS_description'      =>  "--",
+        );  
+        $this->Focu->agregarFocus($focu);
+        
+        
+        
     }
 }

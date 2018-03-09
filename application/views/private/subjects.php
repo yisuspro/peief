@@ -57,15 +57,6 @@
                                             </select>
                                             </div>
                                             
-                                            
-                                            
-                                            <div class="form-group">
-                                                <label> Docentes</label>
-                                            <select class="form-control" name="SBJC_FK_users_teacher" id="SBJC_FK_users_teacher">
-                                                <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-                                                <option value="">Seleccione una Docente...</option>
-                                            </select>
-                                            </div>
                                             <div class="form-actions">
                                                 <div class="row">
                                                     <div class="modal-footer">
@@ -104,7 +95,6 @@
                                         <th>Asignaturas</th>
                                         <th>Descripcion</th>
                                         <th>Unidad de aprendizaje</th>
-                                        <th>Docente</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -113,7 +103,6 @@
                                         <th>Asignaturas</th>
                                         <th>Descripcion</th>
                                         <th>Unidad de aprendizaje</th>
-                                        <th>Docente</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>
@@ -138,42 +127,7 @@
 <script>
     $(document).ready(function() {    
         
-        document.getElementById('SBJC_FK_learning_units').onchange = function(){
-            
-            listadocentes=<?= json_encode($docentes->result_array(), JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS) ?>;        
-            var lista=[];
-            
-            listadocentes.forEach(function(element) {
-                if(!lista[element.USLE_FK_learning_units]){
-                    lista.push(element.USLE_FK_learning_units);
-                    lista[element.USLE_FK_learning_units]=Array({"Nombre":element.Nombre,"PK":element.USLE_PK});
-                }else{
-                    var newdata ={'Nombre': element.Nombre,'PK' :element.USLE_PK};
-                    lista[element.USLE_FK_learning_units].push(newdata);
-                }
-            });
-            
-            var unidad = document.getElementById('SBJC_FK_learning_units');
-            var docentes = document.getElementById('SBJC_FK_users_teacher');
-            var unidadSeleccionada = unidad.value;
-            
-            docentes.innerHTML = '<option value="">Seleccione un Docente...</option>';
-            
-            if(unidadSeleccionada !== ''){
-                unidadSeleccionada = lista[unidadSeleccionada];
-    
-                unidadSeleccionada.forEach(function(docente){
-                    let opcion = document.createElement('option');
-                    opcion.value = docente.PK;
-                    opcion.text = docente.Nombre;
-                    docentes.add(opcion);
-                });
-            }
-                
-        };
-            
-        
-        
+
         var dt;
         dt = $('#sample_1');
         dt.DataTable({
@@ -218,7 +172,6 @@
             columns: [{data:'SBJC_name'},
                       {data:'SBJC_description'},
                       {data:'LNUT_name'},
-                      {data:'Docente'},
                       {mRender: function (data, type, row) {
                           return '<input type="button" class="btn btn-warning fa fa-remove edit" title="Editar unidad" value="editar" ><input type="button" class="btn btn-danger fa fa-remove remove" title="Eliminar unidad" value="eliminar" >';
                 }

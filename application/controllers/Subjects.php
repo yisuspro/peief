@@ -144,7 +144,6 @@ class Subjects extends CI_Controller{
                 'SBJC_name'             =>  $this->input->post('SBJC_name'),
                 'SBJC_description'      =>  $this->input->post('SBJC_description'),
                 'SBJC_FK_learning_units'=>  $this->input->post('SBJC_FK_learning_units'),
-                'SBJC_FK_users_teacher'=>  $this->input->post('SBJC_FK_users_teacher'),
                 'SBJC_date_create'      =>  date("Y-m-d H:i:s"),
                 'SBJC_PK_create'        =>  $this->session->userdata('id'),
                 'SBJC_date_update'      =>  date("Y-m-d H:i:s"),
