@@ -23,7 +23,7 @@
                     <div class="portlet-body">
                         <!-- espacio de trabajo _______________________________________________________________________________________________________________________________________________________ -->
                         <div class="profile-userpic">
-                            <img src="<?= base_url('assets/pages/media/profile/profile_user.jpg') ?>" class="img-responsive" alt="" width="100px" height="100px">
+                            <img src="<?= base_url() ?>assets/pages/media/profile/profile_user.jpg" class="img-responsive" alt="" width="100px" height="100px">
                         </div>
                         <!-- END SIDEBAR USERPIC -->
                         <!-- SIDEBAR USER TITLE -->
@@ -39,7 +39,7 @@
                                     </a>
                                     <a class="list-toggle-container" data-toggle="collapse" href="#completed" aria-expanded="true">
                                         <div class="list-toggle done uppercase">
-                                            INFROMACION BASICA
+                                            INFORMACION BASICA
                                             <span class="badge badge-default pull-right bg-white font-green bold"></span>
                                         </div>
                                     </a>
@@ -49,14 +49,12 @@
                                                 <div class="list-icon-container">
                                                     <i class="icon-user"></i>
                                                 </div>
-                                                <div class="list-datetime">
-                                                    N/A
-                                                </div>
+                                            
 
                                                 <div class="list-item-content">
                                                     NOMBRE Y APELLIDOS
                                                     <p>
-                                                        <?php echo $nombre; ?> <?php echo $this->session->userdata('apellido'); ?>
+                                                        <?= $nombre; ?> <?= $this->session->userdata('apellido'); ?>
                                                         
                                                     </p>
                                                 </div>
@@ -65,12 +63,10 @@
                                                 <div class="list-icon-container">
                                                     <i class="fa fa-credit-card"></i>
                                                 </div>
-                                                <div class="list-datetime">
-                                                    N/A
-                                                </div>
+                                                
                                                 <div class="list-item-content">
                                                     TIPO Y NUMERO DE DOCUMENTO
-                                                    <p><?php echo $this->session->userdata('type_identification'); ?> : <?php echo $this->session->userdata('doc'); ?>
+                                                    <p><?= $this->session->userdata('type_identification'); ?> : <?= $this->session->userdata('doc'); ?>
                                                     </p>
                                                 </div>
                                             </li>
@@ -78,13 +74,11 @@
                                                 <div class="list-icon-container">
                                                     <i class="fa fa-home"></i>
                                                 </div>
-                                                <div class="list-datetime">
-                                                    N/A
-                                                </div>
+                                                
                                                 <div class="list-item-content">
                                                     DIRECCION DE RESIDENCIA
                                                     <p>
-                                                        <?php echo $address;?>
+                                                        <?= $address;?>
                                                     </p>
                                                 </div>
                                             </li>
@@ -92,13 +86,11 @@
                                                 <div class="list-icon-container">
                                                     <i class="fa fa-phone"></i>
                                                 </div>
-                                                <div class="list-datetime">
-                                                    N/A
-                                                </div>
+                                                
                                                 <div class="list-item-content">
                                                     TELEFONO
                                                     <p>
-                                                        <?php echo $telephone;?>
+                                                        <?= $telephone;?>
                                                     </p>
                                                 </div>
                                             </li>
@@ -106,13 +98,11 @@
                                                 <div class="list-icon-container">
                                                     <i class="fa fa-at"></i>
                                                 </div>
-                                                <div class="list-datetime">
-                                                    N/A
-                                                </div>
+                                                
                                                 <div class="list-item-content">
                                                     CORREO ELECTRONICO
                                                     <p>
-                                                        <?php echo $email;?>
+                                                        <?= $email;?>
                                                     </p>
                                                 </div>
                                             </li>
@@ -120,13 +110,11 @@
                                                 <div class="list-icon-container">
                                                     <i class="fa fa-venus-mars"></i>
                                                 </div>
-                                                <div class="list-datetime">
-                                                    N/A
-                                                </div>
+
                                                 <div class="list-item-content">
                                                     GENERO
                                                     <p>
-                                                        <?php echo $gender; ?>
+                                                        <?= $gender; ?>
                                                     </p>
                                                 </div>
                                             </li>
@@ -134,13 +122,11 @@
                                                 <div class="list-icon-container">
                                                     <i class="fa fa-check-square-o"></i>
                                                 </div>
-                                                <div class="list-datetime">
-                                                    N/A
-                                                </div>
+                                               
                                                 <div class="list-item-content">
                                                     ESTADO
                                                     <p>
-                                                        <?php echo $state; ?>
+                                                        <?= $state; ?>
                                                     </p>
                                                 </div>
                                             </li>

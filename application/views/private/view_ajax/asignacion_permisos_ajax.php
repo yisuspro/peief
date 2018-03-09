@@ -189,7 +189,7 @@ left: 21px !important;
                 $(this).toggleClass("switchOn");
                 var tr = this.id;
                 $.ajax({
-                    url: 'Roles/asignarPermisoRol/' + <?php echo $id;?> + '/' + tr,
+                    url: 'Roles/asignarPermisoRol/' + <?= $id;?> + '/' + tr,
                     type: 'POST',
                     data: tr,
                     success: function(data, xhr) {
@@ -213,7 +213,7 @@ left: 21px !important;
                 $(this).toggleClass("switchOn");
                 
                 $.ajax({
-                    url: 'Permisos/eliminarPermisosRol/'+<?php echo $id;?>+'/'+tr,
+                    url: 'Permisos/eliminarPermisosRol/'+<?= $id;?>+'/'+tr,
                     type: 'POST',
                     data: tr,
                     success: function(data, xhr) {

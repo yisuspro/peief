@@ -30,7 +30,7 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <?php echo validation_errors(); ?>
+                                        <?= validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_version"');?>
                                             <div class="form-wizard">
                                                 <div class="form-group">
@@ -41,7 +41,7 @@
                                                     </div>
                                                     <div class="alert alert-danger invalid-feedback" id="VRSN_name_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
-                                                            <?php echo form_error('VRSN_name') ?>
+                                                            <?= form_error('VRSN_name') ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -50,7 +50,7 @@
                                             <select class="form-control" name="VRSN_FK_plans" id="VRSN_FK_plans">
                                                 <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                                 <?php foreach($planes->result_array() as $r) { ?>
-                                                <option value="<?php echo $r['PLAN_PK'];?>"><?php echo $r['PLAN_name']; ?></option>
+                                                <option value="<?= $r['PLAN_PK'];?>"><?= $r['PLAN_name']; ?></option>
                                                 <?php }?>
                                             </select>
                                                 
@@ -116,7 +116,7 @@
                 [5, 10, 25, 50, "Todo"],
             ],
             "ajax": {
-                url: "<?php echo base_url(); ?>Versions/listarVersions",
+                url: "<?= base_url(); ?>Versions/listarVersions",
                 type: 'GET'
             },
             "scrollX": true,
@@ -219,4 +219,4 @@
         });
     });
 </script>
-<script src="<?= base_url('assets/js/versions/agregar_versions.js')?>"></script>
+<script src="<?= base_url()?>assets/js/versions/agregar_versions.js"></script>

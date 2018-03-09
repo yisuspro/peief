@@ -25,7 +25,7 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <?php echo validation_errors(); ?>
+                                    <?= validation_errors(); ?>
                                     <?= form_open('','id="frm_agregar_unidad"');?>
                                         <div class="form-wizard">
                                             <div class="form-group"><label>Nombre unidad</label>
@@ -34,7 +34,7 @@
                                                 </div>
                                                 <div class="alert alert-danger invalid-feedback" id="LNUT_name_alerta" role="alert" style="display:none">
                                                     <div class="invalid-feedback">
-                                                        <?php echo form_error('LNUT_name') ?>
+                                                        <?= form_error('LNUT_name') ?>
                                                     </div>
                                                 </div>
                                                 <label>Descripcion</label>
@@ -52,7 +52,7 @@
                                             <select class="form-control" name="LNUT_FK_focus" id="LNUT_FK_focus">
                                                 <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                                 <?php foreach($focus->result_array() as $r) { ?>
-                                                <option value="<?php echo $r['FOCS_PK'];?>"><?php echo $r['FOCS_name']; ?></option>
+                                                <option value="<?= $r['FOCS_PK'];?>"><?= $r['FOCS_name']; ?></option>
                                                 <?php }?>
                                             </select>
 
@@ -263,4 +263,4 @@
 
 </script>
 
-<script src="<?= base_url('assets/js/learning_units/agregar_learning_units.js')?>"></script>
+<script src="<?= base_url()?>assets/js/learning_units/agregar_learning_units.js"></script>

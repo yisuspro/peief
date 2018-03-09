@@ -68,7 +68,7 @@ class Usuarios extends CI_Controller
                         'USER_PK_update'               =>   $this->session->userdata('id'),
                         'USER_FK_state'                =>   1,
                         'USER_FK_type_identification'  =>   $this->input->post('USER_FK_type_identification'),
-                        'USER_FK_gander'               =>   $this->input->post('USER_FK_gander')
+                        'USER_FK_gender'               =>   $this->input->post('USER_FK_gender')
                     );
                 
                     if(!$this->Users->registrar($data)){                                    //registro del usuarios en caso de erro envia mensaje de error si no confirma la accion de gardar
@@ -103,8 +103,8 @@ class Usuarios extends CI_Controller
         
         $data['title'] ='Perfil';                                                       //Titulo de pagina
                     
-        $this->load->view('private/heads/head_1',$data);
-        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/header',$data);
+        $this->load->view('private/heads/bar_up');
         $this->load->view('private/heads/menus');
         $this->load->view('private/perfil', $data);                             //envio de vista perfil con los datos de la persona logueada   
         $this->load->view('private/footers/foot_1');
@@ -120,8 +120,8 @@ class Usuarios extends CI_Controller
     public function listarUsuarios(){
         $data['title']='Listar Usuarios';                                                      //Titulo de pagina
         
-        $this->load->view('private/heads/head_1',$data);
-        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/header',$data);
+        $this->load->view('private/heads/bar_up');
         $this->load->view('private/heads/menus');
         $this->load->view('private/listar_usuarios', $data);    
         $this->load->view('private/footers/foot_1');
@@ -216,7 +216,7 @@ class Usuarios extends CI_Controller
                 'USER_PK_update'                =>  $this->session->userdata('id'),
                 'USER_FK_state'                 =>  $this->input->post('USER_FK_state'),
                 'USER_FK_type_identification'   =>  $this->input->post('USER_FK_type_identification'),
-                'USER_FK_gander'                =>  $this->input->post('USER_FK_gander')
+                'USER_FK_gender'                =>  $this->input->post('USER_FK_gender')
             );
             
             if(!$this->Users->modificarUsuario($doc,$data)){                    //utilizacion del metodo modificarUsuarios() del modelo users() para la modificacion del usuario  enviando el id y los datos pertinentes

@@ -29,7 +29,7 @@
                                         <h1><i class="glyphicon glyphicon-thumbs-up"></i> AGREGAR UN CURSO</h1>
                                     </div>
                                     <div class="modal-body">
-                                        <?php echo validation_errors(); ?>
+                                        <?= validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_cicle"');?>
                                             <div class="form-wizard">
                                                 <div class="form-group">
@@ -39,14 +39,14 @@
                                                     </div>
                                                     <div class="alert alert-danger invalid-feedback" id="CCLS_name_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
-                                                            <?php echo form_error('CCLS_name') ?>
+                                                            <?= form_error('CCLS_name') ?>
                                                         </div>
                                                     </div>
                                                     <label> Tipo de version y plan</label>
                                                     <select class="form-control" name="CCLS_FK_plans" id="CCLS_FK_plans">
                                                         <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                                         <?php foreach($versiones->result_array() as $r) { ?>
-                                                        <option value="<?php echo $r['PLAN_PK'];?>"><?= $r['PLAN_name']; ?></option>
+                                                        <option value="<?= $r['PLAN_PK'];?>"><?= $r['PLAN_name']; ?></option>
                                                         <?php }?>
                                                     </select>
 
@@ -110,7 +110,6 @@
 </div>
 <!--fin del contenido de lapagina-->
 <!--contenido pies de pagina-->
-<?php require_once 'footers/foot_1.php';?>
 <?php require_once 'footers/foot_3.php';?>
 <!-- fin contenido pies de pagina-->
 <!--aqui se pueden agregar ls scrips necesarios  que nesesite la pagina-->
@@ -231,8 +230,5 @@
     });
 
 </script>
-<script src="<?= base_url('assets/js/cicles/agregar_cicles.js')?>"></script>
+<script src="<?= base_url()?>assets/js/cicles/agregar_cicles.js"></script>
 <!--fin scrips-->
-<!--scrips pie de pagina-->
-<?php require_once 'footers/foot_2.php';?>
-<!--fin scrips pie de pagina-->

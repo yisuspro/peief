@@ -31,13 +31,13 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <?php echo validation_errors(); ?>
+                                        <?= validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_plan"');?>
                                             <div class="form-wizard">
                                                 <div class="form-group">
                                                     <div class="alert alert-danger" id="PLAN_PK_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
-                                                            <?php echo form_error ('PLAN_PK') ?>
+                                                            <?= form_error ('PLAN_PK') ?>
                                                         </div>
                                                     </div>
 
@@ -47,7 +47,7 @@
                                                     </div>
                                                     <div class="alert alert-danger invalid-feedback" id="PLAN_name_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
-                                                            <?php echo form_error('PLAN_name') ?>
+                                                            <?= form_error('PLAN_name') ?>
                                                         </div>
                                                     </div>
 
@@ -118,7 +118,7 @@
                 [5, 10, 25, 50, "Todo"],
             ],
             "ajax": {
-                url: "<?php echo base_url('Plans/listarPlans'); ?>",
+                url: "<?= base_url(); ?>Plans/listarPlans",
                 type: 'GET'
             },
             "scrollX": true,
@@ -221,5 +221,5 @@
     });
 
 </script>
-<script src="<?= base_url('assets/js/plans/agregar_plans.js')?>"></script>
+<script src="<?= base_url()?>assets/js/plans/agregar_plans.js"></script>
 

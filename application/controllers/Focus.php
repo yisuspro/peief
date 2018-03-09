@@ -29,8 +29,8 @@ class Focus extends CI_Controller{
     */
     public function index(){
         $data['title']='Enfoques';
-        $this->load->view('private/heads/head_1',$data);
-        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/header',$data);
+        $this->load->view('private/heads/bar_up');
         $this->load->view('private/heads/menus');
         $this->load->view('private/focus', $data);    
         $this->load->view('private/footers/foot_1');

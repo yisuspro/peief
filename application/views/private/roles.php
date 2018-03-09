@@ -61,13 +61,13 @@
                                     </div>
                                     
                                     <div class="modal-body">
-                                        <?php echo validation_errors(); ?>
+                                        <?= validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_rol"');?>
                                             <div class="form-wizard">
                                                 <div class="form-group">
                                                     <div class="alert alert-danger" id="ROLE_PK_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
-                                                            <?php echo form_error ('ROLE_PK') ?>
+                                                            <?= form_error ('ROLE_PK') ?>
                                                         </div>
                                                     </div>
 
@@ -77,7 +77,7 @@
                                                     </div>
                                                     <div class="alert alert-danger invalid-feedback" id="ROLE_name_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
-                                                            <?php echo form_error('ROLE_name') ?>
+                                                            <?= form_error('ROLE_name') ?>
                                                         </div>
                                                     </div>
                                                     
@@ -138,7 +138,7 @@
                 [5, 10, 25, 50, "Todo"],
             ],
             "ajax": {
-                url: "<?php echo base_url(); ?>Roles/listarRoles",
+                url: "<?= base_url(); ?>Roles/listarRoles",
                 type: 'GET'
             },
             "scrollX": true,
@@ -256,5 +256,5 @@
     });
 
 </script>
-<script src="<?= base_url('assets/js/roles/agregar_roles.js')?>"></script>
+<script src="<?= base_url()?>assets/js/roles/agregar_roles.js"></script>
 

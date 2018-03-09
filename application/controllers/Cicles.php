@@ -32,8 +32,8 @@ class Cicles extends CI_Controller{
         
         $data['versiones']=$this->Plan->listarVersionsPlans();
         $data['title']='PEIEF | Ciclos';
-        $this->load->view('private/heads/head_1',$data);
-        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/header',$data);
+        $this->load->view('private/heads/bar_up');
         $this->load->view('private/heads/menus');
         $this->load->view('private/Cicles', $data);    
         $this->load->view('private/footers/foot_1');

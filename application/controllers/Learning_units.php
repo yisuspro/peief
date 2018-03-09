@@ -31,8 +31,8 @@ class Learning_units extends CI_Controller{
     public function index(){
         $data['focus']=$this->Focu->listar();
         $data['title']='Unidades de aprendizaje';
-        $this->load->view('private/heads/head_1',$data);
-        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/header',$data);
+        $this->load->view('private/heads/bar_up');
         $this->load->view('private/heads/menus');
         $this->load->view('private/Learning_units', $data);    
         $this->load->view('private/footers/foot_1');

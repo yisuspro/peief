@@ -30,7 +30,7 @@
                             <select class="form-control" name="VRSN_FK_plans" id="VRSN_FK_plans" value="<?= $data['VRSN_FK_plans']; ?>">
                                 <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                 <?php foreach($planes->result_array() as $r) { ?>
-                                <option value="<?php echo $r['PLAN_PK'];?>"><?php echo $r['PLAN_name']; ?></option>
+                                <option value="<?= $r['PLAN_PK'];?>"><?= $r['PLAN_name']; ?></option>
                                 <?php }?>
                             </select>
                             <div class="form-actions">

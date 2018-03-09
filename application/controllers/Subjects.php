@@ -32,8 +32,8 @@ class Subjects extends CI_Controller{
         $data['unidades']=$this->Learning_unit->listar();
         $data['docentes']=$this->Subject->listarDocentes();
         $data['title']='Asignaturas';
-        $this->load->view('private/heads/head_1',$data);
-        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/header',$data);
+        $this->load->view('private/heads/bar_up');
         $this->load->view('private/heads/menus');
         $this->load->view('private/subjects', $data);    
         $this->load->view('private/footers/foot_1');

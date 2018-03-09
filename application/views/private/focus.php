@@ -30,7 +30,7 @@
                                         <h1><i class="glyphicon glyphicon-thumbs-up"></i> AGREGAR UN ENFOQUE</h1>
                                     </div>
                                     <div class="modal-body">
-                                        <?php echo validation_errors(); ?>
+                                        <?= validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_focus"');?>
                                             <div class="form-wizard">
                                                 <div class="form-group">
@@ -40,7 +40,7 @@
                                                     </div>
                                                     <div class="alert alert-danger invalid-feedback" id="FOCS_name_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
-                                                            <?php echo form_error('FOCS_name') ?>
+                                                            <?= form_error('FOCS_name') ?>
                                                         </div>
                                                     </div>
                                                     <label>Descripcion</label>
@@ -49,7 +49,7 @@
                                                     </div>
                                                     <div class="alert alert-danger invalid-feedback" id="FOCS_description_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
-                                                            <?php echo form_error('FOCS_description') ?>
+                                                            <?= form_error('FOCS_description') ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -219,4 +219,4 @@
     });
 
 </script>
-<script src="<?= base_url('assets/js/focus/agregar_focus.js')?>"></script>
+<script src="<?= base_url()?>assets/js/focus/agregar_focus.js"></script>

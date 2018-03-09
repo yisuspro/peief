@@ -67,7 +67,7 @@
                                     </div>
                                     
                                     <div class="modal-body">
-                                        <?php echo validation_errors(); ?>
+                                        <?= validation_errors(); ?>
                                         <?= form_open('Usuarios/registrar','id="frm_agregar_permiso"');?>
                                             <div class="form-wizard">
                                                 <div class="form-group">
@@ -77,7 +77,7 @@
                                                     </div>
                                                     <div class="alert alert-danger invalid-feedback" id="PRMS_name_alerta" role="alert" style="display:none">
                                                         <div class="invalid-feedback">
-                                                            <?php echo form_error('PRMS_name') ?>
+                                                            <?= form_error('PRMS_name') ?>
                                                         </div>
                                                     </div>
                                                     
@@ -241,4 +241,4 @@
 });
 </script>
 
-<script src="<?= base_url('assets/js/permisos/agregar_permisos.js')?>"></script>
+<script src="<?= base_url()?>assets/js/permisos/agregar_permisos.js"></script>

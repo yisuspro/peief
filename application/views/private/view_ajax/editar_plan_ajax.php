@@ -14,14 +14,14 @@
                         <div class="form-wizard">
                             <div class="form-group">
                                 
-                                <input type="hidden" id="PLAN_PK_hidden" value="<?php echo $PLAN_PK; ?>">
+                                <input type="hidden" id="PLAN_PK_hidden" value="<?= $PLAN_PK; ?>">
                                 <label>Nombre</label>
                                 <div class="input-group" id="PLAN_name"><span class="input-group-addon"><i class="fa fa-map"></i></span>
-                                    <input type="text" id="PLAN_name" name="PLAN_name" class="form-control" placeholder="Nombre" value="<?php echo $PLAN_name; ?>">
+                                    <input type="text" id="PLAN_name" name="PLAN_name" class="form-control" placeholder="Nombre" value="<?= $PLAN_name; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="PLAN_name_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('PLAN_name') ?>
+                                        <?= form_error('PLAN_name') ?>
                                     </div>
                                 </div>
                             

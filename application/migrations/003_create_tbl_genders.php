@@ -3,15 +3,15 @@
 *
 *@autor jesus andres castellanos aguilar
 *
-*archivo de migracion encargado de la cracion y eliminacion de la tabla ganders en la base de datos
+*archivo de migracion encargado de la cracion y eliminacion de la tabla genders en la base de datos
 * 
 */
 defined('BASEPATH') OR exit('No direct script access allowed');
  
-class Migration_create_tbl_ganders extends CI_Migration {
+class Migration_create_tbl_genders extends CI_Migration {
     
     /**
-    * funcion para crreacion de la tabla ganders
+    * funcion para crreacion de la tabla genders
     *
     * @return create_table()
     */
@@ -23,21 +23,21 @@ class Migration_create_tbl_ganders extends CI_Migration {
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ),
-            'GNDR_gander' => array(                 //columna GNDR_gander tipo VARCHAR, tamaño 45
+            'GNDR_gender' => array(                 //columna GNDR_gender tipo VARCHAR, tamaño 45
                 'type' => 'VARCHAR',
                 'constraint' => '45',
             ),
         ));
         $this->dbforge->add_key('GNDR_PK', TRUE);   //agregar atributo de llave primaria al campo GNDR_PK 
-        $this->dbforge->create_table('ganders');    //creacion de la tabla ganders con los atributos y columnas
+        $this->dbforge->create_table('genders');    //creacion de la tabla genders con los atributos y columnas
     }
     
     /**
-    *funcion para eliminacion de la tabla ganders
+    *funcion para eliminacion de la tabla genders
     *
     * @return drop_table()
     */
     public function down(){
-        $this->dbforge->drop_table('ganders');      //eliminacion de la tabla ganders
+        $this->dbforge->drop_table('genders');      //eliminacion de la tabla genders
     }
 }

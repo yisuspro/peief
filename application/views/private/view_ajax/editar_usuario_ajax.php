@@ -16,21 +16,21 @@
                             <div class="form-group">
                                 <div class="alert alert-danger" id="USER_identification_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error ('USER_identification') ?>
+                                        <?= form_error ('USER_identification') ?>
                                     </div>
                                 </div>
-                                <input type="hidden" id="USER_PK_hidden" value="<?php echo $USER_PK; ?>">
+                                <input type="hidden" id="USER_PK_hidden" value="<?= $USER_PK; ?>">
                                 <div class="col-lg-6">
                                     <label>Documento</label>
                                     <div class="input-group" id="USER_identification">
                                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-                                        <input type="text" id="USER_identification" name="USER_identification" class="form-control is-invalid" placeholder="Documento de identidad" value="<?php echo $USER_identification; ?>">
+                                        <input type="text" id="USER_identification" name="USER_identification" class="form-control is-invalid" placeholder="Documento de identidad" value="<?= $USER_identification; ?>">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <label> Tipo de Documento</label>
-                                    <select class="form-control" name="USER_FK_type_identification" id="USER_FK_type_identification" value="<?php echo $USER_FK_type_identification; ?>">
+                                    <select class="form-control" name="USER_FK_type_identification" id="USER_FK_type_identification" value="<?= $USER_FK_type_identification; ?>">
                                     <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                     <option value="1">C.C.</option>
                                     <option value="2">T.I.</option>
@@ -45,18 +45,18 @@
 
                                 <label>Nombres</label>
                                 <div class="input-group" id="USER_names"><span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" id="USER_names" name="USER_names" class="form-control" placeholder="Nombres" value="<?php echo $USER_names; ?>">
+                                    <input type="text" id="USER_names" name="USER_names" class="form-control" placeholder="Nombres" value="<?= $USER_names; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="USER_names_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('USER_names') ?>
+                                        <?= form_error('USER_names') ?>
                                     </div>
                                 </div>
 
 
                                 <label>Apellidos</label>
                                 <div class="input-group" id="USER_lastnames"><span class="input-group-addon"><i class="fa fa-users"></i></span>
-                                    <input type="text" id="USER_lastnames" name="USER_lastnames" class="form-control" placeholder="Apellidos" value="<?php echo $USER_lastnames; ?>">
+                                    <input type="text" id="USER_lastnames" name="USER_lastnames" class="form-control" placeholder="Apellidos" value="<?= $USER_lastnames; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="USER_lastnames_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -66,7 +66,7 @@
 
                                 <label>Correo</label>
                                 <div class="input-group" id="USER_email"><span class="input-group-addon"><i class="fa fa-at"></i></span>
-                                    <input type="email" id="USER_email" name="USER_email" class="form-control" placeholder="Correo" value="<?php echo $USER_email; ?>">
+                                    <input type="email" id="USER_email" name="USER_email" class="form-control" placeholder="Correo" value="<?= $USER_email; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="USER_email_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -76,7 +76,7 @@
 
                                 <label>Direccion</label>
                                 <div class="input-group" id="USER_address"><span class="input-group-addon"><i class="fa fa-industry"></i></span>
-                                    <input type="text" id="USER_address" name="USER_address" class="form-control" placeholder="Direccion" value="<?php echo $USER_address; ?>">
+                                    <input type="text" id="USER_address" name="USER_address" class="form-control" placeholder="Direccion" value="<?= $USER_address; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="USER_address_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -88,7 +88,7 @@
 
                                 <label>Telefono</label>
                                 <div class="input-group" id="USER_telephone"><span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                    <input type="text" id="USER_telephone" name="USER_telephone" class="form-control" placeholder="Telefono" value="<?php echo $USER_telephone; ?>">
+                                    <input type="text" id="USER_telephone" name="USER_telephone" class="form-control" placeholder="Telefono" value="<?= $USER_telephone; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="USER_telephone_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -98,7 +98,7 @@
 
                                 <label>Contraseña</label>
                                 <div class="input-group" id="USER_password"><span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-                                    <input type="text" id="USER_password" name="USER_password" class="form-control" placeholder="Contraseña" value="<?php echo $USER_password; ?>">
+                                    <input type="text" id="USER_password" name="USER_password" class="form-control" placeholder="Contraseña" value="<?= $USER_password; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="USER_password_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -107,8 +107,8 @@
                                 </div>
 
                                 <label> Genero</label>
-                                <div class="input-group" name="USER_FK_gander" id="USER_FK_gender"><span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
-                                    <select class="form-control" id="USER_FK_gander" name="USER_FK_gander" value="<?php echo $USER_FK_gander; ?>">
+                                <div class="input-group" name="USER_FK_gender" id="USER_FK_gender"><span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+                                    <select class="form-control" id="USER_FK_gender" name="USER_FK_gender" value="<?= $USER_FK_gender; ?>">
                                                  
                                                                 <option value="1">Masculino</option>
                                                                 <option value="2">Femenino</option>
@@ -117,7 +117,7 @@
                                 </div>
                                 <label> Estado</label>
                                 <div class="input-group" name="USER_FK_state" id="USER_FK_state"><span class="input-group-addon"><i class="fa fa-check"></i></span>
-                                    <select class="form-control" id="USER_FK_state" name="USER_FK_state" value="<?php echo $USER_FK_state; ?>">
+                                    <select class="form-control" id="USER_FK_state" name="USER_FK_state" value="<?= $USER_FK_state; ?>">
                                     <option value="1">Activo</option>
                                     <option value="2">Inactivo</option>
                                 </select>

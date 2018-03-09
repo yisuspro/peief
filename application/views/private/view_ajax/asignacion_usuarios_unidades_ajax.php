@@ -54,7 +54,7 @@
                     <h1><i class="glyphicon glyphicon-thumbs-up"></i> AGREGAR USUARIO</h1>
                 </div>
                 <div class="modal-body">
-                    <?php echo validation_errors(); ?>
+                    <?= validation_errors(); ?>
                     <?= form_open('Usuarios/registrar','id="frm_agregar_usuario"');?>
                         <div class="form-wizard">
                             <div class="form-group">
@@ -63,14 +63,14 @@
                                         el usuario no existe o ya se encuentra en el grupo
                                     </div>
                                 </div>
-                                <input type="hidden" name="USLE_FK_learning_units" id="USLE_FK_learning_units" value="<?php echo $id ;?>">
+                                <input type="hidden" name="USLE_FK_learning_units" id="USLE_FK_learning_units" value="<?= $id ;?>">
                                        <label>Numero de Docuemnto</label>
                                 <div class="input-group" id="USLE_FK_users"><span class="input-group-addon"><i class="fa fa-user"></i></span>
                                     <input type="text" id="USLE_FK_users" name="USLE_FK_users" class="form-control" placeholder="Docueto">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="USLE_FK_users_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('USLE_FK_users') ?>
+                                        <?= form_error('USLE_FK_users') ?>
                                     </div>
                                 </div>
 
@@ -78,7 +78,7 @@
                                 <select class="form-control" name="USLE_FK_roles" id="USLE_FK_roles">
                                     <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                     <?php foreach($roles->result_array() as $r) { ?>
-                                    <option value="<?php echo $r['ROLE_PK'];?>"><?php echo $r['ROLE_name']; ?></option>
+                                    <option value="<?= $r['ROLE_PK'];?>"><?= $r['ROLE_name']; ?></option>
                                     <?php }?>
                                 </select>
                             </div>
@@ -208,4 +208,4 @@
     });
 
 </script>
-<script src="<?= base_url('assets/js/learning_units/agregar_usuarios_learning_units.js')?>"></script>
+<script src="assets/js/learning_units/agregar_usuarios_learning_units.js'"></script>

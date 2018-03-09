@@ -64,7 +64,7 @@ class Users extends CI_Model {
     * @return get()
     */
     public function listar(){
-        $usuarios = $this->db->select('*')->from('users')->join('states','users.USER_FK_state = states.STTS_PK')->join('ganders','users.USER_FK_gander = ganders.GNDR_PK')->join('types_identifications','users.USER_FK_type_identification = types_identifications.TPDI_PK');
+        $usuarios = $this->db->select('*')->from('users')->join('states','users.USER_FK_state = states.STTS_PK')->join('genders','users.USER_FK_gender = genders.GNDR_PK')->join('types_identifications','users.USER_FK_type_identification = types_identifications.TPDI_PK');
         return $usuarios->get();
     }
     
@@ -88,7 +88,7 @@ class Users extends CI_Model {
     * @return get() | false
     */
     public function datosUsuario($datos){
-        if(!$usuario= $this->db->select('*')->from('users')->where('USER_PK',$datos)->join('states','users.USER_FK_state = states.STTS_PK')->join('ganders','users.USER_FK_gander = ganders.GNDR_PK')->join('types_identifications','users.USER_FK_type_identification = types_identifications.TPDI_PK')){
+        if(!$usuario= $this->db->select('*')->from('users')->where('USER_PK',$datos)->join('states','users.USER_FK_state = states.STTS_PK')->join('genders','users.USER_FK_gender = genders.GNDR_PK')->join('types_identifications','users.USER_FK_type_identification = types_identifications.TPDI_PK')){
             return false;
         }else{
             return $usuario->get();
@@ -137,7 +137,7 @@ class Users extends CI_Model {
     * @return true | false
     */
     public function registrarG($datos){
-        if(!$this->db->insert('ganders',$datos)){
+        if(!$this->db->insert('genders',$datos)){
             return false;
         }
         return true;

@@ -16,26 +16,26 @@
                             <div class="form-group">
                                 <div class="alert alert-danger" id="PRMS_PK_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error ('PRMS_PK') ?>
+                                        <?= form_error ('PRMS_PK') ?>
                                     </div>
                                 </div>
-                                <input type="hidden" id="PRMS_PK_hidden" value="<?php echo $PRMS_PK; ?>">
+                                <input type="hidden" id="PRMS_PK_hidden" value="<?= $PRMS_PK; ?>">
 
 
                                 <label>Nombre</label>
                                 <div class="input-group" id="PRMS_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" id="PRMS_name" name="PRMS_name" class="form-control" placeholder="Nombre" value="<?php echo $PRMS_name; ?>">
+                                    <input type="text" id="PRMS_name" name="PRMS_name" class="form-control" placeholder="Nombre" value="<?= $PRMS_name; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="PRMS_name_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('PRMS_name') ?>
+                                        <?= form_error('PRMS_name') ?>
                                     </div>
                                 </div>
 
 
                                 <label>Nombre corto</label>
                                 <div class="input-group" id="PRMS_shortname"><span class="input-group-addon"><i class="fa fa-users"></i></span>
-                                    <input type="text" id="PRMS_shortname" name="PRMS_shortname" class="form-control" placeholder="Apellidos" value="<?php echo $PRMS_shortname; ?>">
+                                    <input type="text" id="PRMS_shortname" name="PRMS_shortname" class="form-control" placeholder="Apellidos" value="<?= $PRMS_shortname; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="PRMS_shortname_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -46,7 +46,7 @@
 
                                 <label>Descripcion</label>
                                 <div class="input-group" id="PRMS_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                    <input type="text" id="PRMS_description" name="PRMS_description" class="form-control" placeholder="Direccion" value="<?php echo $PRMS_description; ?>">
+                                    <input type="text" id="PRMS_description" name="PRMS_description" class="form-control" placeholder="Direccion" value="<?= $PRMS_description; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="PRMS_description_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">

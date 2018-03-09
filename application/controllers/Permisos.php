@@ -31,8 +31,8 @@ class Permisos extends CI_Controller{
     public function index(){
         $data['title'] ='Permisos';
         
-        $this->load->view('private/heads/head_1',$data);
-        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/header',$data);
+        $this->load->view('private/heads/bar_up');
         $this->load->view('private/heads/menus');
         $this->load->view('private/permisos',$data);    
         $this->load->view('private/footers/foot_1');

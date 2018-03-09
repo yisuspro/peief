@@ -78,13 +78,13 @@
                                                 </div>
                                             </div>
                                             <div class="modal-body">
-                                                <?php echo validation_errors(); ?>
+                                                <?= validation_errors(); ?>
                                                 <?= form_open('Usuarios/registrar','id="frm_agregar_usuario"');?>
                                                     <div class="form-wizard">
                                                         <div class="form-group">
                                                             <div class="alert alert-danger" id="USER_identification_alerta" role="alert" style="display:none">
                                                                 <div class="invalid-feedback">
-                                                                    <?php echo form_error ('USER_identification') ?>
+                                                                    <?= form_error ('USER_identification') ?>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
@@ -116,7 +116,7 @@
                                                             </div>
                                                             <div class="alert alert-danger invalid-feedback" id="USER_names_alerta" role="alert" style="display:none">
                                                                 <div class="invalid-feedback">
-                                                                    <?php echo form_error('USER_names') ?>
+                                                                    <?= form_error('USER_names') ?>
                                                                 </div>
                                                             </div>
 
@@ -174,8 +174,8 @@
                                                             </div>
 
                                                             <label> Genero</label>
-                                                            <div class="input-group" name="USER_FK_gander" id="USER_FK_gender"><span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
-                                                                <select class="form-control" id="USER_FK_gander" name="USER_FK_gander">
+                                                            <div class="input-group" name="USER_FK_gender" id="USER_FK_gender"><span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+                                                                <select class="form-control" id="USER_FK_gender" name="USER_FK_gender">
                                                                 <option value="1">Masculino</option>
                                                                 <option value="2">Femenino</option>
                                                                 <option value="3">Otro</option>
@@ -221,7 +221,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?php echo base_url(); ?>Usuarios/listarTabla",
+                url: "<?= base_url(); ?>Usuarios/listarTabla",
                 type: 'GET'
             },
 
@@ -365,5 +365,5 @@
 });
 </script>
 
-<script src="<?= base_url('assets/js/usuarios/agregar_usuarios.js')?>"></script>
+<script src="<?= base_url()?>assets/js/usuarios/agregar_usuarios.js"></script>
 

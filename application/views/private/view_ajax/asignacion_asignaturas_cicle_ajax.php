@@ -146,7 +146,7 @@
                 [5, 10, 25, 50, "Todo"]
             ],
             "ajax": {
-                url: "<?= base_url('Cicles/listarMaterias'); ?>",
+                url: "<?= base_url(); ?>Cicles/listarMaterias",
                 type: 'GET'
             },
             "scrollX": true,
@@ -186,7 +186,7 @@
             eliminar = confirm("Seguro desea asignar este permiso al rol " + tr);
             if (eliminar) {
                 $.ajax({
-                    url: 'Cicles/asignarMateriaCurso/' + <?php echo $id; ?> + '/' + tr,
+                    url: 'Cicles/asignarMateriaCurso/' + <?= $id; ?> + '/' + tr,
                     type: 'POST',
                     data: tr,
                     success: function(data, xhr) {

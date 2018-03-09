@@ -13,23 +13,23 @@
                     <?= form_open('','id="frm_editar_plan"');?>
                         <div class="form-wizard">
                             <div class="form-group">
-                                <input type="hidden" id="FOCS_PK_hidden" value="<?php echo $FOCS_PK; ?>">
+                                <input type="hidden" id="FOCS_PK_hidden" value="<?= $FOCS_PK; ?>">
                                 <label>Nombre del enfoque</label>
                                 <div class="input-group" id="FOCS_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" id="FOCS_name" name="FOCS_name" class="form-control" placeholder="Nombre" value="<?php echo $FOCS_name; ?>">
+                                    <input type="text" id="FOCS_name" name="FOCS_name" class="form-control" placeholder="Nombre" value="<?= $FOCS_name; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="FOCS_name_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('FOCS_name') ?>
+                                        <?= form_error('FOCS_name') ?>
                                     </div>
                                 </div>
                                 <label>Descripcion</label>
                                 <div class="input-group" id="FOCS_description"><span class="input-group-addon"><i class="fa fa-sticky-note"></i></span>
-                                    <input type="text" id="FOCS_description" name="FOCS_description" class="form-control" placeholder="Descripcion" value="<?php echo $FOCS_description; ?>">
+                                    <input type="text" id="FOCS_description" name="FOCS_description" class="form-control" placeholder="Descripcion" value="<?= $FOCS_description; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="FOCS_description_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('FOCS_description') ?>
+                                        <?= form_error('FOCS_description') ?>
                                     </div>
                                 </div>
                             </div>

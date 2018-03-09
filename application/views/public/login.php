@@ -218,7 +218,7 @@
                         <h3 class="panel-title">Login via site</h3>
                     </div>
                     <div class="panel-body">
-                        <?php echo form_open(base_url('login/validate'),'id="frm_login"'); ?>
+                        <?= form_open(base_url('login/validate'),'id="frm_login"'); ?>
                         <fieldset>
                             <div class="col-sm-8">
                                 <label for="exampleImputEmail" clas="fa fa-battery-full">Correo electronico</label>
@@ -226,7 +226,7 @@
                             <div class="form-group" id="email">
                                 <input class="form-control" placeholder="yourmail@example.com" name="email" type="text" id="email" type="email">
                                 <div class="invalid-feedback">
-                                    <?php echo form_error ('email') ?>
+                                    <?= form_error ('email') ?>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -236,12 +236,12 @@
                                 
                                 <input class="form-control" placeholder="Password" name="password" type="password" value="" id="password">
                                 <div class="invalid-feedback">
-                                    <?php echo form_error ('password') ?>
+                                    <?= form_error ('password') ?>
                                 </div>
                             </div>
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
                         </fieldset>
-                        <?php echo form_close(); ?>
+                        <?= form_close(); ?>
                         <hr/>
                     </div>
                 </div>

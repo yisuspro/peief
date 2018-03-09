@@ -19,7 +19,7 @@ class Seeders extends CI_Controller{
     */
     function __construct() {
         parent::__construct ();
-        $this->load->model('Permits','Logueo','Cicle','Focu','Learning_unit','Plan','Role','Subject','Users','version');
+        $this->load->model(['Permits','Logueo','Cicle','Focu','Learning_unit','Plan','Role','Subject','Users','version']);
     }
     
     /**
@@ -71,24 +71,24 @@ class Seeders extends CI_Controller{
             
         );
         $this->Users->registrarT($typedoc);
-        $ganders= array(
+        $genders= array(
             'GNDR_PK'=> 1,
-            'GNDR_gander'=> 'masculino',
+            'GNDR_gender'=> 'masculino',
             
         );
-        $this->Users->registrarG($ganders);
-         $ganders= array(
+        $this->Users->registrarG($genders);
+         $genders= array(
             'GNDR_PK'=> 2,
-            'GNDR_gander'=> 'femeninio',
+            'GNDR_gender'=> 'femeninio',
             
         );
-        $this->Users->registrarG($ganders);
-         $ganders= array(
+        $this->Users->registrarG($genders);
+         $genders= array(
             'GNDR_PK'=> 3,
-            'GNDR_gander'=> 'otro',
+            'GNDR_gender'=> 'otro',
             
         );
-        $this->Users->registrarG($ganders);
+        $this->Users->registrarG($genders);
         $users= array(
             'USER_PK'               => 1,
             'USER_identification'   => 1073246137,
@@ -105,7 +105,7 @@ class Seeders extends CI_Controller{
             'USER_PK_update'        =>1,
             'USER_FK_state'         =>1,
             'USER_FK_type_identification'=>1,
-            'USER_FK_gander'        =>1,
+            'USER_FK_gender'        =>1,
         );
         $this->Users->registrar($users);
          

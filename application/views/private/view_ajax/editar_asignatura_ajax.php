@@ -12,20 +12,20 @@
                 </div>
                 <div class="portlet-body">
                     <?= form_open('','id="frm_editar_asignatura"');?>
-                    <input type="hidden" id="SBJC_PK_hidden" value="<?php echo $SBJC_PK; ?>">
+                    <input type="hidden" id="SBJC_PK_hidden" value="<?= $SBJC_PK; ?>">
                         <div class="form-wizard">
                             <div class="form-group"><label>Nombre asignatura</label>
                                 <div class="input-group" id="SBJC_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" id="SBJC_name" name="SBJC_name" class="form-control" placeholder="Nombre" value="<?php echo $SBJC_name; ?>">
+                                    <input type="text" id="SBJC_name" name="SBJC_name" class="form-control" placeholder="Nombre" value="<?= $SBJC_name; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="SBJC_name_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('SBJC_name') ?>
+                                        <?= form_error('SBJC_name') ?>
                                     </div>
                                 </div>
                                 <label>Descripcion</label>
                                 <div class="input-group" id="SBJC_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                    <textarea type="text" id="SBJC_description" name="SBJC_description" class="form-control" placeholder="Direccion" ><?php echo $SBJC_description; ?></textarea>
+                                    <textarea type="text" id="SBJC_description" name="SBJC_description" class="form-control" placeholder="Direccion" ><?= $SBJC_description; ?></textarea>
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="SBJC_description_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -40,7 +40,7 @@
                                                 <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                                 <option value="">Seleccione una unidad...</option>
                                                 <?php foreach($unidades->result_array() as $r) { ?>
-                                                <option value="<?php echo $r['LNUT_PK'];?>"><?php echo $r['LNUT_name']; ?></option>
+                                                <option value="<?= $r['LNUT_PK'];?>"><?= $r['LNUT_name']; ?></option>
                                                 <?php }?>
                                             </select>
                                             </div>

@@ -82,7 +82,7 @@ class Migration_create_tbl_users extends CI_Migration {
                 'constraint' => 10,
                 'unsigned' => TRUE,
             ),
-            'USER_FK_gander' => array(                  //columna USER_FK_gander tipo int, tamaño 10, solo positivos
+            'USER_FK_gender' => array(                  //columna USER_FK_gender tipo int, tamaño 10, solo positivos
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => TRUE,
@@ -97,8 +97,8 @@ class Migration_create_tbl_users extends CI_Migration {
             'CONSTRAINT USER_FK_type_identification FOREIGN KEY(USER_FK_type_identification) REFERENCES types_identifications(TPDI_PK)',
         ]);                                             //creacion de relacion a la tabla types_identifications
         $this->dbforge->add_column('users',[
-            'CONSTRAINT USER_FK_gander FOREIGN KEY(USER_FK_gander) REFERENCES ganders(GNDR_PK)',
-        ]);                                             //creacion de relacion a la tabla ganders
+            'CONSTRAINT USER_FK_gender FOREIGN KEY(USER_FK_gender) REFERENCES genders(GNDR_PK)',
+        ]);                                             //creacion de relacion a la tabla genders
     }
     
     /**

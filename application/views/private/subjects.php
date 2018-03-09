@@ -24,7 +24,7 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <?php echo validation_errors(); ?>
+                                    <?= validation_errors(); ?>
                                     <?= form_open('','id="frm_agregar_asignatura"');?>
                                         <div class="form-wizard">
                                             <div class="form-group"><label>Nombre asignatura</label>
@@ -33,7 +33,7 @@
                                                 </div>
                                                 <div class="alert alert-danger invalid-feedback" id="SBJC_name_alerta" role="alert" style="display:none">
                                                     <div class="invalid-feedback">
-                                                        <?php echo form_error('SBJC_name') ?>
+                                                        <?= form_error('SBJC_name') ?>
                                                     </div>
                                                 </div>
                                                 <label>Descripcion</label>
@@ -52,7 +52,7 @@
                                                 <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                                 <option value="">Seleccione una unidad...</option>
                                                 <?php foreach($unidades->result_array() as $r) { ?>
-                                                <option value="<?php echo $r['LNUT_PK'];?>"><?php echo $r['LNUT_name']; ?></option>
+                                                <option value="<?= $r['LNUT_PK'];?>"><?= $r['LNUT_name']; ?></option>
                                                 <?php }?>
                                             </select>
                                             </div>
@@ -288,5 +288,5 @@
 });
 </script>
 
-<script src="<?= base_url('assets/js/subjects/agregar_asignaturas.js')?>"></script>
+<script src="<?= base_url()?>assets/js/subjects/agregar_asignaturas.js"></script>
 

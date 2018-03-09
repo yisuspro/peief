@@ -15,22 +15,22 @@
                             <div class="form-group">
                                 <div class="alert alert-danger" id="ROLE_PK_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error ('ROLE_PK') ?>
+                                        <?= form_error ('ROLE_PK') ?>
                                     </div>
                                 </div>
-                                <input type="hidden" id="ROLE_PK_hidden" value="<?php echo $ROLE_PK; ?>">
+                                <input type="hidden" id="ROLE_PK_hidden" value="<?= $ROLE_PK; ?>">
                                 <label>Nombre</label>
                                 <div class="input-group" id="ROLE_name"><span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" id="ROLE_name" name="ROLE_name" class="form-control" placeholder="Nombre" value="<?php echo $ROLE_name; ?>">
+                                    <input type="text" id="ROLE_name" name="ROLE_name" class="form-control" placeholder="Nombre" value="<?= $ROLE_name; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="ROLE_name_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('ROLE_name') ?>
+                                        <?= form_error('ROLE_name') ?>
                                     </div>
                                 </div>
                                 <label>Nombre corto</label>
                                 <div class="input-group" id="ROLE_shortname"><span class="input-group-addon"><i class="fa fa-users"></i></span>
-                                    <input type="text" id="ROLE_shortname" name="ROLE_shortname" class="form-control" placeholder="Apellidos" value="<?php echo $ROLE_shortname; ?>">
+                                    <input type="text" id="ROLE_shortname" name="ROLE_shortname" class="form-control" placeholder="Apellidos" value="<?= $ROLE_shortname; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="ROLE_shortname_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
@@ -39,7 +39,7 @@
                                 </div>
                                 <label>Descripcion</label>
                                 <div class="input-group" id="ROLE_description"><span class="input-group-addon"><i class="fa fa-book"></i></span>
-                                    <input type="text" id="ROLE_description" name="ROLE_description" class="form-control" placeholder="Direccion" value="<?php echo $ROLE_description; ?>">
+                                    <input type="text" id="ROLE_description" name="ROLE_description" class="form-control" placeholder="Direccion" value="<?= $ROLE_description; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="ROLE_description_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">

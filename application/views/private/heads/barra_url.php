@@ -7,7 +7,7 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <span><?php echo $this->uri->segment(1); ?></span><i class="fa fa-angle-right"></i>
+            <span><?= $this->uri->segment(1); ?></span><i class="fa fa-angle-right"></i>
         </li>
         <li>
             <span><?php if($this->uri->segment(2)){
@@ -15,7 +15,7 @@
                 ?></span><i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <span><?php echo $this->uri->segment(3);} ?></span>
+            <span><?= $this->uri->segment(3);} ?></span>
         </li>
     </ul>
 

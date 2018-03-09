@@ -31,8 +31,8 @@ class Plans extends CI_Controller
         
         $data['title']='Planes';
         
-        $this->load->view('private/heads/head_1',$data);
-        $this->load->view('private/heads/head_2');
+        $this->load->view('private/heads/header',$data);
+        $this->load->view('private/heads/bar_up');
         $this->load->view('private/heads/menus');
         $this->load->view('private/plans');    
         $this->load->view('private/footers/foot_1');

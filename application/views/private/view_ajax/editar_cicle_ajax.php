@@ -18,18 +18,18 @@
                                 <input type="hidden" id="CCLS_PK_hidden" value="<?= $CCLS_PK; ?>">
                                 <label>Nombre</label>
                                 <div class="input-group" id="CCLS_name"><span class="input-group-addon"><i class="fa fa-map"></i></span>
-                                    <input type="text" id="CCLS_name" name="CCLS_name" class="form-control" placeholder="Nombre" value="<?php echo $CCLS_name; ?>">
+                                    <input type="text" id="CCLS_name" name="CCLS_name" class="form-control" placeholder="Nombre" value="<?= $CCLS_name; ?>">
                                 </div>
                                 <div class="alert alert-danger invalid-feedback" id="CCLS_name_alerta" role="alert" style="display:none">
                                     <div class="invalid-feedback">
-                                        <?php echo form_error('CCLS_name') ?>
+                                        <?= form_error('CCLS_name') ?>
                                     </div>
                                 </div>
                                 <label> Tipo de version y plan</label>
                                 <select class="form-control" name="CCLS_FK_plans" id="CCLS_FK_plans" value="CCLS_FK_plans">
                                     <span class="input-group-addon"><i class="fa fa-plus"></i></span>
                                     <?php foreach($versiones->result_array() as $r) { ?>
-                                        <option value="<?php echo $r['PLAN_PK'];?>"><?= $r['PLAN_name']; ?></option>
+                                        <option value="<?= $r['PLAN_PK'];?>"><?= $r['PLAN_name']; ?></option>
                                     <?php }?>
                                 </select>
                             </div>
@@ -114,5 +114,5 @@
     });
 
 </script>
-<script src="<?= base_url('assets/js/cicles/agregar_miembro_cicle.js')?>">
+<script src="assets/js/cicles/agregar_miembro_cicle.js">
 </script>
