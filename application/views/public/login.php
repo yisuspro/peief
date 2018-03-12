@@ -221,7 +221,7 @@
                         <?= form_open(base_url('login/validate'),'id="frm_login"'); ?>
                         <fieldset>
                             <div class="col-sm-8">
-                                <label for="exampleImputEmail" clas="fa fa-battery-full">Correo electronico</label>
+                                <label for="exampleImputEmail" clas="fa fa-battery-full"><?=lang('auth_logwithemail')?></label>
                             </div>
                             <div class="form-group" id="email">
                                 <input class="form-control" placeholder="yourmail@example.com" name="email" type="text" id="email" type="email">
@@ -230,7 +230,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="exampleImputpassword">Contraseña</label>
+                                <label for="exampleImputpassword"><?=lang('auth_password')?></label>
                             </div>
                             <div class="form-group" id="password">
                                 

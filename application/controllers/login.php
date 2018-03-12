@@ -17,9 +17,8 @@ class login extends CI_Controller
     function __construct() {
         parent::__construct ();
         $this->load->model('Logueo');
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->helper('login_rules');
+        $this->load->helper(['url','form','login_rules']);
+        $this->lang->load ( 'login' );
     }
     
     /**
